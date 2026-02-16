@@ -1,0 +1,182 @@
+"use client";
+
+import { Search, LayoutGrid, Menu, X, Github, Send } from "lucide-react";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
+
+export default function Navbar() {
+    const pathname = usePathname();
+    const router = useRouter();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+            const query = encodeURIComponent(searchQuery);
+            if (pathname.startsWith('/discover')) {
+                router.push(`/discover?q=${query}`);
+            } else {
+                router.push(`/support?q=${query}`);
+            }
+            setIsMenuOpen(false);
+            setSearchQuery("");
+        }
+    };
+
+    const navLinks = [
+        { name: "Home", href: "/" },
+        { name: "Discover", href: "/discover" },
+        { name: "Earn", href: "/earn" },
+        { name: "Portfolio", href: "/portfolio" },
+        { name: "Support", href: "/support" },
+    ];
+
+    return (
+        <header className="h-[72px] bg-white border-b border-slate-100 flex items-center px-4 md:px-6 sticky top-0 z-50">
+            {/* Logo */}
+            <div className="flex items-center gap-2 mr-4 md:mr-12">
+                <Link href="/" className="flex items-center gap-3">
+                    <img
+                        src="/images/altai.svg"
+                        alt="Altai Logo"
+                        className="w-10 h-10 md:w-11 md:h-11 object-contain"
+                    />
+                    <span className="text-lg md:text-xl font-bold bg-clip-text text-[#1e293b] whitespace-nowrap">Altai Pro</span>
+                </Link>
+            </div>
+
+            {/* Desktop Search */}
+            <form onSubmit={handleSearch} className="hidden lg:block flex-1 max-w-[480px] relative">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+                <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search support, assets or guide..."
+                    className="w-full bg-[#f1f5f9] border-none rounded-2xl py-2.5 pl-11 pr-4 text-sm font-medium focus:ring-2 focus:ring-blue-100 outline-none placeholder:text-slate-400 text-slate-600 shadow-inner shadow-slate-200/50"
+                />
+            </form>
+
+            {/* Desktop Nav */}
+            <nav className="hidden lg:flex items-center gap-1 ml-auto">
+                {navLinks.map((link) => {
+                    const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+                    return (
+                        <Link key={link.name} href={link.href}>
+                            <button className={cn(
+                                "px-4 py-2 rounded-xl text-sm font-bold transition-all",
+                                isActive ? "text-blue-600 bg-[#eff6ff]" : "text-slate-500 hover:bg-slate-50"
+                            )}>
+                                {link.name}
+                            </button>
+                        </Link>
+                    );
+                })}
+            </nav>
+
+            {/* Actions */}
+            <div className="flex items-center gap-2 md:gap-4 ml-auto lg:ml-8">
+                <button
+                    onClick={() => setIsMenuOpen(true)}
+                    className="hidden md:flex items-center justify-center w-10 h-10 lg:hidden text-slate-500 hover:bg-slate-50 rounded-xl transition-all"
+                >
+                    <Search className="w-5 h-5" />
+                </button>
+
+                <div className="hidden sm:block h-6 w-[1px] bg-slate-100 mx-1"></div>
+
+                <button className="hidden sm:block px-5 md:px-6 py-2.5 bg-slate-950 text-white text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-slate-800 transition-all shadow-lg shadow-black/5 active:scale-95 whitespace-nowrap">
+                    Connect Wallet
+                </button>
+
+                {/* Mobile Menu Toggle */}
+                <button
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    className="lg:hidden w-10 h-10 flex items-center justify-center text-slate-900 hover:bg-slate-50 rounded-xl transition-all active:scale-90"
+                >
+                    {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </button>
+            </div>
+
+            {/* Mobile Menu Overlay */}
+            <AnimatePresence>
+                {isMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="absolute top-[72px] inset-x-0 bg-white border-b border-slate-100 shadow-2xl p-4 flex flex-col gap-2 lg:hidden z-40"
+                    >
+                        <form onSubmit={handleSearch} className="relative mb-4">
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
+                            <input
+                                type="text"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                placeholder="Search..."
+                                className="w-full bg-[#f1f5f9] border-none rounded-xl py-3 pl-11 pr-4 text-sm font-medium outline-none text-slate-600"
+                            />
+                        </form>
+                        {navLinks.map((link) => {
+                            const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+                            return (
+                                <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className={cn(
+                                        "flex items-center px-4 py-3 rounded-xl text-sm font-black transition-all",
+                                        isActive ? "text-blue-600 bg-blue-50" : "text-slate-600 hover:bg-slate-50"
+                                    )}
+                                >
+                                    {link.name}
+                                </Link>
+                            );
+                        })}
+                        <div className="pt-4 mt-2 border-t border-slate-50 flex flex-col gap-4">
+                            <button className="w-full py-4 bg-slate-950 text-white text-xs font-black uppercase tracking-widest rounded-xl shadow-lg active:scale-[0.98] transition-all">
+                                Connect Wallet
+                            </button>
+
+                            <div className="flex items-center justify-center gap-3">
+                                {[
+                                    {
+                                        name: "X", icon: (props: any) => (
+                                            <svg {...props} viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+                                            </svg>
+                                        ), href: "https://x.com/altaiexchange"
+                                    },
+                                    { name: "Telegram", icon: Send, href: "https://t.me/altaiexchange" },
+                                    {
+                                        name: "Medium", icon: (props: any) => (
+                                            <svg {...props} viewBox="0 0 24 24" fill="currentColor">
+                                                <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42S14.2 15.54 14.2 12s1.52-6.42 3.38-6.42S20.96 8.46 20.96 12zm3.04 0c0 3.07-.33 5.56-.73 5.56s-.73-2.49-.73-5.56.33-5.56.73-5.56.73 2.49.73 5.56z" />
+                                            </svg>
+                                        ), href: "https://medium.com/@Altaiexchange"
+                                    },
+                                    { name: "GitHub", icon: Github, href: "https://github.com" },
+                                ].map((social) => (
+                                    <a
+                                        key={social.name}
+                                        href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-950 hover:bg-white hover:shadow-md transition-all duration-300"
+                                    >
+                                        <social.icon className="w-4 h-4" />
+                                    </a>
+                                ))}
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </header>
+    );
+}
