@@ -3,6 +3,7 @@
 @theme {
   --color-primary: #3b82f6;
   --font-display: "Inter", sans-serif;
+  --animate-pulse-slow: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 :root {
