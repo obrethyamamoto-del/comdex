@@ -48,27 +48,33 @@ const SUPPORT_CATEGORIES = [
 const FAQS = [
     {
         q: "What is ALTAI Exchange?",
-        a: "ALTAI is a decentralized exchange platform that enables users to trade, participate, and manage precious metals on the blockchain. We provide a secure, transparent, and efficient way to access precious metals markets without traditional intermediaries."
+        a: "ALTAI is a decentralized exchange platform that enables users to trade, participate, and manage precious metals on the blockchain. We provide a secure, transparent, and efficient way to access precious metals markets without traditional intermediaries.",
+        category: "General"
     },
     {
         q: "How does participation work on ALTAI?",
-        a: "Participation on ALTAI allows you to commit your tokenized precious metals to support the ecosystem and earn returns. You can participate with Gold, Silver, Platinum, or Palladium tokens for different durations, receiving returns based on platform revenue."
+        a: "Participation on ALTAI allows you to commit your tokenized precious metals to support the ecosystem and earn returns. You can participate with Gold, Silver, Platinum, or Palladium tokens for different durations, receiving returns based on platform revenue.",
+        category: "Participation"
     },
     {
         q: "What metals can I trade?",
-        a: "Currently, ALTAI supports trading of four major precious metals: Gold (Au), Silver (Ag), Platinum (Pt), and Palladium (Pd). Each metal is backed by physical reserves and can be traded 24/7 with real-time pricing from major exchanges."
+        a: "Currently, ALTAI supports trading of four major precious metals: Gold (Au), Silver (Ag), Platinum (Pt), and Palladium (Pd). Each metal is backed by physical reserves and can be traded 24/7 with real-time pricing from major exchanges.",
+        category: "Trading"
     },
     {
         q: "What is AUSD and how is it used?",
-        a: "AUSD is the native yield-bearing stablecoin of the Altai ecosystem. It serves as the primary liquidity bridge, allowing users to move seamlessly between physical metal tokens. When you hold AUSD, you maintain your purchasing power while staying ready to capitalize on market movements within the Altai vault."
+        a: "AUSD is the native yield-bearing stablecoin of the Altai ecosystem. It serves as the primary liquidity bridge, allowing users to move seamlessly between physical metal tokens. When you hold AUSD, you maintain your purchasing power while staying ready to capitalize on market movements within the Altai vault.",
+        category: "General"
     },
     {
         q: "How are Altai assets backed by real-world metals?",
-        a: "Every metal token on Altai is 1:1 backed by physical inventory stored in secure, institutional-grade vaults in Dubai (DMCC) and London. We bridge the gap between physical ownership and digital liquidity, ensuring that each digital unit represents a verifiable, tangible asset held in professional custody."
+        a: "Every metal token on Altai is 1:1 backed by physical inventory stored in secure, institutional-grade vaults in Dubai (DMCC) and London. We bridge the gap between physical ownership and digital liquidity, ensuring that each digital unit represents a verifiable, tangible asset held in professional custody.",
+        category: "Security"
     },
     {
         q: "Which blockchain networks does Altai support?",
-        a: "Altai is optimized for high performance and low latency. We primarily support BNB Chain, providing our users with ultra-low transaction costs and the massive liquidity of the world’s largest exchange ecosystem."
+        a: "Altai is optimized for high performance and low latency. We primarily support BNB Chain, providing our users with ultra-low transaction costs and the massive liquidity of the world’s largest exchange ecosystem.",
+        category: "Trading"
     }
 ];
 
@@ -703,85 +709,127 @@ function EarnMechanismSteps() {
 
 function FAQAccordion({ searchQuery = "" }: { searchQuery?: string }) {
     const [activeIndex, setActiveIndex] = useState<number | null>(0);
+    const [activeCategory, setActiveCategory] = useState<string>("All");
 
-    const filteredFaqs = FAQS.filter(faq =>
-        faq.q.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        faq.a.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const categories = ["All", ...Array.from(new Set(FAQS.map(f => f.category)))];
+
+    const filteredFaqs = FAQS.filter(faq => {
+        const matchesSearch = faq.q.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            faq.a.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesCategory = activeCategory === "All" || faq.category === activeCategory;
+        return matchesSearch && matchesCategory;
+    });
 
     if (filteredFaqs.length === 0 && searchQuery) return null;
 
     return (
-        <div className="space-y-4">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
-                <div className="space-y-2">
-                    <div className="flex items-center gap-3">
-                        <span className="px-3 py-1 bg-blue-50 border border-blue-100 rounded-full text-[10px] font-black text-blue-600 uppercase tracking-widest">Support FAQ</span>
-                        <div className="h-px w-8 bg-slate-200" />
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Common Inquiries</span>
+        <div className="space-y-8">
+            {/* Header & Categories */}
+            <div className="flex flex-col gap-10">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div className="space-y-2">
+                        <div className="flex items-center gap-3">
+                            <span className="px-3 py-1 bg-blue-50 border border-blue-100 rounded-full text-[10px] font-black text-blue-600 uppercase tracking-widest">Support FAQ</span>
+                            <div className="h-px w-8 bg-slate-200" />
+                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Common Inquiries</span>
+                        </div>
+                        <h2 className="text-3xl md:text-4xl font-black text-slate-950 tracking-tight leading-none">Frequently Asked Questions</h2>
                     </div>
-                    <h2 className="text-3xl font-black text-slate-950 tracking-tight leading-none">Frequently Asked Questions</h2>
                 </div>
-                <div className="flex items-center gap-2 text-[11px] font-bold text-slate-400 bg-white px-4 py-2 rounded-full border border-slate-100 shadow-sm">
-                    <HelpCircle className="w-4 h-4 text-blue-600" />
-                    Global Support Desk
-                </div>
+
+                {/* Category Tabs - Mobile Optimized */}
+                {!searchQuery && (
+                    <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2 -mx-4 px-4 md:mx-0 md:px-0">
+                        {categories.map((cat) => (
+                            <button
+                                key={cat}
+                                onClick={() => {
+                                    setActiveCategory(cat);
+                                    setActiveIndex(null);
+                                }}
+                                className={cn(
+                                    "px-6 py-3 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all whitespace-nowrap border",
+                                    activeCategory === cat
+                                        ? "bg-slate-950 text-white border-slate-950 shadow-lg shadow-slate-900/10"
+                                        : "bg-white text-slate-400 border-slate-100 hover:border-slate-300 hover:text-slate-600"
+                                )}
+                            >
+                                {cat}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                {filteredFaqs.map((faq, i) => (
-                    <motion.div
-                        key={i}
-                        className={cn(
-                            "group rounded-[32px] border transition-all duration-500 overflow-hidden cursor-pointer",
-                            activeIndex === i
-                                ? "bg-white border-slate-200 shadow-[0_20px_40px_rgba(0,0,0,0.04)]"
-                                : "bg-slate-50/50 border-slate-100 hover:bg-white hover:border-slate-200"
-                        )}
-                        onClick={() => setActiveIndex(activeIndex === i ? null : i)}
-                    >
-                        <div className="p-5 md:p-8 flex items-start gap-4 md:gap-6">
-                            <div className={cn(
-                                "w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center text-[14px] md:text-[18px] font-black transition-all duration-500 shrink-0",
+            {/* FAQ List - Optimized for performance */}
+            <div className="grid grid-cols-1 gap-4">
+                <AnimatePresence mode="popLayout">
+                    {filteredFaqs.map((faq, i) => (
+                        <motion.div
+                            layout
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            key={faq.q}
+                            className={cn(
+                                "group rounded-[32px] border transition-all duration-300 overflow-hidden cursor-pointer bg-white",
                                 activeIndex === i
-                                    ? "bg-slate-950 text-white rotate-[360deg]"
-                                    : "bg-white text-slate-400 group-hover:bg-slate-950 group-hover:text-white"
-                            )}>
-                                {i + 1}
-                            </div>
-                            <div className="flex-1 space-y-4">
-                                <div className="flex items-center justify-between pr-2">
-                                    <h4 className={cn(
-                                        "text-[17px] font-black tracking-tight leading-tight transition-colors duration-500",
-                                        activeIndex === i ? "text-slate-950" : "text-slate-500 group-hover:text-slate-950"
+                                    ? "border-blue-100 shadow-[0_20px_40px_rgba(0,0,0,0.03)]"
+                                    : "border-slate-100 hover:border-slate-200"
+                            )}
+                            onClick={() => setActiveIndex(activeIndex === i ? null : i)}
+                        >
+                            <div className="p-6 md:p-8">
+                                <div className="flex items-center justify-between gap-6">
+                                    <div className="flex items-center gap-4 md:gap-6">
+                                        <div className={cn(
+                                            "w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center text-[14px] md:text-[16px] font-black transition-all duration-300 shrink-0",
+                                            activeIndex === i
+                                                ? "bg-blue-600 text-white"
+                                                : "bg-slate-50 text-slate-400 group-hover:bg-slate-100"
+                                        )}>
+                                            {String(i + 1).padStart(2, '0')}
+                                        </div>
+                                        <h4 className={cn(
+                                            "text-[16px] md:text-[18px] font-black tracking-tight leading-tight transition-colors duration-300",
+                                            activeIndex === i ? "text-slate-950" : "text-slate-500 group-hover:text-slate-950"
+                                        )}>
+                                            {faq.q}
+                                        </h4>
+                                    </div>
+                                    <div className={cn(
+                                        "w-8 h-8 rounded-full border border-slate-100 flex items-center justify-center transition-all duration-300 shrink-0",
+                                        activeIndex === i ? "rotate-180 bg-blue-50 border-blue-100 text-blue-600" : "text-slate-300"
                                     )}>
-                                        {faq.q}
-                                    </h4>
-                                    <ChevronRight className={cn(
-                                        "w-5 h-5 text-slate-300 transition-all duration-500",
-                                        activeIndex === i ? "rotate-90 text-slate-950" : "group-hover:text-slate-950"
-                                    )} />
+                                        <ChevronRight className="w-4 h-4 rotate-90" />
+                                    </div>
                                 </div>
 
-                                <AnimatePresence>
+                                <AnimatePresence initial={false}>
                                     {activeIndex === i && (
                                         <motion.div
-                                            initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                                            animate={{ height: "auto", opacity: 1, marginTop: 16 }}
-                                            exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                                            transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                                            initial={{ height: 0, opacity: 0 }}
+                                            animate={{ height: "auto", opacity: 1 }}
+                                            exit={{ height: 0, opacity: 0 }}
+                                            transition={{ duration: 0.3, ease: "circOut" }}
                                         >
-                                            <div className="h-px w-full bg-slate-100 mb-6" />
-                                            <p className="text-[15px] text-slate-500 font-medium leading-relaxed max-w-2xl">
-                                                {faq.a}
-                                            </p>
+                                            <div className="pt-6 mt-6 border-t border-slate-50">
+                                                <p className="text-[14px] md:text-[15px] text-slate-500 font-medium leading-relaxed max-w-3xl">
+                                                    {faq.a}
+                                                </p>
+                                                <div className="mt-6 flex items-center gap-2">
+                                                    <span className="px-3 py-1 bg-slate-50 rounded-lg text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                                        Category: {faq.category}
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
                             </div>
-                        </div>
-                    </motion.div>
-                ))}
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
             </div>
         </div>
     );
