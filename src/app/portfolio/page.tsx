@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
 import { Wallet, Lock, Briefcase, ArrowDown, Zap, ArrowRight, ShieldCheck, PieChart } from "lucide-react";
@@ -65,7 +65,16 @@ const STAKED_POSITIONS = [
    COMPONENTS
    ───────────────────────────────────────────────────────────── */
 
-function PortfolioStatCard({ icon: Icon, title, value, subValue, colorClass, delay }: any) {
+interface PortfolioStatCardProps {
+    icon: React.ElementType;
+    title: string;
+    value: string;
+    subValue?: string;
+    colorClass: string;
+    delay: number;
+}
+
+function PortfolioStatCard({ icon: Icon, title, value, subValue, colorClass, delay }: PortfolioStatCardProps) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}

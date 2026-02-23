@@ -130,7 +130,10 @@ function PoolCard({ pool }: { pool: typeof POOLS[0] }) {
             {!isConnected ? (
                 <div className="relative z-10 pt-4">
                     <button
-                        onClick={() => open()}
+                        onClick={() => {
+                            console.log("DEBUG: Earn Page Connect Wallet clicked");
+                            open();
+                        }}
                         className="w-full py-5 bg-slate-950 text-white text-[12px] font-black uppercase tracking-[0.2em] rounded-[24px] shadow-2xl hover:bg-slate-800 transition-all active:scale-[0.98]"
                     >
                         Connect Wallet

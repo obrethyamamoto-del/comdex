@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { DOCS_DATA, DOCS_STRUCTURE } from '@/lib/docsData';
+import { DOCS_DATA, DOCS_STRUCTURE, DocsSectionItem, DocsSection, DocsItem } from '@/lib/docsData';
 import {
     Search, Wallet, ArrowRightLeft, TrendingUp, BookOpen,
     MessageCircle, Mail, HelpCircle, ChevronRight,
@@ -91,7 +91,15 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
     // Global Search Logic for Whitepaper
     const getSearchResults = () => {
         if (!searchQuery) return null;
-        const results: any[] = [];
+
+        interface SearchResult {
+            sectionKey: string;
+            sectionTitle: string;
+            matchType: 'heading' | 'content' | 'section';
+            items: DocsSectionItem[];
+        }
+
+        const results: SearchResult[] = [];
         const query = searchQuery.toLowerCase();
 
         Object.keys(DOCS_DATA).forEach(key => {
@@ -104,11 +112,11 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
             }
 
             // Check sections and items
-            section.sections?.forEach((s: any) => {
+            section.sections?.forEach((s: DocsSection) => {
                 const subHeadingMatch = s.heading?.toLowerCase().includes(query);
                 const contentMatch = s.content?.toLowerCase().includes(query);
 
-                const matchingItems = s.items?.filter((item: any) =>
+                const matchingItems = s.items?.filter((item: DocsSectionItem) =>
                     item.title.toLowerCase().includes(query) ||
                     item.desc.toLowerCase().includes(query)
                 );
@@ -140,7 +148,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
     const currentData = DOCS_DATA[activeSection] || DOCS_DATA['Overview'];
 
     // Navigation Logic
-    const flattenDocs = DOCS_STRUCTURE.reduce((acc: any[], group: any) => [...acc, ...group.items], []);
+    const flattenDocs = DOCS_STRUCTURE.reduce((acc: string[], group: { items: string[] }) => [...acc, ...group.items], []);
     const currentIndex = flattenDocs.indexOf(activeSection);
     const prevSection = currentIndex > 0 ? flattenDocs[currentIndex - 1] : null;
     const nextSection = currentIndex < flattenDocs.length - 1 ? flattenDocs[currentIndex + 1] : null;
@@ -179,7 +187,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                         <button onClick={() => setIsSidebarOpen(false)}><X className="w-5 h-5 text-slate-400" /></button>
                     </div>
 
-                    {DOCS_STRUCTURE.map((group: any, idx: number) => (
+                    {DOCS_STRUCTURE.map((group: { title: string, items: string[] }, idx: number) => (
                         <div key={idx} className="space-y-4">
                             <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-4">{group.title}</h3>
                             <nav className="space-y-1">
@@ -240,7 +248,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
 
                                 <div className="space-y-8">
                                     {searchResults && searchResults.length > 0 ? (
-                                        searchResults.map((result: any, idx: number) => (
+                                        searchResults.map((result: { sectionKey: string, sectionTitle: string, items: DocsSectionItem[] }, idx: number) => (
                                             <div key={idx} className="p-8 bg-slate-50/50 border border-slate-100 rounded-[32px] space-y-6 hover:bg-white hover:border-slate-200 transition-all group">
                                                 <div className="flex items-center justify-between">
                                                     <h3 className="text-xl font-black text-slate-950 group-hover:text-blue-600 transition-colors">{result.sectionTitle}</h3>
@@ -255,7 +263,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                                     </button>
                                                 </div>
                                                 <div className="space-y-4">
-                                                    {result.items?.map((item: any, i: number) => (
+                                                    {result.items?.map((item: DocsSectionItem, i: number) => (
                                                         <div key={i} className="pl-4 border-l-2 border-slate-200">
                                                             <h4 className="text-sm font-bold text-slate-900">{item.title}</h4>
                                                             <p className="text-xs text-slate-500 mt-1 line-clamp-2">{item.desc}</p>
@@ -306,7 +314,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
 
                                 {/* Sections Content */}
                                 <div className="space-y-16">
-                                    {currentData.sections && currentData.sections.map((section: any, idx: number) => (
+                                    {currentData.sections && currentData.sections.map((section: DocsSection, idx: number) => (
                                         <section key={idx} className="space-y-8">
                                             {section.heading && (
                                                 <h2 className="text-xl font-black text-slate-950 tracking-tight">{section.heading}</h2>
@@ -319,7 +327,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
 
                                             {/* Discovery Style Vertical Stack */}
                                             <div className="flex flex-col gap-6">
-                                                {section.items && section.items.map((item: any, i: number) => (
+                                                {section.items && section.items.map((item: DocsSectionItem, i: number) => (
                                                     <div key={i} className="group relative bg-white border border-slate-100 rounded-[32px] p-10 flex flex-col gap-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] hover:border-slate-200 transition-all duration-500 overflow-hidden">
                                                         <div className="flex flex-col h-full gap-8 relative z-10">
                                                             <div className="flex items-center gap-4 md:gap-6">
@@ -338,7 +346,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                                                 <div
                                                                     onClick={(e) => {
                                                                         e.stopPropagation();
-                                                                        handleCopy(item.contract);
+                                                                        handleCopy(item.contract!);
                                                                     }}
                                                                     className="flex items-center justify-between px-5 py-4 bg-[#fafbfc] border border-slate-100 rounded-2xl cursor-pointer hover:bg-white hover:border-slate-300 transition-all group/copy w-full md:w-fit md:min-w-[320px]"
                                                                 >
@@ -578,7 +586,7 @@ function GettingStartedSteps() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {steps.map((step, i) => (
+                    {steps.map((step: { number: string, title: string, desc: string, icon: any, color: string, link?: { text: string, href: string } }, i) => (
                         <div key={i} className="relative group/step">
                             <div className="flex flex-col gap-8 p-8 bg-slate-50/50 border border-slate-100 rounded-[32px] hover:bg-white hover:shadow-[0_30px_60px_rgba(0,0,0,0.05)] hover:border-slate-200 transition-all duration-500 h-full">
                                 <div className="flex items-center justify-between">
@@ -594,15 +602,15 @@ function GettingStartedSteps() {
                                     <h3 className="text-[20px] font-black text-slate-950 tracking-tight leading-none">{step.title}</h3>
                                     <p className="text-slate-500 text-[14px] font-medium leading-relaxed">{step.desc}</p>
                                 </div>
-                                {(step as any).link && (
+                                {step.link && (
                                     <div className="pt-2 mt-auto">
                                         <a
-                                            href={(step as any).link.href}
+                                            href={step.link.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="inline-flex items-center gap-2 text-[10px] font-black text-blue-600 hover:text-blue-700 uppercase tracking-widest bg-blue-50 hover:bg-blue-100 px-4 py-2.5 rounded-xl transition-all"
                                         >
-                                            {(step as any).link.text} <ExternalLink className="w-3 h-3" />
+                                            {step.link.text} <ExternalLink className="w-3 h-3" />
                                         </a>
                                     </div>
                                 )}
@@ -681,13 +689,13 @@ function EarnMechanismSteps() {
                                     <h3 className="text-[20px] font-black text-slate-950 tracking-tight leading-none">{step.title}</h3>
                                     <p className="text-slate-500 text-[14px] font-medium leading-relaxed">{step.desc}</p>
                                 </div>
-                                {(step as any).link && (
+                                {step.link && (
                                     <div className="pt-2 mt-auto">
                                         <a
-                                            href={(step as any).link.href}
+                                            href={step.link.href}
                                             className="inline-flex items-center gap-2 text-[10px] font-black text-blue-600 hover:text-blue-700 uppercase tracking-widest bg-blue-50 hover:bg-blue-100 px-4 py-2.5 rounded-xl transition-all"
                                         >
-                                            {(step as any).link.text} <ChevronRight className="w-3 h-3" />
+                                            {step.link.text} <ChevronRight className="w-3 h-3" />
                                         </a>
                                     </div>
                                 )}

@@ -1,6 +1,28 @@
 import React from 'react';
 
-export const DOCS_DATA: any = {
+export interface DocsSectionItem {
+    title: string;
+    desc: string;
+    icon?: React.ReactNode;
+    contract?: string;
+}
+
+export interface DocsSection {
+    heading?: string;
+    content?: string;
+    items?: DocsSectionItem[];
+    layout?: string;
+}
+
+export interface DocsItem {
+    title: string;
+    type: string;
+    content: string;
+    sections?: DocsSection[];
+    badge?: string;
+}
+
+export const DOCS_DATA: Record<string, DocsItem> = {
     'Overview': {
         title: 'Overview',
         type: 'rich',
@@ -537,7 +559,7 @@ export const DOCS_DATA: any = {
     }
 };
 
-export const DOCS_STRUCTURE: any = [
+export const DOCS_STRUCTURE = [
     {
         title: 'Documentation',
         items: ['Overview', 'Tokenized Assets', 'AUSD (Altai USD)', 'Participation Pools', 'How to Trade', 'Price Oracles', 'Vault & Compliance', 'Roadmap']

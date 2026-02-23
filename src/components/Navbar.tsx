@@ -97,7 +97,10 @@ export default function Navbar() {
                 <div className="hidden sm:block h-6 w-[1px] bg-slate-100 mx-1"></div>
 
                 <button
-                    onClick={() => open()}
+                    onClick={() => {
+                        console.log("DEBUG: Navbar (Desktop) Connect Wallet clicked");
+                        open();
+                    }}
                     className="hidden sm:block px-5 md:px-6 py-2.5 bg-slate-950 text-white text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-slate-800 transition-all shadow-lg shadow-black/5 active:scale-95 whitespace-nowrap"
                 >
                     {isConnected ? formatAddress(address!) : "Connect Wallet"}
@@ -150,6 +153,7 @@ export default function Navbar() {
                         <div className="pt-4 mt-2 border-t border-slate-50 flex flex-col gap-4">
                             <button
                                 onClick={() => {
+                                    console.log("DEBUG: Navbar (Mobile) Connect Wallet clicked");
                                     open();
                                     setIsMenuOpen(false);
                                 }}

@@ -10,7 +10,16 @@ import React, { ReactNode } from 'react'
 // 1. Get projectId from https://cloud.reown.com
 // Buraya kendi Project ID'nizi eklemelisiniz. 
 // Şimdilik boş bırakıyorum veya env üzerinden alacak şekilde ayarlıyorum.
-const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || '8e8e7c1c28f6eb6899b8b0e7d58f2378' // Örnek ID, lütfen kendi ID'nizle değiştirin
+const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || ''
+
+if (typeof window !== 'undefined') {
+    if (!projectId) {
+        console.warn("DEBUG: NEXT_PUBLIC_PROJECT_ID is missing!");
+    } else {
+        console.log("DEBUG: AppKit initializing with Project ID (first 4):", projectId.slice(0, 4));
+    }
+}
+
 
 // 2. Create a metadata object
 const metadata = {

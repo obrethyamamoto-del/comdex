@@ -1,12 +1,11 @@
 "use client";
 
-import { motion, useMotionValue, useTransform, useSpring, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Github, Twitter, Send, Globe, ShieldCheck, Lock, Shield, Zap, BarChart3, Layers, Wallet, Globe2, ChevronRight, TrendingUp, BadgeCheck } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Github, Send, ShieldCheck, Zap, Globe2, TrendingUp, BadgeCheck } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState } from "react";
 import AssetIcon from "@/components/AssetIcon";
 import { ASSETS } from "@/lib/assets";
-import BnbLogo from "@/components/icons/BnbLogo";
 
 /* ═══════════════════════════════════════════════════
    UTILITIES
@@ -512,7 +511,7 @@ export default function HomePage() {
           <div className="flex items-center gap-4">
             {[
               {
-                name: "X", icon: (props: any) => (
+                name: "X", icon: (props: React.ComponentProps<"svg">) => (
                   <svg {...props} viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
                   </svg>
@@ -520,7 +519,7 @@ export default function HomePage() {
               },
               { name: "Telegram", icon: Send, href: "https://t.me/altaiexchange" },
               {
-                name: "Medium", icon: (props: any) => (
+                name: "Medium", icon: (props: React.ComponentProps<"svg">) => (
                   <svg {...props} viewBox="0 0 24 24" fill="currentColor">
                     <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42S14.2 15.54 14.2 12s1.52-6.42 3.38-6.42S20.96 8.46 20.96 12zm3.04 0c0 3.07-.33 5.56-.73 5.56s-.73-2.49-.73-5.56.33-5.56.73-5.56.73 2.49.73 5.56z" />
                   </svg>

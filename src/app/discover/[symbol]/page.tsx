@@ -29,22 +29,21 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
     const [activeTab, setActiveTab] = useState("1D");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedAsset, setSelectedAsset] = useState(asset.symbol === "AUSD" ? (ASSETS.find(a => a.symbol === "USDT") || ASSETS[0]) : asset);
+    const [prevAssetSymbol, setPrevAssetSymbol] = useState(asset.symbol);
     const [swapStatus, setSwapStatus] = useState<"idle" | "loading" | "success">("idle");
+
+    if (asset.symbol !== prevAssetSymbol) {
+        setPrevAssetSymbol(asset.symbol);
+        setSelectedAsset(asset.symbol === "AUSD" ? (ASSETS.find(a => a.symbol === "USDT") || ASSETS[0]) : asset);
+    }
 
     const { open } = useAppKit();
     const { isConnected } = useAppKitAccount();
 
     useEffect(() => {
-        setMounted(true);
+        requestAnimationFrame(() => setMounted(true));
     }, []);
 
-    useEffect(() => {
-        if (asset.symbol === "AUSD") {
-            setSelectedAsset(ASSETS.find(a => a.symbol === "USDT") || ASSETS[0]);
-        } else {
-            setSelectedAsset(asset);
-        }
-    }, [asset]);
 
     if (!mounted) return null;
 
