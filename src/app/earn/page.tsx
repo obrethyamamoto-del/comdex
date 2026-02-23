@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
 import { Lock, DollarSign, Users, Loader2, CheckCircle2, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 import AssetIcon from "@/components/AssetIcon";
 import { TABLE_HEADER_CLASS, PRIMARY_BUTTON_CLASS, SUCCESS_BUTTON_CLASS } from "@/lib/constants";
 
@@ -19,11 +21,29 @@ function PoolCard({ pool }: { pool: typeof POOLS[0] }) {
     const [redeemStatus, setRedeemStatus] = useState<"idle" | "loading" | "success">("idle");
     const [claimStatus, setClaimStatus] = useState<"idle" | "loading" | "success">("idle");
 
+    const { open } = useAppKit();
+    const { isConnected } = useAppKitAccount();
+
     const handleParticipate = () => {
-        if (!amount || isNaN(Number(amount)) || Number(amount) <= 0) return;
+        if (!isConnected) {
+            toast.error("Wallet Not Connected", {
+                description: "Connect your wallet to participate in this vault.",
+            });
+            open();
+            return;
+        }
+        if (!amount || isNaN(Number(amount)) || Number(amount) <= 0) {
+            toast.error("Invalid Amount", {
+                description: "Enter a valid amount to participate.",
+            });
+            return;
+        }
         setStatus("loading");
         setTimeout(() => {
             setStatus("success");
+            toast.success("Participation Confirmed", {
+                description: `You have successfully joined the ${pool.name} vault.`,
+            });
             setTimeout(() => {
                 setStatus("idle");
                 setAmount("");
@@ -35,6 +55,9 @@ function PoolCard({ pool }: { pool: typeof POOLS[0] }) {
         setRedeemStatus("loading");
         setTimeout(() => {
             setRedeemStatus("success");
+            toast.success("Assets Redeemed", {
+                description: `Successfully withdrawn assets from ${pool.name}.`,
+            });
             setTimeout(() => setRedeemStatus("idle"), 3000);
         }, 2000);
     };
@@ -43,6 +66,9 @@ function PoolCard({ pool }: { pool: typeof POOLS[0] }) {
         setClaimStatus("loading");
         setTimeout(() => {
             setClaimStatus("success");
+            toast.success("Rewards Claimed", {
+                description: `Reward amount credited to your wallet.`,
+            });
             setTimeout(() => setClaimStatus("idle"), 3000);
         }, 2000);
     };
@@ -101,77 +127,88 @@ function PoolCard({ pool }: { pool: typeof POOLS[0] }) {
                 </button>
             </div>
 
-            <div className="relative z-10 flex flex-col gap-3">
-                <button
-                    onClick={handleClaim}
-                    disabled={claimStatus !== "idle" || status !== "idle" || redeemStatus !== "idle"}
-                    className={`w-full h-11 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-[0.98] flex items-center justify-center gap-2 border shadow-sm ${claimStatus === "success"
-                        ? `${SUCCESS_BUTTON_CLASS} border-emerald-100`
-                        : "bg-white border-blue-100 text-blue-600 hover:bg-blue-50"
-                        }`}
-                >
-                    {claimStatus === "idle" && "Claim Rewards"}
-                    {claimStatus === "loading" && (
-                        <>
-                            <Loader2 className="w-4 h-4 animate-spin" />
-                            Claiming...
-                        </>
-                    )}
-                    {claimStatus === "success" && (
-                        <>
-                            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                            Rewards Claimed
-                        </>
-                    )}
-                </button>
-
-                <div className="grid grid-cols-2 gap-3">
+            {!isConnected ? (
+                <div className="relative z-10 pt-4">
                     <button
-                        onClick={handleParticipate}
-                        disabled={status !== "idle" || redeemStatus !== "idle" || claimStatus !== "idle"}
-                        className={`h-12 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl active:scale-[0.98] transition-all whitespace-nowrap flex items-center justify-center gap-2 ${status === "success"
-                            ? SUCCESS_BUTTON_CLASS
-                            : PRIMARY_BUTTON_CLASS
-                            }`}
+                        onClick={() => open()}
+                        className="w-full py-5 bg-slate-950 text-white text-[12px] font-black uppercase tracking-[0.2em] rounded-[24px] shadow-2xl hover:bg-slate-800 transition-all active:scale-[0.98]"
                     >
-                        {status === "idle" && "Participate"}
-                        {status === "loading" && (
-                            <>
-                                <Loader2 className="w-4 h-4 animate-spin" />
-                                Processing
-                            </>
-                        )}
-                        {status === "success" && (
-                            <>
-                                <CheckCircle2 className="w-4 h-4" />
-                                Success
-                            </>
-                        )}
-                    </button>
-                    <button
-                        onClick={handleRedeem}
-                        disabled={redeemStatus !== "idle" || status !== "idle" || claimStatus !== "idle"}
-                        className={`h-12 border rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-[0.98] whitespace-nowrap flex items-center justify-center gap-2 ${redeemStatus === "success"
-                            ? "bg-emerald-50 text-emerald-600 border-emerald-200"
-                            : "bg-white border-slate-100 text-slate-400 hover:bg-slate-50 hover:text-slate-950"
-                            }`}
-                    >
-                        {redeemStatus === "idle" && "Redeem"}
-                        {redeemStatus === "loading" && (
-                            <>
-                                <Loader2 className="w-4 h-4 animate-spin" />
-                                Redeeming
-                            </>
-                        )}
-                        {redeemStatus === "success" && (
-                            <>
-                                <CheckCircle2 className="w-4 h-4" />
-                                Redeemed
-                            </>
-                        )}
+                        Connect Wallet
                     </button>
                 </div>
-            </div>
+            ) : (
+                <div className="relative z-10 flex flex-col gap-3">
+                    <button
+                        onClick={handleClaim}
+                        disabled={claimStatus !== "idle" || status !== "idle" || redeemStatus !== "idle"}
+                        className={`w-full h-11 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-[0.98] flex items-center justify-center gap-2 border shadow-sm ${claimStatus === "success"
+                            ? `${SUCCESS_BUTTON_CLASS} border-emerald-100`
+                            : "bg-white border-blue-100 text-blue-600 hover:bg-blue-50"
+                            }`}
+                    >
+                        {claimStatus === "idle" && "Claim Rewards"}
+                        {claimStatus === "loading" && (
+                            <>
+                                <Loader2 className="w-4 h-4 animate-spin" />
+                                Claiming...
+                            </>
+                        )}
+                        {claimStatus === "success" && (
+                            <>
+                                <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                                Rewards Claimed
+                            </>
+                        )}
+                    </button>
+
+                    <div className="grid grid-cols-2 gap-3">
+                        <button
+                            onClick={handleParticipate}
+                            disabled={status !== "idle" || redeemStatus !== "idle" || claimStatus !== "idle"}
+                            className={`h-12 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl active:scale-[0.98] transition-all whitespace-nowrap flex items-center justify-center gap-2 ${status === "success"
+                                ? SUCCESS_BUTTON_CLASS
+                                : PRIMARY_BUTTON_CLASS
+                                }`}
+                        >
+                            {status === "idle" && "Participate"}
+                            {status === "loading" && (
+                                <>
+                                    <Loader2 className="w-4 h-4 animate-spin" />
+                                    Processing
+                                </>
+                            )}
+                            {status === "success" && (
+                                <>
+                                    <CheckCircle2 className="w-4 h-4" />
+                                    Success
+                                </>
+                            )}
+                        </button>
+                        <button
+                            onClick={handleRedeem}
+                            disabled={redeemStatus !== "idle" || status !== "idle" || claimStatus !== "idle"}
+                            className={`h-12 border rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-[0.98] whitespace-nowrap flex items-center justify-center gap-2 ${redeemStatus === "success"
+                                ? "bg-emerald-50 text-emerald-600 border-emerald-200"
+                                : "bg-white border-slate-100 text-slate-400 hover:bg-slate-50 hover:text-slate-950"
+                                }`}
+                        >
+                            {redeemStatus === "idle" && "Redeem"}
+                            {redeemStatus === "loading" && (
+                                <>
+                                    <Loader2 className="w-4 h-4 animate-spin" />
+                                    Redeeming
+                                </>
+                            )}
+                            {redeemStatus === "success" && (
+                                <>
+                                    <CheckCircle2 className="w-4 h-4" />
+                                    Redeemed
+                                </>
+                            )}
+                        </button>
+                    </div>
+                </div>
+            )}
 
             {/* Hover Accent – identical to Discover cards */}
             <div className="absolute bottom-0 left-0 h-[3px] w-full bg-slate-950 transition-transform duration-500 origin-left scale-x-0 group-hover:scale-x-100" />
@@ -256,6 +293,7 @@ function StakeRow({ stake }: { stake: typeof STAKES[0] }) {
 export default function EarnPage() {
     const [selectedFilter, setSelectedFilter] = useState("All Vaults");
     const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const { isConnected } = useAppKitAccount();
 
     const filteredPools = selectedFilter === "All Vaults"
         ? POOLS
@@ -357,33 +395,35 @@ export default function EarnPage() {
                 </div>
 
                 {/* Active Participations Section */}
-                <div className="space-y-8">
-                    <div className="flex items-center justify-between px-1">
-                        <h2 className="text-2xl md:text-3xl font-black text-slate-950 tracking-tight">Active Participations</h2>
-                    </div>
+                {isConnected && (
+                    <div className="space-y-8">
+                        <div className="flex items-center justify-between px-1">
+                            <h2 className="text-2xl md:text-3xl font-black text-slate-950 tracking-tight">Active Participations</h2>
+                        </div>
 
-                    <div className="bg-white border border-slate-100 rounded-[32px] shadow-sm overflow-hidden mb-32">
-                        <div className="overflow-x-auto no-scrollbar">
-                            <table className="w-full text-left min-w-[1000px]">
-                                <thead className="bg-[#fafbfc] border-b border-slate-100">
-                                    <tr>
-                                        <th className={TABLE_HEADER_CLASS}>Asset Pool</th>
-                                        <th className={TABLE_HEADER_CLASS}>Participated Amount</th>
-                                        <th className={TABLE_HEADER_CLASS}>Lifecycle</th>
-                                        <th className={TABLE_HEADER_CLASS}>APY %</th>
-                                        <th className={TABLE_HEADER_CLASS}>Yield Earned</th>
-                                        <th className={`${TABLE_HEADER_CLASS} text-right`}>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-slate-100">
-                                    {STAKES.map((stake) => (
-                                        <StakeRow key={stake.id} stake={stake} />
-                                    ))}
-                                </tbody>
-                            </table>
+                        <div className="bg-white border border-slate-100 rounded-[32px] shadow-sm overflow-hidden mb-32">
+                            <div className="overflow-x-auto no-scrollbar">
+                                <table className="w-full text-left min-w-[1000px]">
+                                    <thead className="bg-[#fafbfc] border-b border-slate-100">
+                                        <tr>
+                                            <th className={TABLE_HEADER_CLASS}>Asset Pool</th>
+                                            <th className={TABLE_HEADER_CLASS}>Participated Amount</th>
+                                            <th className={TABLE_HEADER_CLASS}>Lifecycle</th>
+                                            <th className={TABLE_HEADER_CLASS}>APY %</th>
+                                            <th className={TABLE_HEADER_CLASS}>Yield Earned</th>
+                                            <th className={`${TABLE_HEADER_CLASS} text-right`}>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-slate-100">
+                                        {STAKES.map((stake) => (
+                                            <StakeRow key={stake.id} stake={stake} />
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
 
             </div>
         </div>

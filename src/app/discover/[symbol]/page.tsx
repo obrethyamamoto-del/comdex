@@ -1,6 +1,7 @@
 "use client";
 
 import { use, useState, useEffect } from "react";
+import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
 import { ASSETS } from "@/lib/assets";
 import AssetIcon from "@/components/AssetIcon";
 import {
@@ -14,6 +15,7 @@ import {
     Loader2,
     CheckCircle2
 } from "lucide-react";
+import { toast } from "sonner";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import DiscoverTicker from "@/components/discover/DiscoverTicker";
@@ -28,6 +30,9 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedAsset, setSelectedAsset] = useState(asset.symbol === "AUSD" ? (ASSETS.find(a => a.symbol === "USDT") || ASSETS[0]) : asset);
     const [swapStatus, setSwapStatus] = useState<"idle" | "loading" | "success">("idle");
+
+    const { open } = useAppKit();
+    const { isConnected } = useAppKitAccount();
 
     useEffect(() => {
         setMounted(true);
@@ -53,9 +58,19 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
     };
 
     const handleSwap = () => {
+        if (!isConnected) {
+            toast.error("Wallet Not Connected", {
+                description: "Please connect your wallet to perform a swap.",
+            });
+            open();
+            return;
+        }
         setSwapStatus("loading");
         setTimeout(() => {
             setSwapStatus("success");
+            toast.success("Transaction Successful", {
+                description: `Successfully swapped assets.`,
+            });
             setTimeout(() => {
                 setSwapStatus("idle");
             }, 2000);
@@ -318,21 +333,28 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                 </div>
 
                                 <button
-                                    onClick={handleSwap}
-                                    disabled={swapStatus !== "idle"}
-                                    className={`w-full py-5 rounded-[24px] text-[12px] font-black uppercase tracking-[0.2em] shadow-2xl transition-all active:scale-[0.98] flex items-center justify-center gap-3 ${swapStatus === "success"
+                                    onClick={() => {
+                                        if (isConnected) {
+                                            handleSwap();
+                                        } else {
+                                            open();
+                                        }
+                                    }}
+                                    disabled={isConnected && swapStatus !== "idle"}
+                                    className={`w-full py-5 rounded-[24px] text-[12px] font-black uppercase tracking-[0.2em] shadow-2xl transition-all active:scale-[0.98] flex items-center justify-center gap-3 ${isConnected && swapStatus === "success"
                                         ? "bg-emerald-500 text-white shadow-emerald-500/20 hover:bg-emerald-600"
                                         : "bg-slate-950 text-white shadow-slate-950/20 hover:bg-slate-800"
                                         }`}
                                 >
-                                    {swapStatus === "idle" && "SWAP"}
-                                    {swapStatus === "loading" && (
+                                    {!isConnected && "Connect Wallet"}
+                                    {isConnected && swapStatus === "idle" && "SWAP"}
+                                    {isConnected && swapStatus === "loading" && (
                                         <>
                                             <Loader2 className="w-5 h-5 animate-spin" />
                                             Processing...
                                         </>
                                     )}
-                                    {swapStatus === "success" && (
+                                    {isConnected && swapStatus === "success" && (
                                         <>
                                             <CheckCircle2 className="w-5 h-5" />
                                             Success

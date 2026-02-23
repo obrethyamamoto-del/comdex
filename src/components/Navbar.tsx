@@ -7,12 +7,18 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
 
 export default function Navbar() {
     const pathname = usePathname();
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+
+    const { open } = useAppKit();
+    const { isConnected, address } = useAppKitAccount();
+
+    const formatAddress = (addr: string) => `${addr.slice(0, 6)}...${addr.slice(-4)}`;
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
@@ -90,8 +96,11 @@ export default function Navbar() {
 
                 <div className="hidden sm:block h-6 w-[1px] bg-slate-100 mx-1"></div>
 
-                <button className="hidden sm:block px-5 md:px-6 py-2.5 bg-slate-950 text-white text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-slate-800 transition-all shadow-lg shadow-black/5 active:scale-95 whitespace-nowrap">
-                    Connect Wallet
+                <button
+                    onClick={() => open()}
+                    className="hidden sm:block px-5 md:px-6 py-2.5 bg-slate-950 text-white text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-slate-800 transition-all shadow-lg shadow-black/5 active:scale-95 whitespace-nowrap"
+                >
+                    {isConnected ? formatAddress(address!) : "Connect Wallet"}
                 </button>
 
                 {/* Mobile Menu Toggle */}
@@ -139,8 +148,14 @@ export default function Navbar() {
                             );
                         })}
                         <div className="pt-4 mt-2 border-t border-slate-50 flex flex-col gap-4">
-                            <button className="w-full py-4 bg-slate-950 text-white text-xs font-black uppercase tracking-widest rounded-xl shadow-lg active:scale-[0.98] transition-all">
-                                Connect Wallet
+                            <button
+                                onClick={() => {
+                                    open();
+                                    setIsMenuOpen(false);
+                                }}
+                                className="w-full py-4 bg-slate-950 text-white text-xs font-black uppercase tracking-widest rounded-xl shadow-lg active:scale-[0.98] transition-all"
+                            >
+                                {isConnected ? formatAddress(address!) : "Connect Wallet"}
                             </button>
 
                             <div className="flex items-center justify-center gap-3">

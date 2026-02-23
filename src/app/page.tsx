@@ -126,9 +126,6 @@ function HeroAssetCard() {
               <div className="flex items-center gap-4">
                 <div className="relative">
                   <AssetIcon symbol={asset.symbol} avatar={asset.avatar} color={asset.color} size="md" className="shadow-lg shadow-black/5" />
-                  <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full flex items-center justify-center border border-slate-50 shadow-sm">
-                    <BnbLogo className="w-3 h-3" />
-                  </div>
                 </div>
                 <div>
                   <h3 className="text-lg font-black text-slate-950 leading-none">{asset.symbol}</h3>
@@ -219,7 +216,7 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
-                className="text-[3.5rem] sm:text-[4.5rem] md:text-[5.5rem] font-black text-slate-900 leading-[0.95] tracking-[-0.04em]"
+                className="text-[3rem] sm:text-[4rem] md:text-[5rem] lg:text-[5.5rem] font-black text-slate-900 leading-[0.95] tracking-[-0.04em]"
               >
                 Real Assets. <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
@@ -248,7 +245,7 @@ export default function HomePage() {
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </Link>
-                <Link href="/docs" className="w-full sm:w-auto">
+                <Link href="/support" className="w-full sm:w-auto">
                   <button className="h-[56px] px-8 w-full sm:w-auto bg-white text-slate-600 border border-slate-200 hover:border-slate-300 rounded-2xl text-sm font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-slate-50 active:scale-95 transition-all duration-300">
                     Documentation
                   </button>
@@ -261,21 +258,21 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="relative lg:h-[600px] flex items-center justify-center perspective-[2000px]"
+              className="relative lg:h-[600px] flex items-center justify-center perspective-[2000px] mt-12 lg:mt-0"
             >
               {/* Floating Elements Background */}
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-50/50 to-purple-50/50 rounded-full blur-3xl opacity-60" />
 
               {/* Main Card */}
-              <div className="transform transition-transform hover:scale-[1.02] duration-500 relative z-10 w-full">
+              <div className="transform transition-transform hover:scale-[1.02] duration-500 relative z-10 w-full px-4 sm:px-0 flex justify-center">
                 <HeroAssetCard />
               </div>
 
-              {/* Floating Stats Cards around it */}
+              {/* Floating Stats Cards around it - Hidden on mobile, visible on desktop */}
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute top-20 -right-4 sm:right-10 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 z-20 max-w-[180px]"
+                className="hidden md:block absolute top-10 right-0 lg:top-20 lg:-right-4 xl:right-10 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 z-20 max-w-[180px]"
               >
                 <div className="flex items-center gap-2 mb-2">
                   <div className="p-1.5 bg-green-100 text-green-600 rounded-lg">
@@ -290,7 +287,7 @@ export default function HomePage() {
               <motion.div
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute bottom-32 -left-4 sm:left-0 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 z-20"
+                className="hidden md:block absolute bottom-20 left-0 lg:bottom-32 lg:-left-4 xl:left-0 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 z-20"
               >
                 <div className="flex items-center gap-3">
                   <div className="flex -space-x-3">
@@ -336,7 +333,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto lg:auto-rows-[340px]">
           {/* Feature 1: RWA */}
           <div className="md:col-span-2 bg-[#f1f5f9] rounded-[32px] p-10 relative overflow-hidden group">
             <div className="relative z-10 h-full flex flex-col justify-between">
@@ -463,7 +460,12 @@ export default function HomePage() {
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-2 mb-6">
-              <img src="/images/altai.svg" alt="Altai" className="w-8 h-8 opacity-80" />
+              <div className="relative">
+                <img src="/images/altai.svg" alt="Altai" className="w-8 h-8 opacity-80" />
+                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full shadow-sm flex items-center justify-center p-[1px] border border-slate-50">
+                  <BnbLogo className="w-full h-full" />
+                </div>
+              </div>
               <span className="text-xl font-black text-slate-900">ALTAI</span>
             </div>
             <p className="text-sm text-slate-500 font-medium leading-relaxed">
@@ -472,16 +474,36 @@ export default function HomePage() {
           </div>
 
           {[
-            { title: "Platform", links: ["Discover", "Earn", "Portfolio", "Exchange"] },
-            { title: "Support", links: ["Help Center", "Documentation", "API Status", "Contact"] },
-            { title: "Legal", links: ["Privacy Policy", "Terms of Service", "Risk Disclosure"] }
+            {
+              title: "Platform", links: [
+                { label: "Discover", href: "/discover" },
+                { label: "Earn", href: "/earn" },
+                { label: "Portfolio", href: "/portfolio" },
+                { label: "Exchange", href: "/discover" }
+              ]
+            },
+            {
+              title: "Support", links: [
+                { label: "Help Center", href: "/support" },
+                { label: "Documentation", href: "/support?tab=docs" },
+                { label: "API Status", href: "/support" },
+                { label: "Contact", href: "/support" }
+              ]
+            },
+            {
+              title: "Legal", links: [
+                { label: "Privacy Policy", href: "/legal" },
+                { label: "Terms of Service", href: "/legal" },
+                { label: "Risk Disclosure", href: "/legal" }
+              ]
+            }
           ].map((col, i) => (
             <div key={i}>
               <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest mb-6">{col.title}</h4>
               <ul className="space-y-4">
                 {col.links.map(l => (
-                  <li key={l}>
-                    <Link href="#" className="text-sm text-slate-500 hover:text-blue-600 font-medium transition-colors">{l}</Link>
+                  <li key={l.label}>
+                    <Link href={l.href} className="text-sm text-slate-500 hover:text-blue-600 font-medium transition-colors">{l.label}</Link>
                   </li>
                 ))}
               </ul>

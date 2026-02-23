@@ -1,6 +1,7 @@
 "use client";
 
 import TetherLogo from "@/components/icons/TetherLogo";
+import BnbLogo from "@/components/icons/BnbLogo";
 import { ALTAI_MARK_SRC, ICON_SIZES } from "@/lib/constants";
 
 interface AssetIconProps {
@@ -23,7 +24,7 @@ export default function AssetIcon({ symbol, avatar, color, size = "md", classNam
 
     return (
         <div
-            className={`${s.container} ${s.radius} flex items-center justify-center text-white shadow-sm shrink-0 ${className}`}
+            className={`${s.container} ${s.radius} flex items-center justify-center text-white shadow-sm shrink-0 relative ${className}`}
             style={{ backgroundColor: color || "#f1f5f9" }}
         >
             {symbol === "USDT" ? (
@@ -35,6 +36,11 @@ export default function AssetIcon({ symbol, avatar, color, size = "md", classNam
                     alt={symbol}
                 />
             )}
+
+            {/* Global Binance (BNB) Badge */}
+            <div className="absolute -bottom-1 -right-1 w-[42%] h-[42%] bg-white rounded-full shadow-md z-10 flex items-center justify-center p-[2px] border border-white">
+                <BnbLogo className="w-full h-full" />
+            </div>
         </div>
     );
 }

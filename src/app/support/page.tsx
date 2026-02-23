@@ -470,7 +470,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                             </div>
 
                                             <Link
-                                                href="/trade/AXAUAUSD"
+                                                href="/discover/AXAU"
                                                 className="shrink-0 w-full md:w-auto px-8 py-5 bg-white text-slate-950 rounded-[24px] font-black text-[11px] uppercase tracking-widest hover:bg-blue-50 transition-all flex items-center justify-center gap-3 group/btn hover:scale-[1.02] active:scale-[0.98] shadow-xl"
                                             >
                                                 Launch App
@@ -549,7 +549,7 @@ function GettingStartedSteps() {
             desc: "Swap your USDT into AUSD, our gold-backed settlement engine on BNB Chain for all trades.",
             icon: ArrowRightLeft,
             color: "emerald",
-            link: { text: "Buy AUSD", href: "/trade/AUSDUSDT" }
+            link: { text: "Buy AUSD", href: "/discover/AUSD" }
         },
         {
             number: "03",

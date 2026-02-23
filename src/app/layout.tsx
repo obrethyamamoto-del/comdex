@@ -13,6 +13,8 @@ export const metadata: Metadata = {
 };
 
 import Navbar from "@/components/Navbar";
+import Web3Provider from "@/context/Web3Provider";
+import { Toaster } from "sonner";
 
 export default function RootLayout({
   children,
@@ -22,10 +24,26 @@ export default function RootLayout({
   return (
     <html lang="en" className="light">
       <body className={`${inter.variable} font-display antialiased`}>
-        <div className="flex flex-col h-screen bg-[#f8fafc] text-slate-900 overflow-hidden">
-          <Navbar />
-          {children}
-        </div>
+        <Web3Provider>
+          <Toaster
+            position="top-right"
+            richColors
+            closeButton
+            toastOptions={{
+              style: {
+                borderRadius: '16px',
+                border: '1px solid #f1f5f9',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+                fontFamily: 'var(--font-inter)',
+                padding: '16px'
+              },
+            }}
+          />
+          <div className="flex flex-col h-screen bg-[#f8fafc] text-slate-900 overflow-hidden">
+            <Navbar />
+            {children}
+          </div>
+        </Web3Provider>
       </body>
     </html>
   );

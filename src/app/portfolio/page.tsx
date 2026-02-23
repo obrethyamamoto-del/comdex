@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Wallet, Lock, Briefcase, ArrowDown, Zap } from "lucide-react";
+import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
+import { Wallet, Lock, Briefcase, ArrowDown, Zap, ArrowRight, ShieldCheck, PieChart } from "lucide-react";
 import AssetIcon from "@/components/AssetIcon";
 import { TABLE_HEADER_CLASS, TABLE_CELL_CLASS } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
@@ -168,9 +169,115 @@ function StakedRow({ item, index }: { item: typeof STAKED_POSITIONS[0], index: n
 }
 
 export default function PortfolioPage() {
+    const { open } = useAppKit();
+    const { isConnected } = useAppKitAccount();
+
+    if (!isConnected) {
+        return (
+            <div className="flex-1 overflow-y-auto bg-[#fafbfc] flex items-start lg:items-center justify-center p-4 pt-20 lg:pt-4">
+                <div className="max-w-[1000px] w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        className="flex flex-col gap-6 md:gap-8 items-center lg:items-start text-center lg:text-left"
+                    >
+                        <div className="w-fit flex items-center gap-2 text-[10px] font-black text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full uppercase tracking-[0.2em]">
+                            <ShieldCheck className="w-3 h-3" />
+                            Secure Access
+                        </div>
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-950 tracking-tighter leading-[1] md:leading-[0.9]">
+                            Portfolio <br className="hidden md:block" />
+                            <span className="text-slate-300">Management.</span>
+                        </h1>
+                        <p className="text-base md:text-lg text-slate-500 font-medium leading-relaxed max-w-md">
+                            Connect your wallet to track your digital assets, monitor yield performance, and manage your tokenized commodity portfolio in real-time.
+                        </p>
+                        <div className="flex flex-col gap-4 w-full md:w-auto items-center lg:items-start">
+                            <button
+                                onClick={() => open()}
+                                className="w-full md:w-fit px-12 py-5 bg-slate-950 text-white text-[12px] font-black uppercase tracking-[0.2em] rounded-2xl shadow-2xl hover:bg-slate-800 transition-all active:scale-[0.98] flex items-center justify-center gap-4 group"
+                            >
+                                Connect Wallet
+                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </button>
+                            <p className="text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+                                Support for MetaMask, Trust & 300+ Wallets
+                            </p>
+                        </div>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.8 }}
+                        className="hidden lg:flex items-center justify-center relative"
+                    >
+                        {/* Soft Glow Background */}
+                        <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 via-transparent to-emerald-500/10 blur-[100px] rounded-full" />
+
+                        <div className="relative">
+                            {/* Main Decorative Card */}
+                            <motion.div
+                                animate={{ y: [0, -15, 0] }}
+                                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                                className="w-[380px] h-[480px] bg-white border border-slate-100 rounded-[60px] shadow-[0_40px_100px_rgba(0,0,0,0.04)] flex flex-col items-center justify-center p-12 relative overflow-hidden"
+                            >
+                                <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-slate-100 to-transparent" />
+
+                                {/* Icon Sphere */}
+                                <div className="relative mb-10">
+                                    <div className="absolute inset-0 bg-blue-600/20 blur-2xl rounded-full scale-150" />
+                                    <div className="relative w-24 h-24 bg-slate-950 rounded-[32px] flex items-center justify-center shadow-2xl">
+                                        <Wallet className="w-10 h-10 text-white" />
+                                    </div>
+
+                                    {/* Small floating dots */}
+                                    <motion.div animate={{ y: [0, 20, 0] }} transition={{ duration: 4, repeat: Infinity }} className="absolute -top-4 -right-4 w-4 h-4 bg-emerald-400 rounded-full blur-[2px]" />
+                                    <motion.div animate={{ y: [0, -20, 0] }} transition={{ duration: 5, repeat: Infinity }} className="absolute -bottom-2 -left-6 w-3 h-3 bg-blue-400 rounded-full blur-[1px]" />
+                                </div>
+
+                                <div className="text-center space-y-3">
+                                    <h3 className="text-xl font-black text-slate-950 tracking-tight">Your Digital Vault</h3>
+                                    <p className="text-[13px] font-medium text-slate-400 leading-relaxed">
+                                        Securely connect to manage and track your tokenized assets.
+                                    </p>
+                                </div>
+
+                                {/* Minimal Skeleton Lines */}
+                                <div className="mt-12 w-full space-y-4">
+                                    <div className="h-[2px] w-full bg-slate-50" />
+                                    <div className="h-[2px] w-2/3 bg-slate-50 mx-auto" />
+                                    <div className="h-[2px] w-1/2 bg-slate-50 mx-auto" />
+                                </div>
+
+                                <div className="absolute bottom-12 inset-x-0 flex justify-center">
+                                    <div className="bg-slate-50/50 backdrop-blur-sm border border-slate-100 px-5 py-2.5 rounded-full flex items-center gap-3">
+                                        <div className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-pulse" />
+                                        <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em]">Secure Gateway</span>
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                            {/* Floating Element - Secondary Card */}
+                            <motion.div
+                                animate={{ y: [0, 20, 0], x: [0, 10, 0] }}
+                                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                                className="absolute -right-12 top-20 w-32 h-32 bg-white/40 backdrop-blur-md border border-white/60 rounded-[32px] shadow-xl z-10 flex items-center justify-center"
+                            >
+                                <PieChart className="w-10 h-10 text-slate-200" />
+                            </motion.div>
+                        </div>
+                    </motion.div>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className="flex-1 overflow-y-auto bg-[#fafbfc]">
-            <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-8 md:py-12 pb-32">
+        <div className="flex-1 overflow-y-auto bg-[#fafbfc] px-4 md:px-10 py-8 md:py-12 no-scrollbar">
+            <div className="max-w-[1400px] mx-auto pb-32">
 
                 {/* Header */}
                 <div className="flex flex-col gap-6 mb-12">
@@ -193,7 +300,7 @@ export default function PortfolioPage() {
                 </div>
 
                 {/* Stat Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-12">
                     <PortfolioStatCard
                         icon={Wallet}
                         title="Wallet Balance"
