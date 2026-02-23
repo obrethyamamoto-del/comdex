@@ -462,9 +462,6 @@ export default function HomePage() {
             <div className="flex items-center gap-2 mb-6">
               <div className="relative">
                 <img src="/images/altai.svg" alt="Altai" className="w-8 h-8 opacity-80" />
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full shadow-sm flex items-center justify-center p-[1px] border border-slate-50">
-                  <BnbLogo className="w-full h-full" />
-                </div>
               </div>
               <span className="text-xl font-black text-slate-900">ALTAI</span>
             </div>
