@@ -2,7 +2,7 @@
 
 import TetherLogo from "@/components/icons/TetherLogo";
 import BnbLogo from "@/components/icons/BnbLogo";
-import { ALTAI_MARK_SRC, ICON_SIZES } from "@/lib/constants";
+import { COMDEX_MARK_SRC, ICON_SIZES } from "@/lib/constants";
 
 interface AssetIconProps {
     symbol: string;
@@ -31,7 +31,7 @@ export default function AssetIcon({ symbol, avatar, color, size = "md", classNam
                 <TetherLogo className={`${s.img}`} />
             ) : (
                 <img
-                    src={ALTAI_MARK_SRC}
+                    src={COMDEX_MARK_SRC}
                     className={`${s.img} object-contain`}
                     alt={symbol}
                 />

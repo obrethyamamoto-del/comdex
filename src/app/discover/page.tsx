@@ -6,28 +6,28 @@ import StatSection from "@/components/discover/StatSection";
 import AssetCard from "@/components/discover/AssetCard";
 import AssetRow from "@/components/discover/AssetRow";
 import { useState, useEffect, Suspense } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { ASSETS } from "@/lib/assets";
 import { TABLE_HEADER_CLASS } from "@/lib/constants";
 
 const TOP_GAINERS = [
-    { icon: "C", name: "Altai Copper", symbol: "AXCU", value: "$8.45", subValue: "+1.15%", isPositive: true, color: "#d35400" },
-    { icon: "P", name: "Altai Palladium", symbol: "AXPD", value: "$950.25", subValue: "+1.20%", isPositive: true, color: "#5D9B76" },
-    { icon: "G", name: "Altai Gold", symbol: "AXAU", value: "$2,045.80", subValue: "+0.45%", isPositive: true, color: "#FFD700" },
+    { icon: "C", name: "Comdex Copper", symbol: "XCUc", value: "$8.45", subValue: "+1.15%", isPositive: true, color: "#d35400" },
+    { icon: "P", name: "Comdex Palladium", symbol: "XPDc", value: "$950.25", subValue: "+1.20%", isPositive: true, color: "#5D9B76" },
+    { icon: "G", name: "Comdex Gold", symbol: "XAUc", value: "$2,045.80", subValue: "+0.45%", isPositive: true, color: "#FFD700" },
 ];
 
 const TRENDING = [
-    { icon: "G", name: "Altai Gold", symbol: "AXAU", value: "$2,045.80", subValue: "+0.64%", isPositive: true, color: "#FFD700" },
-    { icon: "O", name: "Altai Brent Oil", symbol: "ABRN", value: "$78.45", subValue: "-0.85%", isPositive: false, color: "#216477" },
-    { icon: "A", name: "Altai USD", symbol: "AUSD", value: "$1.00", subValue: "+0.00%", isPositive: true, color: "#8B5CF6" },
+    { icon: "G", name: "Comdex Gold", symbol: "XAUc", value: "$2,045.80", subValue: "+0.64%", isPositive: true, color: "#FFD700" },
+    { icon: "O", name: "Comdex Brent Oil", symbol: "BRNc", value: "$78.45", subValue: "-0.85%", isPositive: false, color: "#216477" },
+    { icon: "A", name: "Comdex USD", symbol: "CUSD", value: "$1.00", subValue: "+0.00%", isPositive: true, color: "#8B5CF6" },
 ];
 
 const NEWLY_ADDED = [
-    { icon: "S", name: "Altai Silver", symbol: "AXAG", value: "$23.45", subValue: "Metal", color: "#C0C0C0" },
-    { icon: "P", name: "Altai Platinum", symbol: "AXPT", value: "$915.20", subValue: "Metal", color: "#4A7EBB" },
-    { icon: "C", name: "Altai Copper", symbol: "AXCU", value: "$8.45", subValue: "Metal", color: "#d35400" },
+    { icon: "S", name: "Comdex Silver", symbol: "XAGc", value: "$23.45", subValue: "Metal", color: "#C0C0C0" },
+    { icon: "P", name: "Comdex Platinum", symbol: "XPTc", value: "$915.20", subValue: "Metal", color: "#4A7EBB" },
+    { icon: "C", name: "Comdex Copper", symbol: "XCUc", value: "$8.45", subValue: "Metal", color: "#d35400" },
 ];
 
 const CATEGORIES = ["All assets", "Metal", "Commodity", "Stable"];
@@ -43,6 +43,7 @@ function DiscoverContent() {
     useEffect(() => {
         const query = searchParams.get('q');
         if (query) {
+            // eslint-disable-next-line
             setSearchQuery(query);
         }
     }, [searchParams]);
@@ -110,7 +111,7 @@ function DiscoverContent() {
 
                     {/* Explorer Bar */}
                     <div className="flex flex-col gap-10">
-                        <div className="sticky top-0 z-40 bg-[#fafbfc] py-6 -mx-1 px-1 border-b border-slate-100 flex flex-col gap-6">
+                        <div className="relative z-40 bg-[#fafbfc] py-6 -mx-1 px-1 border-b border-slate-100 flex flex-col gap-6">
                             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                                 <div className="flex items-center gap-4">
                                     <h2 className="text-xl font-black text-slate-950 tracking-tight">Market Explorer</h2>
@@ -253,8 +254,8 @@ function DiscoverContent() {
                                         <table className="w-full text-left border-collapse min-w-[1000px]">
                                             <thead className="bg-[#fafbfc] border-b border-slate-100">
                                                 <tr>
-                                                    <th className={`${TABLE_HEADER_CLASS} w-16 text-center`}>#</th>
-                                                    <th className={`${TABLE_HEADER_CLASS} min-w-[200px]`}>Asset Name</th>
+                                                    <th className={`${TABLE_HEADER_CLASS} w-10 md:w-16 text-center sticky left-0 z-20 bg-[#fafbfc] border-r border-slate-100`}>#</th>
+                                                    <th className={`${TABLE_HEADER_CLASS} min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-10 md:left-16 z-20 bg-[#fafbfc] border-r border-slate-100 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.05)]`}>Asset Name</th>
                                                     <th className={TABLE_HEADER_CLASS}>Price</th>
                                                     <th className={TABLE_HEADER_CLASS}>Categories</th>
                                                     <th className={TABLE_HEADER_CLASS}>Performance</th>

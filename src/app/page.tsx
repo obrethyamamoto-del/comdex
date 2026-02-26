@@ -29,22 +29,6 @@ function generateSparkline(points: number, trend: "up" | "down" = "up", amplitud
   }, "");
 }
 
-function AnimatedNumber({ value, prefix = "", suffix = "", duration = 2000 }: {
-  value: number; prefix?: string; suffix?: string; duration?: number;
-}) {
-  const [display, setDisplay] = useState(0);
-  useEffect(() => {
-    const start = performance.now();
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 4);
-      setDisplay(Math.floor(value * eased));
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, [value, duration]);
-  return <>{prefix}{display.toLocaleString()}{suffix}</>;
-}
 
 /* ═══════════════════════════════════════════════════
    COMPONENTS
@@ -89,7 +73,7 @@ function LiveSparkline({ color = "#10b981", trend = "up" as "up" | "down" }) {
 /* -------------------------------------------------------------
    HERO ASSET CARD (Updated Design)
 ------------------------------------------------------------- */
-const SLIDER_ASSETS = ASSETS.filter(a => a.symbol !== "USDT" && a.symbol !== "AUSD");
+const SLIDER_ASSETS = ASSETS.filter(a => a.symbol !== "USDT" && a.symbol !== "CUSD");
 
 function HeroAssetCard() {
   const [index, setIndex] = useState(0);
@@ -305,7 +289,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <div className="text-sm font-black text-slate-900">12k+ Users</div>
-                    <div className="text-[10px] font-bold text-slate-400">Trust Altai Pro</div>
+                    <div className="text-[10px] font-bold text-slate-400">Trust Comdex Pro</div>
                   </div>
                 </div>
               </motion.div>
@@ -322,7 +306,7 @@ export default function HomePage() {
       <section className="py-24 px-6 md:px-10 max-w-[1400px] mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="max-w-xl">
-            <span className="text-blue-600 font-extrabold uppercase tracking-widest text-xs mb-2 block">Why Choose Altai</span>
+            <span className="text-blue-600 font-extrabold uppercase tracking-widest text-xs mb-2 block">Why Choose Comdex</span>
             <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-[1.1]">
               Backed by Earth, <br /> Powered by Code.
             </h2>
@@ -399,14 +383,14 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-2xl font-black text-slate-900 mb-3">Multi-Source Oracles</h3>
                 <p className="text-slate-500 font-medium">
-                  Prices are aggregated from <strong className="text-slate-700">Pyth Network</strong> and <strong className="text-slate-700">Redstone</strong>, then validated by our internal <strong className="text-blue-600">Altai Oracle</strong>. Triple-layer security ensures tamper-proof valuations.
+                  Prices are aggregated from <strong className="text-slate-700">Pyth Network</strong> and <strong className="text-slate-700">Redstone</strong>, then validated by our internal <strong className="text-blue-600">Comdex Oracle</strong>. Triple-layer security ensures tamper-proof valuations.
                 </p>
               </div>
               <div className="flex flex-col justify-center gap-4">
                 {[
                   { name: "Pyth Network", status: "Operational", color: "bg-emerald-500" },
                   { name: "RedStone", status: "Operational", color: "bg-emerald-500" },
-                  { name: "Altai Oracle", status: "Primary Source", color: "bg-blue-600" }
+                  { name: "Comdex Oracle", status: "Primary Source", color: "bg-blue-600" }
                 ].map((oracle, i) => (
                   <div key={i} className="flex items-center justify-between py-3 border-b border-slate-100 last:border-0">
                     <div className="flex items-center gap-3">
@@ -458,11 +442,11 @@ export default function HomePage() {
       <footer className="border-t border-slate-200 bg-white pt-20 pb-12 px-6">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="relative">
-                <img src="/images/altai.svg" alt="Altai" className="w-8 h-8 opacity-80" />
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 bg-[#0052cc] rounded-xl flex items-center justify-center border border-blue-700/50 shadow-lg shadow-blue-900/10">
+                <img src="/images/comdex-logo.svg" alt="Comdex" className="w-6 h-6" />
               </div>
-              <span className="text-xl font-black text-slate-900">ALTAI</span>
+              <span className="text-xl font-black text-slate-900 tracking-tighter">COMDEX</span>
             </div>
             <p className="text-sm text-slate-500 font-medium leading-relaxed">
               Tokenized real-world assets for the decentralized economy.
@@ -507,7 +491,7 @@ export default function HomePage() {
           ))}
         </div>
         <div className="max-w-[1400px] mx-auto pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs font-bold text-slate-400">© 2026 Altai Protocol. All rights reserved.</p>
+          <p className="text-xs font-bold text-slate-400">© 2026 Comdex Protocol. All rights reserved.</p>
           <div className="flex items-center gap-4">
             {[
               {
@@ -515,15 +499,15 @@ export default function HomePage() {
                   <svg {...props} viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
                   </svg>
-                ), href: "https://x.com/altaiexchange"
+                ), href: "https://x.com/comdexexchange"
               },
-              { name: "Telegram", icon: Send, href: "https://t.me/altaiexchange" },
+              { name: "Telegram", icon: Send, href: "https://t.me/comdexexchange" },
               {
                 name: "Medium", icon: (props: React.ComponentProps<"svg">) => (
                   <svg {...props} viewBox="0 0 24 24" fill="currentColor">
                     <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42S14.2 15.54 14.2 12s1.52-6.42 3.38-6.42S20.96 8.46 20.96 12zm3.04 0c0 3.07-.33 5.56-.73 5.56s-.73-2.49-.73-5.56.33-5.56.73-5.56.73 2.49.73 5.56z" />
                   </svg>
-                ), href: "https://medium.com/@Altaiexchange"
+                ), href: "https://medium.com/@comdexexchange"
               },
               { name: "GitHub", icon: Github, href: "https://github.com" },
             ].map((social) => (

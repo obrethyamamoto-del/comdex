@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Altai Pro | Tokenized Commodities Exchange",
+  title: "Comdex Pro | Tokenized Commodities Exchange",
   description: "Trade real-world commodity-backed tokens on BNB Chain. Gold, silver, platinum, palladium, copper, and crude oil — each backed 1:1 by physical reserves.",
 };
 

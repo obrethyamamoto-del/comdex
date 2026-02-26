@@ -9,10 +9,10 @@ import AssetIcon from "@/components/AssetIcon";
 import { TABLE_HEADER_CLASS, PRIMARY_BUTTON_CLASS, SUCCESS_BUTTON_CLASS } from "@/lib/constants";
 
 const POOLS = [
-    { name: "Altai Gold", ticker: "AXAU", apy: "5.20%", tvl: "12,042 AXAU", rewards: "$1.2M", stake: "12.50 AXAU", yourReward: "158.42 AUSD", color: "#FFD700", avatar: "G" },
-    { name: "Altai Silver", ticker: "AXAG", apy: "12.80%", tvl: "570,240 AXAG", rewards: "$850K", stake: "450.00 AXAG", yourReward: "42.15 AUSD", color: "#C0C0C0", avatar: "S" },
-    { name: "Altai Platinum", ticker: "AXPT", apy: "7.45%", tvl: "6,065 AXPT", rewards: "$420K", stake: "0.00 AXPT", yourReward: "0.00 AUSD", color: "#4A7EBB", avatar: "P" },
-    { name: "Altai Palladium", ticker: "AXPD", apy: "9.15%", tvl: "3,385 AXPD", rewards: "$280K", stake: "5.00 AXPD", yourReward: "210.10 AUSD", color: "#5D9B76", avatar: "D" }
+    { name: "Comdex Gold", ticker: "XAUc", apy: "5.20%", tvl: "12,042 XAUc", rewards: "$1.2M", stake: "12.50 XAUc", yourReward: "158.42 CUSD", color: "#FFD700", avatar: "G" },
+    { name: "Comdex Silver", ticker: "XAGc", apy: "12.80%", tvl: "570,240 XAGc", rewards: "$850K", stake: "450.00 XAGc", yourReward: "42.15 CUSD", color: "#C0C0C0", avatar: "S" },
+    { name: "Comdex Platinum", ticker: "XPTc", apy: "7.45%", tvl: "6,065 XPTc", rewards: "$420K", stake: "0.00 XPTc", yourReward: "0.00 CUSD", color: "#4A7EBB", avatar: "P" },
+    { name: "Comdex Palladium", ticker: "XPDc", apy: "9.15%", tvl: "3,385 XPDc", rewards: "$280K", stake: "5.00 XPDc", yourReward: "210.10 CUSD", color: "#5D9B76", avatar: "D" }
 ];
 
 function PoolCard({ pool }: { pool: typeof POOLS[0] }) {
@@ -220,9 +220,9 @@ function PoolCard({ pool }: { pool: typeof POOLS[0] }) {
 }
 
 const STAKES = [
-    { symbol: "AXAU", fullName: "Altai Gold", id: "#1204", amount: "12.500 AXAU", value: "≈ $25,430.00", duration: "45 Days", progress: 65, apy: "5.20%", rewarded: "158.42", color: "#FFD700" },
-    { symbol: "AXAG", fullName: "Altai Silver", id: "#8921", amount: "450.000 AXAG", value: "≈ $10,102.50", duration: "12 Days", progress: 20, apy: "12.80%", rewarded: "42.15", color: "#C0C0C0" },
-    { symbol: "AXPD", fullName: "Altai Palladium", id: "#5412", amount: "5.000 AXPD", value: "≈ $4,729.00", duration: "92 Days", progress: 85, apy: "9.15%", rewarded: "210.10", color: "#5D9B76" }
+    { symbol: "XAUc", fullName: "Comdex Gold", id: "#1204", amount: "12.500 XAUc", value: "≈ $25,430.00", duration: "45 Days", progress: 65, apy: "5.20%", rewarded: "158.42", color: "#FFD700" },
+    { symbol: "XAGc", fullName: "Comdex Silver", id: "#8921", amount: "450.000 XAGc", value: "≈ $10,102.50", duration: "12 Days", progress: 20, apy: "12.80%", rewarded: "42.15", color: "#C0C0C0" },
+    { symbol: "XPDc", fullName: "Comdex Palladium", id: "#5412", amount: "5.000 XPDc", value: "≈ $4,729.00", duration: "92 Days", progress: 85, apy: "9.15%", rewarded: "210.10", color: "#5D9B76" }
 ];
 
 function StakeRow({ stake }: { stake: typeof STAKES[0] }) {
@@ -238,12 +238,12 @@ function StakeRow({ stake }: { stake: typeof STAKES[0] }) {
 
     return (
         <tr key={stake.id} className="group hover:bg-slate-50/50 transition-all">
-            <td className="px-6 py-6">
-                <div className="flex items-center gap-4">
-                    <AssetIcon symbol={stake.symbol} avatar="" color={stake.color} size="sm" className="transition-transform group-hover:scale-110" />
-                    <div>
-                        <p className="text-sm font-black text-slate-950 leading-none">{stake.symbol}</p>
-                        <p className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest">{stake.fullName}</p>
+            <td className="px-6 py-4 md:py-6 min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-0 z-10 bg-white group-hover:bg-slate-50 transition-colors border-r border-slate-50 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.02)]">
+                <div className="flex items-center gap-2 md:gap-4">
+                    <AssetIcon symbol={stake.symbol} avatar="" color={stake.color} size="sm" className="transition-transform group-hover:scale-110 flex-shrink-0" />
+                    <div className="flex flex-col min-w-0">
+                        <p className="text-sm font-black text-slate-950 leading-none truncate">{stake.symbol}</p>
+                        <p className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest truncate">{stake.fullName}</p>
                     </div>
                 </div>
             </td>
@@ -263,7 +263,7 @@ function StakeRow({ stake }: { stake: typeof STAKES[0] }) {
                 <p className="text-sm font-black text-blue-600 tabular-nums">{stake.apy}</p>
             </td>
             <td className="px-6 py-6">
-                <p className="text-sm font-black text-slate-950 tabular-nums">{stake.rewarded} AUSD</p>
+                <p className="text-sm font-black text-slate-950 tabular-nums">{stake.rewarded} CUSD</p>
             </td>
             <td className="px-6 py-6 text-right">
                 <button
@@ -319,7 +319,7 @@ export default function EarnPage() {
                         </motion.div>
                         <h1 className="text-3xl md:text-4xl font-black text-slate-950 tracking-tight leading-none">Put Your Assets to Work</h1>
                         <p className="text-slate-500 font-medium max-w-lg text-sm leading-relaxed">
-                            Participate with your assets and earn high-yield rewards in AUSD stablecoins.
+                            Participate with your assets and earn high-yield rewards in CUSD stablecoins.
                             Institutional-grade security, fully audited and always liquid.
                         </p>
                     </div>
@@ -409,7 +409,7 @@ export default function EarnPage() {
                                 <table className="w-full text-left min-w-[1000px]">
                                     <thead className="bg-[#fafbfc] border-b border-slate-100">
                                         <tr>
-                                            <th className={TABLE_HEADER_CLASS}>Asset Pool</th>
+                                            <th className={`${TABLE_HEADER_CLASS} min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-0 z-20 bg-[#fafbfc] border-r border-slate-100 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.05)]`}>Asset Pool</th>
                                             <th className={TABLE_HEADER_CLASS}>Participated Amount</th>
                                             <th className={TABLE_HEADER_CLASS}>Lifecycle</th>
                                             <th className={TABLE_HEADER_CLASS}>APY %</th>

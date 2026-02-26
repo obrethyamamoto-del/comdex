@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, LayoutGrid, Menu, X, Github, Send } from "lucide-react";
+import { Search, Menu, X, Github, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -47,12 +47,15 @@ export default function Navbar() {
             {/* Logo */}
             <div className="flex items-center gap-2 mr-4 md:mr-12">
                 <Link href="/" className="flex items-center gap-3">
-                    <img
-                        src="/images/altai.svg"
-                        alt="Altai Logo"
-                        className="w-10 h-10 md:w-11 md:h-11 object-contain"
-                    />
-                    <span className="text-lg md:text-xl font-bold bg-clip-text text-[#1e293b] whitespace-nowrap">Altai Pro</span>
+                    <div className="w-10 h-10 md:w-11 md:h-11 bg-[#0052cc] rounded-[18px] flex items-center justify-center shadow-lg shadow-blue-900/20 border border-blue-700/50">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src="/images/comdex-logo.svg"
+                            alt="Comdex Logo"
+                            className="w-6 h-6 md:w-7 md:h-7 object-contain"
+                        />
+                    </div>
+                    <span className="text-lg md:text-xl font-black text-slate-900 tracking-[-0.03em] whitespace-nowrap uppercase">Comdex Pro</span>
                 </Link>
             </div>
 
@@ -165,19 +168,19 @@ export default function Navbar() {
                             <div className="flex items-center justify-center gap-3">
                                 {[
                                     {
-                                        name: "X", icon: (props: any) => (
+                                        name: "X", icon: (props: React.SVGProps<SVGSVGElement>) => (
                                             <svg {...props} viewBox="0 0 24 24" fill="currentColor">
                                                 <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
                                             </svg>
-                                        ), href: "https://x.com/altaiexchange"
+                                        ), href: "https://x.com/comdexexchange"
                                     },
-                                    { name: "Telegram", icon: Send, href: "https://t.me/altaiexchange" },
+                                    { name: "Telegram", icon: Send, href: "https://t.me/comdexexchange" },
                                     {
-                                        name: "Medium", icon: (props: any) => (
+                                        name: "Medium", icon: (props: React.SVGProps<SVGSVGElement>) => (
                                             <svg {...props} viewBox="0 0 24 24" fill="currentColor">
                                                 <path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42S14.2 15.54 14.2 12s1.52-6.42 3.38-6.42S20.96 8.46 20.96 12zm3.04 0c0 3.07-.33 5.56-.73 5.56s-.73-2.49-.73-5.56.33-5.56.73-5.56.73 2.49.73 5.56z" />
                                             </svg>
-                                        ), href: "https://medium.com/@Altaiexchange"
+                                        ), href: "https://medium.com/@comdexexchange"
                                     },
                                     { name: "GitHub", icon: Github, href: "https://github.com" },
                                 ].map((social) => (

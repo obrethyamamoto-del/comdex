@@ -19,8 +19,8 @@ export const ICON_SIZES = {
     lg: { container: "w-12 h-12 md:w-14 md:h-14", img: "w-9 h-9 md:w-11 md:h-11", radius: "rounded-2xl" },
 } as const;
 
-/** The altai mark SVG path used for all non-USDT icons */
-export const ALTAI_MARK_SRC = "/images/altai-mark.svg";
+/** The comdex mark SVG path used for all non-USDT icons */
+export const COMDEX_MARK_SRC = "/images/comdex-mark.svg";
 
 /** Shared positive / negative color tokens */
 export const TREND_COLORS = {

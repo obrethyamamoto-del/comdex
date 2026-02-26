@@ -10,7 +10,7 @@ import React, { ReactNode } from 'react'
 // 1. Get projectId from https://cloud.reown.com
 // Buraya kendi Project ID'nizi eklemelisiniz. 
 // Şimdilik boş bırakıyorum veya env üzerinden alacak şekilde ayarlıyorum.
-const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || ''
+const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || 'b56e18d47c72ab683b10817fe9485c60'
 
 if (typeof window !== 'undefined') {
     if (!projectId) {
@@ -23,13 +23,14 @@ if (typeof window !== 'undefined') {
 
 // 2. Create a metadata object
 const metadata = {
-    name: 'Altai Pro',
+    name: 'Comdex Pro',
     description: 'Tokenized Commodities Exchange',
-    url: 'https://altai.pro',
-    icons: ['https://altai.pro/images/altai.svg']
+    url: 'https://comdex.pro',
+    icons: ['https://comdex.pro/images/comdex-logo.svg']
 }
 
 // 3. Set the networks
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const networks = [mainnet, bsc] as [any, ...any[]]
 
 // 4. Create Wagmi Adapter
@@ -66,8 +67,10 @@ export default function Web3Provider({ children }: { children: ReactNode }) {
 }
 
 declare global {
+    // eslint-disable-next-line @typescript-eslint/no-namespace
     namespace JSX {
         interface IntrinsicElements {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             'appkit-button': any
         }
     }

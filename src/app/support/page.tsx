@@ -2,78 +2,47 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { DOCS_DATA, DOCS_STRUCTURE, DocsSectionItem, DocsSection, DocsItem } from '@/lib/docsData';
+import { DOCS_DATA, DOCS_STRUCTURE, DocsSectionItem, DocsSection } from '@/lib/docsData';
 import {
     Search, Wallet, ArrowRightLeft, TrendingUp, BookOpen,
-    MessageCircle, Mail, HelpCircle, ChevronRight,
-    Copy, Check, Menu, X, Book, Info, Shield,
-    Map, Rocket, DollarSign, Layers, FileText, Globe, Zap, ExternalLink, Clock,
+    MessageCircle, Mail, ChevronRight,
+    Copy, Check, Menu, X, Rocket, Layers, Zap, ExternalLink, Clock,
     ArrowLeft, ArrowRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
-const SUPPORT_CATEGORIES = [
-    {
-        icon: Wallet,
-        title: "Wallet & Connectivity",
-        desc: "Learn how to connect your Web3 wallet and manage your digital identity.",
-        links: ["Connecting MetaMask", "BNB Chain Setup", "Wallet Security Tips"],
-        color: "#3b82f6"
-    },
-    {
-        icon: ArrowRightLeft,
-        title: "Trading & Swaps",
-        desc: "Understanding zero-slippage trades and commodity-backed assets.",
-        links: ["How Swaps Work", "Price Oracles", "Transaction Fees"],
-        color: "#10b981"
-    },
-    {
-        icon: TrendingUp,
-        title: "Earn & Yield",
-        desc: "Maximize your returns with Participation Pools and AUSD rewards.",
-        links: ["Staking Guide", "Revenue Share Model", "Reward Distribution"],
-        color: "#8b5cf6"
-    },
-    {
-        icon: BookOpen,
-        title: "Assets & Compliance",
-        desc: "Details on physical backing, vaulting, and Sharia compliance.",
-        links: ["Vault Locations", "Independent Audits", "Sharia Principles"],
-        color: "#f59e0b"
-    }
-];
 
 const FAQS = [
     {
-        q: "What is ALTAI Exchange?",
-        a: "ALTAI is a decentralized exchange platform that enables users to trade, participate, and manage precious metals on the blockchain. We provide a secure, transparent, and efficient way to access precious metals markets without traditional intermediaries.",
+        q: "What is Comdex Exchange?",
+        a: "Comdex is a decentralized exchange platform that enables users to trade, participate, and manage precious metals on the blockchain. We provide a secure, transparent, and efficient way to access precious metals markets without traditional intermediaries.",
         category: "General"
     },
     {
-        q: "How does participation work on ALTAI?",
-        a: "Participation on ALTAI allows you to commit your tokenized precious metals to support the ecosystem and earn returns. You can participate with Gold, Silver, Platinum, or Palladium tokens for different durations, receiving returns based on platform revenue.",
+        q: "How does participation work on Comdex?",
+        a: "Participation on Comdex allows you to commit your tokenized precious metals to support the ecosystem and earn returns. You can participate with Gold, Silver, Platinum, or Palladium tokens for different durations, receiving returns based on platform revenue.",
         category: "Participation"
     },
     {
         q: "What metals can I trade?",
-        a: "Currently, ALTAI supports trading of four major precious metals: Gold (Au), Silver (Ag), Platinum (Pt), and Palladium (Pd). Each metal is backed by physical reserves and can be traded 24/7 with real-time pricing from major exchanges.",
+        a: "Currently, Comdex supports trading of four major precious metals: Gold (Au), Silver (Ag), Platinum (Pt), and Palladium (Pd). Each metal is backed by physical reserves and can be traded 24/7 with real-time pricing from major exchanges.",
         category: "Trading"
     },
     {
-        q: "What is AUSD and how is it used?",
-        a: "AUSD is the native yield-bearing stablecoin of the Altai ecosystem. It serves as the primary liquidity bridge, allowing users to move seamlessly between physical metal tokens. When you hold AUSD, you maintain your purchasing power while staying ready to capitalize on market movements within the Altai vault.",
+        q: "What is CUSD and how is it used?",
+        a: "CUSD is the native yield-bearing stablecoin of the Comdex ecosystem. It serves as the primary liquidity bridge, allowing users to move seamlessly between physical metal tokens. When you hold CUSD, you maintain your purchasing power while staying ready to capitalize on market movements within the Comdex vault.",
         category: "General"
     },
     {
-        q: "How are Altai assets backed by real-world metals?",
-        a: "Every metal token on Altai is 1:1 backed by physical inventory stored in secure, institutional-grade vaults in Dubai (DMCC) and London. We bridge the gap between physical ownership and digital liquidity, ensuring that each digital unit represents a verifiable, tangible asset held in professional custody.",
+        q: "How are Comdex assets backed by real-world metals?",
+        a: "Every metal token on Comdex is 1:1 backed by physical inventory stored in secure, institutional-grade vaults in Dubai (DMCC) and London. We bridge the gap between physical ownership and digital liquidity, ensuring that each digital unit represents a verifiable, tangible asset held in professional custody.",
         category: "Security"
     },
     {
-        q: "Which blockchain networks does Altai support?",
-        a: "Altai is optimized for high performance and low latency. We primarily support BNB Chain, providing our users with ultra-low transaction costs and the massive liquidity of the world’s largest exchange ecosystem.",
+        q: "Which blockchain networks does Comdex support?",
+        a: "Comdex is optimized for high performance and low latency. We primarily support BNB Chain, providing our users with ultra-low transaction costs and the massive liquidity of the world’s largest exchange ecosystem.",
         category: "Trading"
     }
 ];
@@ -243,7 +212,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                             >
                                 <header className="space-y-4">
                                     <h2 className="text-3xl font-black text-slate-950 tracking-tight">Whitepaper Search Results</h2>
-                                    <p className="text-slate-500 font-medium text-sm">Found {searchResults?.length || 0} relative sections for "{searchQuery}"</p>
+                                    <p className="text-slate-500 font-medium text-sm">Found {searchResults?.length || 0} relative sections for &quot;{searchQuery}&quot;</p>
                                 </header>
 
                                 <div className="space-y-8">
@@ -279,7 +248,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                             </div>
                                             <div className="space-y-2">
                                                 <h3 className="text-xl font-black text-slate-950">No documentation found</h3>
-                                                <p className="text-slate-500 font-medium">Try searching for broader terms like "Gold", "Vault", or "Security"</p>
+                                                <p className="text-slate-500 font-medium">Try searching for broader terms like &quot;Gold&quot;, &quot;Vault&quot;, or &quot;Security&quot;</p>
                                             </div>
                                         </div>
                                     )}
@@ -386,7 +355,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                                 </div>
                                                 <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">Explore Real-Time Asset Data</h3>
                                                 <p className="text-slate-400 font-medium text-sm md:text-[15px] leading-relaxed">
-                                                    Dive into the live market board to view real-time prices, 24h volume, and performance metrics for all Altai tokenized assets.
+                                                    Dive into the live market board to view real-time prices, 24h volume, and performance metrics for all Comdex tokenized assets.
                                                 </p>
                                             </div>
 
@@ -401,8 +370,8 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                     </div>
                                 )}
 
-                                {/* CTA: AUSD Detail */}
-                                {activeSection === 'AUSD (Altai USD)' && (
+                                {/* CTA: CUSD Detail */}
+                                {activeSection === 'CUSD (Comdex USD)' && (
                                     <div className="mt-16 p-8 md:p-12 rounded-[32px] bg-slate-950 relative overflow-hidden group border border-white/5 shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
                                         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 blur-[120px] rounded-full group-hover:bg-blue-600/30 transition-all duration-1000" />
                                         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sky-600/10 blur-[100px] rounded-full group-hover:bg-sky-600/20 transition-all duration-1000" />
@@ -413,17 +382,17 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                                     <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
                                                     <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Stablecoin & Settlement</span>
                                                 </div>
-                                                <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">View AUSD Market Data</h3>
+                                                <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">View CUSD Market Data</h3>
                                                 <p className="text-slate-400 font-medium text-sm md:text-[15px] leading-relaxed">
-                                                    Analyze the stability, treasury backing, and 24h volume of the Altai USD (AUSD) settlement token.
+                                                    Analyze the stability, treasury backing, and 24h volume of the Comdex USD (CUSD) settlement token.
                                                 </p>
                                             </div>
 
                                             <Link
-                                                href="/discover/AUSD"
+                                                href="/discover/CUSD"
                                                 className="shrink-0 w-full md:w-auto px-8 py-5 bg-white text-slate-950 rounded-[24px] font-black text-[11px] uppercase tracking-widest hover:bg-blue-50 transition-all flex items-center justify-center gap-3 group/btn hover:scale-[1.02] active:scale-[0.98] shadow-xl"
                                             >
-                                                Open AUSD Details
+                                                View CUSD Details
                                                 <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                                             </Link>
                                         </div>
@@ -444,7 +413,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                                 </div>
                                                 <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">Start Earning Real Yield</h3>
                                                 <p className="text-slate-400 font-medium text-sm md:text-[15px] leading-relaxed">
-                                                    Deposit your tokenized assets into Participation Pools and earn a share of platform revenue distributed in AUSD.
+                                                    Deposit your tokenized assets into Participation Pools and earn a share of platform revenue distributed in CUSD.
                                                 </p>
                                             </div>
 
@@ -459,7 +428,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                     </div>
                                 )}
 
-                                {/* CTA: Trade General (Links to AXAU) */}
+                                {/* CTA: Trade General (Links to XAUc) */}
                                 {activeSection === 'How to Trade' && (
                                     <div className="mt-16 p-8 md:p-12 rounded-[32px] bg-slate-950 relative overflow-hidden group border border-white/5 shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
                                         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 blur-[120px] rounded-full group-hover:bg-blue-600/30 transition-all duration-1000" />
@@ -478,7 +447,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                             </div>
 
                                             <Link
-                                                href="/discover/AXAU"
+                                                href="/discover/XAUc"
                                                 className="shrink-0 w-full md:w-auto px-8 py-5 bg-white text-slate-950 rounded-[24px] font-black text-[11px] uppercase tracking-widest hover:bg-blue-50 transition-all flex items-center justify-center gap-3 group/btn hover:scale-[1.02] active:scale-[0.98] shadow-xl"
                                             >
                                                 Launch App
@@ -553,11 +522,11 @@ function GettingStartedSteps() {
         },
         {
             number: "02",
-            title: "Convert to AUSD",
-            desc: "Swap your USDT into AUSD, our gold-backed settlement engine on BNB Chain for all trades.",
+            title: "Convert to CUSD",
+            desc: "Swap your USDT into CUSD, our gold-backed settlement engine on BNB Chain for all trades.",
             icon: ArrowRightLeft,
             color: "emerald",
-            link: { text: "Buy AUSD", href: "/discover/AUSD" }
+            link: { text: "Buy CUSD", href: "/discover/CUSD" }
         },
         {
             number: "03",
@@ -586,7 +555,7 @@ function GettingStartedSteps() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {steps.map((step: { number: string, title: string, desc: string, icon: any, color: string, link?: { text: string, href: string } }, i) => (
+                    {steps.map((step: { number: string, title: string, desc: string, icon: React.ElementType, color: string, link?: { text: string, href: string } }, i) => (
                         <div key={i} className="relative group/step">
                             <div className="flex flex-col gap-8 p-8 bg-slate-50/50 border border-slate-100 rounded-[32px] hover:bg-white hover:shadow-[0_30px_60px_rgba(0,0,0,0.05)] hover:border-slate-200 transition-all duration-500 h-full">
                                 <div className="flex items-center justify-between">
@@ -633,7 +602,7 @@ function EarnMechanismSteps() {
         {
             number: "01",
             title: "Vault Your Assets",
-            desc: "Deposit your tokenized commodities (AXAU, AXAG, ABRN) into specialized Participation Pools.",
+            desc: "Deposit your tokenized commodities (XAUc, XAGc, BRNc) into specialized Participation Pools.",
             icon: Layers,
             color: "blue",
             link: { text: "View Pools", href: "/earn" }
@@ -648,7 +617,7 @@ function EarnMechanismSteps() {
         {
             number: "03",
             title: "Earn Real Yield",
-            desc: "Receive a direct share of global platform revenue, distributed daily in gold-backed AUSD.",
+            desc: "Receive a direct share of global platform revenue, distributed daily in gold-backed CUSD.",
             icon: TrendingUp,
             color: "violet"
         }
@@ -668,7 +637,7 @@ function EarnMechanismSteps() {
                             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Participation Model</span>
                         </div>
                         <h2 className="text-3xl md:text-5xl font-black text-slate-950 tracking-tight leading-none">Earn Real Yield</h2>
-                        <p className="text-slate-500 font-medium text-sm max-w-xl leading-relaxed text-balance">Turn your idle physical assets into active revenue streams through Altai's institutional-grade Participation Pools.</p>
+                        <p className="text-slate-500 font-medium text-sm max-w-xl leading-relaxed text-balance">Turn your idle physical assets into active revenue streams through Comdex&apos;s institutional-grade Participation Pools.</p>
                     </div>
                 </div>
 
@@ -867,7 +836,7 @@ function SupportContent({ searchQuery = "" }: { searchQuery?: string }) {
                     </div>
                     <div className="space-y-2">
                         <h3 className="text-xl font-black text-slate-950">No results found</h3>
-                        <p className="text-slate-500 font-medium">We couldn't find any help topics matching "{searchQuery}"</p>
+                        <p className="text-slate-500 font-medium">We couldn&apos;t find any help topics matching &quot;{searchQuery}&quot;</p>
                     </div>
                     <button
                         onClick={() => window.dispatchEvent(new CustomEvent('clear-search'))}
@@ -894,7 +863,7 @@ function SupportContent({ searchQuery = "" }: { searchQuery?: string }) {
 
                 <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-6 relative z-10 pt-4 px-4 sm:px-0">
                     <a
-                        href="https://t.me/altaiexchange"
+                        href="https://t.me/comdexexchange"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full sm:w-auto px-10 py-5 bg-white text-slate-950 rounded-[24px] font-black text-[12px] uppercase tracking-widest flex items-center justify-center gap-4 hover:bg-slate-200 transition-all active:scale-[0.98] shadow-2xl shadow-indigo-500/10"
@@ -903,7 +872,7 @@ function SupportContent({ searchQuery = "" }: { searchQuery?: string }) {
                         Community
                     </a>
                     <a
-                        href="mailto:Support@altai.exchange"
+                        href="mailto:Support@comdex.pro"
                         className="w-full sm:w-auto px-10 py-5 bg-slate-900 text-white border border-white/5 rounded-[24px] font-black text-[12px] uppercase tracking-widest flex items-center justify-center gap-4 hover:bg-slate-800 transition-all active:scale-[0.98]"
                     >
                         <Mail className="w-5 h-5" />
@@ -929,6 +898,7 @@ function PageMain() {
 
     useEffect(() => {
         const tab = searchParams.get('tab');
+        // eslint-disable-next-line
         if (tab === 'docs') setActiveTab('docs');
 
         const section = searchParams.get('section');
@@ -965,8 +935,8 @@ function PageMain() {
                             </h1>
                             <p className="text-slate-500 font-medium max-w-lg text-sm leading-relaxed">
                                 {activeTab === 'support'
-                                    ? "Access our comprehensive support network and community-driven guides for the Altai ecosystem."
-                                    : "Detailed technical specifications, economic models, and architectural blueprints of Altai Pro."
+                                    ? "Access our comprehensive support network and community-driven guides for the Comdex ecosystem."
+                                    : "Detailed technical specifications, economic models, and architectural blueprints of Comdex Pro."
                                 }
                             </p>
                         </div>

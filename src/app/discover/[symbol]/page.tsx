@@ -28,13 +28,13 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
     const [mounted, setMounted] = useState(false);
     const [activeTab, setActiveTab] = useState("1D");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedAsset, setSelectedAsset] = useState(asset.symbol === "AUSD" ? (ASSETS.find(a => a.symbol === "USDT") || ASSETS[0]) : asset);
+    const [selectedAsset, setSelectedAsset] = useState(asset.symbol === "CUSD" ? (ASSETS.find(a => a.symbol === "USDT") || ASSETS[0]) : asset);
     const [prevAssetSymbol, setPrevAssetSymbol] = useState(asset.symbol);
     const [swapStatus, setSwapStatus] = useState<"idle" | "loading" | "success">("idle");
 
     if (asset.symbol !== prevAssetSymbol) {
         setPrevAssetSymbol(asset.symbol);
-        setSelectedAsset(asset.symbol === "AUSD" ? (ASSETS.find(a => a.symbol === "USDT") || ASSETS[0]) : asset);
+        setSelectedAsset(asset.symbol === "CUSD" ? (ASSETS.find(a => a.symbol === "USDT") || ASSETS[0]) : asset);
     }
 
     const { open } = useAppKit();
@@ -196,8 +196,8 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                             {tradeType === "buy" ? (
                                                 <div className="flex items-center gap-2.5 px-3 py-2 bg-white border border-slate-100 rounded-2xl shadow-sm">
                                                     <div className="flex items-center gap-2">
-                                                        <AssetIcon symbol="AUSD" avatar="A" color="#8B5CF6" size="sm" />
-                                                        <span className="text-[14px] font-black text-slate-900 tracking-tight">AUSD</span>
+                                                        <AssetIcon symbol="CUSD" avatar="C" color="#8B5CF6" size="sm" />
+                                                        <span className="text-[14px] font-black text-slate-900 tracking-tight">CUSD</span>
                                                     </div>
                                                 </div>
                                             ) : (
@@ -219,7 +219,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                                                 onClick={() => setIsDropdownOpen(false)}
                                                             />
                                                             <div className="absolute top-full right-0 mt-2 w-56 bg-white border border-slate-100 rounded-2xl shadow-2xl py-2 z-50 max-h-64 overflow-y-auto no-scrollbar">
-                                                                {ASSETS.filter(a => a.symbol !== "AUSD").map((a) => (
+                                                                {ASSETS.filter(a => a.symbol !== "CUSD").map((a) => (
                                                                     <button
                                                                         key={a.symbol}
                                                                         onClick={() => handleAssetSelect(a)}
@@ -281,7 +281,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                                                 onClick={() => setIsDropdownOpen(false)}
                                                             />
                                                             <div className="absolute top-full right-0 mt-2 w-56 bg-white border border-slate-100 rounded-2xl shadow-2xl py-2 z-50 max-h-64 overflow-y-auto no-scrollbar">
-                                                                {ASSETS.filter(a => a.symbol !== "AUSD").map((a) => (
+                                                                {ASSETS.filter(a => a.symbol !== "CUSD").map((a) => (
                                                                     <button
                                                                         key={a.symbol}
                                                                         onClick={() => handleAssetSelect(a)}
@@ -301,8 +301,8 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                             ) : (
                                                 <div className="flex items-center gap-2.5 px-3 py-2 bg-white border border-slate-100 rounded-2xl shadow-sm">
                                                     <div className="flex items-center gap-2">
-                                                        <AssetIcon symbol="AUSD" avatar="A" color="#8B5CF6" size="sm" />
-                                                        <span className="text-[14px] font-black text-slate-900 tracking-tight">AUSD</span>
+                                                        <AssetIcon symbol="CUSD" avatar="C" color="#8B5CF6" size="sm" />
+                                                        <span className="text-[14px] font-black text-slate-900 tracking-tight">CUSD</span>
                                                     </div>
                                                 </div>
                                             )}
@@ -327,7 +327,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                     </div>
                                     <div className="flex justify-between text-[11px] font-black tracking-widest uppercase">
                                         <span className="text-slate-400">Live Price</span>
-                                        <span className="text-slate-900">1 {selectedAsset.symbol} = {selectedAsset.price} AUSD</span>
+                                        <span className="text-slate-900">1 {selectedAsset.symbol} = {selectedAsset.price} CUSD</span>
                                     </div>
                                 </div>
 
@@ -391,8 +391,8 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                     </div>
                                     <div className="flex flex-col gap-6">
                                         <DetailRow label="Underlying Name" value={selectedAsset.underlying} />
-                                        <DetailRow label="Underlying Ticker" value={selectedAsset.symbol.slice(1)} />
-                                        <DetailRow label="Shares Per Token" value={`1 ${selectedAsset.symbol} = 1.00 ${selectedAsset.symbol.slice(1)}`} />
+                                        <DetailRow label="Underlying Ticker" value={selectedAsset.symbol.replace(/c$/, '')} />
+                                        <DetailRow label="Shares Per Token" value={`1 ${selectedAsset.symbol} = 1.00 ${selectedAsset.symbol.replace(/c$/, '')}`} />
                                     </div>
                                 </div>
                             </div>

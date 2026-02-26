@@ -2,14 +2,14 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronRight, FileText, Shield, Cookie, AlertTriangle, ArrowLeft } from 'lucide-react';
+import { Menu, X, FileText, Shield, Cookie, AlertTriangle, ArrowLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
 // ═══════════════════════════════════════════════════
 // LEGAL DOCUMENTS DATA (Example Texts)
 // ═══════════════════════════════════════════════════
-const LEGAL_DOCS: Record<string, { title: string; icon: any; content: React.ReactNode }> = {
+const LEGAL_DOCS: Record<string, { title: string; icon: React.ElementType; content: React.ReactNode }> = {
     terms: {
         title: "Terms of Service",
         icon: FileText,
@@ -18,7 +18,7 @@ const LEGAL_DOCS: Record<string, { title: string; icon: any; content: React.Reac
                 <section>
                     <h3 className="text-xl font-black text-slate-950 mb-4">1. Introduction</h3>
                     <p className="text-slate-500 font-medium leading-relaxed">
-                        Welcome to Altai Exchange. By accessing or using our website, services, or applications (collectively, the "Services"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, you may not access or use the Services.
+                        Welcome to Comdex Exchange. By accessing or using our website, services, or applications (collectively, the &quot;Services&quot;), you agree to be bound by these Terms of Service (&quot;Terms&quot;). If you do not agree to these Terms, you may not access or use the Services.
                     </p>
                 </section>
                 <section>
@@ -36,7 +36,7 @@ const LEGAL_DOCS: Record<string, { title: string; icon: any; content: React.Reac
                 <section>
                     <h3 className="text-xl font-black text-slate-950 mb-4">4. Tokenized Assets</h3>
                     <p className="text-slate-500 font-medium leading-relaxed">
-                        Altai Exchange facilitates the trading of tokenized real-world assets. You acknowledge that the value of these assets can fluctuate significantly. You agree that Altai Exchange is not responsible for any losses you may incur as a result of such fluctuations. All assets are backed 1:1 by physical reserves as stated in our transparency reports.
+                        Comdex Exchange facilitates the trading of tokenized real-world assets. You acknowledge that the value of these assets can fluctuate significantly. You agree that Comdex Exchange is not responsible for any losses you may incur as a result of such fluctuations. All assets are backed 1:1 by physical reserves as stated in our transparency reports.
                     </p>
                 </section>
                 <section>
@@ -140,7 +140,7 @@ const LEGAL_DOCS: Record<string, { title: string; icon: any; content: React.Reac
                 <section>
                     <h3 className="text-xl font-black text-slate-950 mb-4">2. Regulatory Risk</h3>
                     <p className="text-slate-500 font-medium leading-relaxed">
-                        The regulatory status of digital assets and blockchain technology is evolving rapidly in many jurisdictions. Changes in laws or regulations may adversely affect the value or utility of the tokens available on Altai Exchange.
+                        The regulatory status of digital assets and blockchain technology is evolving rapidly in many jurisdictions. Changes in laws or regulations may adversely affect the value or utility of the tokens available on Comdex Exchange.
                     </p>
                 </section>
                 <section>
@@ -152,7 +152,7 @@ const LEGAL_DOCS: Record<string, { title: string; icon: any; content: React.Reac
                 <section>
                     <h3 className="text-xl font-black text-slate-950 mb-4">4. No Financial Advice</h3>
                     <p className="text-slate-500 font-medium leading-relaxed">
-                        The content provided on Altai Exchange is for informational purposes only and should not be construed as financial, investment, or legal advice. You should conduct your own due diligence and consult with a qualified financial advisor before making any investment decisions.
+                        The content provided on Comdex Exchange is for informational purposes only and should not be construed as financial, investment, or legal advice. You should conduct your own due diligence and consult with a qualified financial advisor before making any investment decisions.
                     </p>
                 </section>
             </div>
@@ -171,8 +171,10 @@ function LegalContent() {
     useEffect(() => {
         const docParam = searchParams.get('doc');
         if (docParam && LEGAL_DOCS[docParam]) {
+            // eslint-disable-next-line
             setActiveDoc(docParam);
         } else if (!docParam) {
+            // eslint-disable-next-line
             setActiveDoc('terms'); // Default if no param is present
         }
     }, [searchParams]);

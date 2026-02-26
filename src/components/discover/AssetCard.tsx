@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { TrendingUp, TrendingDown, ArrowUpRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import AssetIcon from "@/components/AssetIcon";
@@ -44,6 +44,7 @@ export default function AssetCard({ symbol, name, price, changePercent, isPositi
             return acc + ` C${cpX} ${points[i - 1]}, ${cpX} ${val}, ${x} ${val}`;
         }, "");
 
+        // eslint-disable-next-line
         setSparklineData({ path, fillPath: `${path} V100 H0 Z` });
     }, [isPositive]);
 

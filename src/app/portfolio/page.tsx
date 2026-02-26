@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
-import { Wallet, Lock, Briefcase, ArrowDown, Zap, ArrowRight, ShieldCheck, PieChart } from "lucide-react";
+import { Wallet, Lock, Zap, ArrowRight, ShieldCheck, PieChart } from "lucide-react";
 import AssetIcon from "@/components/AssetIcon";
 import { TABLE_HEADER_CLASS, TABLE_CELL_CLASS } from "@/lib/constants";
 import { ASSETS } from "@/lib/assets";
@@ -13,19 +13,19 @@ import { ASSETS } from "@/lib/assets";
    ───────────────────────────────────────────────────────────── */
 const WALLET_BALANCES = [
     {
-        asset: ASSETS.find(a => a.symbol === "AUSD")!,
+        asset: ASSETS.find(a => a.symbol === "CUSD")!,
         balance: "15,240.50",
         value: "$15,240.50",
         allocation: "45%",
     },
     {
-        asset: ASSETS.find(a => a.symbol === "AXAU")!,
+        asset: ASSETS.find(a => a.symbol === "XAUc")!,
         balance: "4.25",
         value: "$8,695.20",
         allocation: "25%",
     },
     {
-        asset: ASSETS.find(a => a.symbol === "AXAG")!,
+        asset: ASSETS.find(a => a.symbol === "XAGc")!,
         balance: "150.00",
         value: "$3,450.00",
         allocation: "10%",
@@ -40,24 +40,24 @@ const WALLET_BALANCES = [
 
 const STAKED_POSITIONS = [
     {
-        asset: ASSETS.find(a => a.symbol === "AXAU")!,
-        amount: "12.50 AXAU",
+        asset: ASSETS.find(a => a.symbol === "XAUc")!,
+        amount: "12.50",
         value: "$25,430.00",
-        rewards: "158.42 AUSD",
+        rewards: "158.42",
         duration: "45 Days",
         apy: "5.20%",
         progress: 65,
-        redeemed: "420.50 AUSD",
+        redeemed: "420.50",
     },
     {
-        asset: ASSETS.find(a => a.symbol === "AXPD")!,
-        amount: "5.00 AXPD",
+        asset: ASSETS.find(a => a.symbol === "XPDc")!,
+        amount: "5.00",
         value: "$4,729.00",
-        rewards: "210.10 AUSD",
+        rewards: "210.10",
         duration: "92 Days",
         apy: "9.15%",
         progress: 85,
-        redeemed: "850.25 AUSD",
+        redeemed: "850.25",
     },
 ];
 
@@ -104,12 +104,12 @@ function BalanceRow({ item, index }: { item: typeof WALLET_BALANCES[0], index: n
             transition={{ delay: index * 0.05 }}
             className="group hover:bg-slate-50/50 transition-colors border-b border-slate-50 last:border-none"
         >
-            <td className={TABLE_CELL_CLASS}>
-                <div className="flex items-center gap-4">
-                    <AssetIcon symbol={item.asset.symbol} avatar={item.asset.avatar} color={item.asset.color} size="sm" className="transition-transform group-hover:scale-110" />
-                    <div>
-                        <p className="text-[13px] font-black text-slate-950 leading-none">{item.asset.symbol}</p>
-                        <p className="text-[10px] font-bold text-slate-400 mt-1.5 uppercase tracking-widest">{item.asset.name}</p>
+            <td className={`${TABLE_CELL_CLASS} min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-0 z-10 bg-white group-hover:bg-slate-50 transition-colors border-r border-slate-50 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.02)]`}>
+                <div className="flex items-center gap-2 md:gap-4">
+                    <AssetIcon symbol={item.asset.symbol} avatar={item.asset.avatar} color={item.asset.color} size="sm" className="transition-transform group-hover:scale-110 flex-shrink-0" />
+                    <div className="flex flex-col min-w-0">
+                        <p className="text-[13px] font-black text-slate-950 leading-none truncate">{item.asset.symbol}</p>
+                        <p className="text-[10px] font-bold text-slate-400 mt-1.5 uppercase tracking-widest truncate">{item.asset.name}</p>
                     </div>
                 </div>
             </td>
@@ -147,26 +147,26 @@ function StakedRow({ item, index }: { item: typeof STAKED_POSITIONS[0], index: n
             transition={{ delay: index * 0.05 + 0.2 }}
             className="group hover:bg-slate-50/50 transition-colors border-b border-slate-50 last:border-none"
         >
-            <td className={TABLE_CELL_CLASS}>
-                <div className="flex items-center gap-4">
-                    <AssetIcon symbol={item.asset.symbol} avatar={item.asset.avatar} color={item.asset.color} size="sm" className="transition-transform group-hover:scale-110" />
-                    <div>
-                        <p className="text-[13px] font-black text-slate-950 leading-none">{item.asset.symbol} Vault</p>
-                        <p className="text-[10px] font-bold text-blue-600 mt-1.5 uppercase tracking-widest">{item.apy} APY</p>
+            <td className={`${TABLE_CELL_CLASS} min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-0 z-10 bg-white group-hover:bg-slate-50 transition-colors border-r border-slate-50 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.02)]`}>
+                <div className="flex items-center gap-2 md:gap-4">
+                    <AssetIcon symbol={item.asset.symbol} avatar={item.asset.avatar} color={item.asset.color} size="sm" className="transition-transform group-hover:scale-110 flex-shrink-0" />
+                    <div className="flex flex-col min-w-0">
+                        <p className="text-[13px] font-black text-slate-950 leading-none truncate">{item.asset.symbol}</p>
+                        <p className="text-[10px] font-bold text-slate-400 mt-1.5 uppercase tracking-widest truncate">{item.asset.name}</p>
                     </div>
                 </div>
             </td>
             <td className={TABLE_CELL_CLASS}>
                 <p className="text-[13px] font-black text-slate-950 tabular-nums tracking-tight mb-1">{item.amount}</p>
-                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest tabular-nums">{item.value}</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest tabular-nums">{item.asset.symbol}</p>
             </td>
             <td className={TABLE_CELL_CLASS}>
-                <p className="text-[13px] font-black text-slate-950 tabular-nums tracking-tight mb-1">+{item.rewards}</p>
-                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Unredeemed</p>
+                <p className="text-[13px] font-black text-emerald-600 tabular-nums tracking-tight mb-1">+{item.rewards}</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest tabular-nums">CUSD</p>
             </td>
             <td className={TABLE_CELL_CLASS}>
                 <p className="text-[13px] font-black text-slate-950 tabular-nums tracking-tight mb-1">{item.redeemed}</p>
-                <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Total Redeemed</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest tabular-nums">CUSD</p>
             </td>
             <td className={`${TABLE_CELL_CLASS} text-right`}>
                 <button className="px-4 py-2 bg-slate-950 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 transition-all active:scale-95 shadow-lg shadow-black/10">
@@ -302,7 +302,7 @@ export default function PortfolioPage() {
                         <div>
                             <h1 className="text-3xl md:text-4xl font-black text-slate-950 tracking-tight leading-none mb-3">Portfolio Overview</h1>
                             <p className="text-slate-500 font-medium text-sm max-w-lg leading-relaxed">
-                                Track your wallet balances, Participated assets, and real-time performance across the Altai ecosystem.
+                                Track your wallet balances, Participated assets, and real-time performance across the Comdex ecosystem.
                             </p>
                         </div>
                     </div>
@@ -350,7 +350,7 @@ export default function PortfolioPage() {
                                     <table className="w-full text-left border-collapse min-w-[700px]">
                                         <thead className="bg-[#fafbfc] border-b border-slate-100">
                                             <tr>
-                                                <th className={TABLE_HEADER_CLASS}>Asset</th>
+                                                <th className={`${TABLE_HEADER_CLASS} min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-0 z-20 bg-[#fafbfc] border-r border-slate-100 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.05)]`}>Asset</th>
                                                 <th className={TABLE_HEADER_CLASS}>Balance</th>
                                                 <th className={TABLE_HEADER_CLASS}>Value</th>
                                                 <th className={TABLE_HEADER_CLASS}>Allocation</th>
@@ -380,7 +380,7 @@ export default function PortfolioPage() {
                                     <table className="w-full text-left border-collapse min-w-[700px]">
                                         <thead className="bg-[#fafbfc] border-b border-slate-100">
                                             <tr>
-                                                <th className={TABLE_HEADER_CLASS}>Vault</th>
+                                                <th className={`${TABLE_HEADER_CLASS} min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-0 z-20 bg-[#fafbfc] border-r border-slate-100 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.05)]`}>Vault</th>
                                                 <th className={TABLE_HEADER_CLASS}>Participated</th>
                                                 <th className={TABLE_HEADER_CLASS}>Rewards</th>
                                                 <th className={TABLE_HEADER_CLASS}>Redeemed</th>
