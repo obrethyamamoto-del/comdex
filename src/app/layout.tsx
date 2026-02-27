@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 import Navbar from "@/components/Navbar";
 import Web3Provider from "@/context/Web3Provider";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 export default function RootLayout({
   children,
@@ -22,28 +23,37 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-display antialiased`}>
-        <Web3Provider>
-          <Toaster
-            position="top-right"
-            richColors
-            closeButton
-            toastOptions={{
-              style: {
-                borderRadius: '16px',
-                border: '1px solid #f1f5f9',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
-                fontFamily: 'var(--font-inter)',
-                padding: '16px'
-              },
-            }}
-          />
-          <div className="flex flex-col h-screen bg-[#f8fafc] text-slate-900 overflow-hidden">
-            <Navbar />
-            {children}
-          </div>
-        </Web3Provider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Web3Provider>
+            <Toaster
+              position="top-right"
+              richColors
+              closeButton
+              toastOptions={{
+                style: {
+                  borderRadius: '16px',
+                  border: '1px solid var(--toast-border, #f1f5f9)',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+                  fontFamily: 'var(--font-inter)',
+                  padding: '16px',
+                  background: 'var(--toast-bg, #fff)',
+                  color: 'var(--toast-color, #0f172a)'
+                },
+              }}
+            />
+            <div className="flex flex-col h-screen bg-[#f8fafc] dark:bg-slate-950 text-slate-900 dark:text-slate-50 overflow-hidden transition-colors duration-300">
+              <Navbar />
+              {children}
+            </div>
+          </Web3Provider>
+        </ThemeProvider>
       </body>
     </html>
   );

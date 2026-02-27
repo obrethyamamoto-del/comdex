@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { DOCS_DATA, DOCS_STRUCTURE, DocsSectionItem, DocsSection } from '@/lib/docsData';
 import {
-    Search, Wallet, ArrowRightLeft, TrendingUp, BookOpen,
+    Search, Wallet, ArrowRightLeft, TrendingUp,
     MessageCircle, Mail, ChevronRight,
     Copy, Check, Menu, X, Rocket, Layers, Zap, ExternalLink, Clock,
     ArrowLeft, ArrowRight
@@ -123,7 +123,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
     const nextSection = currentIndex < flattenDocs.length - 1 ? flattenDocs[currentIndex + 1] : null;
 
     return (
-        <div className="flex flex-col lg:flex-row h-auto lg:h-[calc(100vh-280px)] lg:min-h-[700px] bg-white rounded-[32px] border border-slate-100 overflow-hidden relative shadow-sm">
+        <div className="flex flex-col lg:flex-row h-auto lg:h-[calc(100vh-280px)] lg:min-h-[700px] bg-white dark:bg-slate-950 rounded-[32px] border border-slate-100 dark:border-slate-800 overflow-hidden relative shadow-sm">
             {/* Sidebar Toggle (Mobile) */}
             <button
                 onClick={() => setIsSidebarOpen(true)}
@@ -147,18 +147,18 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
 
             {/* Sidebar */}
             <aside className={cn(
-                "fixed lg:relative inset-y-0 left-0 w-80 bg-[#fafbfc] border-r border-slate-100 z-50 transition-transform duration-300 lg:translate-x-0 overflow-y-auto no-scrollbar pt-6",
+                "fixed lg:relative inset-y-0 left-0 w-80 bg-[#fafbfc] dark:bg-slate-950 border-r border-slate-100 dark:border-slate-800 z-50 transition-transform duration-300 lg:translate-x-0 overflow-y-auto no-scrollbar pt-6",
                 isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             )}>
                 <div className="p-6 space-y-10">
                     <div className="flex items-center justify-between lg:hidden">
-                        <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Documentation</span>
-                        <button onClick={() => setIsSidebarOpen(false)}><X className="w-5 h-5 text-slate-400" /></button>
+                        <span className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Documentation</span>
+                        <button onClick={() => setIsSidebarOpen(false)}><X className="w-5 h-5 text-slate-400 dark:text-slate-500" /></button>
                     </div>
 
                     {DOCS_STRUCTURE.map((group: { title: string, items: string[] }, idx: number) => (
                         <div key={idx} className="space-y-4">
-                            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-4">{group.title}</h3>
+                            <h3 className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] px-4">{group.title}</h3>
                             <nav className="space-y-1">
                                 {group.items.map((item: string) => (
                                     <button
@@ -171,8 +171,8 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                         className={cn(
                                             "w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-[13px] font-bold transition-all text-left uppercase tracking-wide",
                                             activeSection === item && !searchQuery
-                                                ? "bg-white text-slate-950 shadow-sm border border-slate-100"
-                                                : "text-slate-400 hover:text-slate-950 hover:bg-slate-50/50"
+                                                ? "bg-white dark:bg-slate-950 text-slate-950 dark:text-white shadow-sm border border-slate-100 dark:border-slate-800"
+                                                : "text-slate-400 dark:text-slate-500 hover:text-slate-950 dark:text-white hover:bg-slate-50 dark:bg-slate-900/50"
                                         )}
                                     >
                                         <div className={cn("w-1.5 h-1.5 rounded-full transition-all", activeSection === item && !searchQuery ? "bg-blue-600 scale-125" : "bg-transparent")} />
@@ -186,13 +186,13 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 overflow-y-auto no-scrollbar bg-white relative">
+            <main className="flex-1 overflow-y-auto no-scrollbar bg-white dark:bg-slate-950 relative">
                 {/* Mobile TOC Trigger */}
-                <div className="lg:hidden sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-slate-100 flex items-center justify-between px-6 py-4">
-                    <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Navigation</span>
+                <div className="lg:hidden sticky top-0 z-20 bg-white dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-100 dark:border-slate-800 flex items-center justify-between px-6 py-4">
+                    <span className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Navigation</span>
                     <button
                         onClick={() => setIsSidebarOpen(true)}
-                        className="flex items-center gap-2 text-[11px] font-black text-slate-950 uppercase tracking-widest bg-slate-50 px-4 py-2 rounded-full border border-slate-100 active:scale-95 transition-all"
+                        className="flex items-center gap-2 text-[11px] font-black text-slate-950 dark:text-white uppercase tracking-widest bg-slate-50 dark:bg-slate-900 px-4 py-2 rounded-full border border-slate-100 dark:border-slate-800 active:scale-95 transition-all"
                     >
                         <Menu className="w-3.5 h-3.5" />
                         Table of Contents
@@ -211,31 +211,31 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                 className="space-y-12"
                             >
                                 <header className="space-y-4">
-                                    <h2 className="text-3xl font-black text-slate-950 tracking-tight">Whitepaper Search Results</h2>
-                                    <p className="text-slate-500 font-medium text-sm">Found {searchResults?.length || 0} relative sections for &quot;{searchQuery}&quot;</p>
+                                    <h2 className="text-3xl font-black text-slate-950 dark:text-white tracking-tight">Whitepaper Search Results</h2>
+                                    <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium text-sm">Found {searchResults?.length || 0} relative sections for &quot;{searchQuery}&quot;</p>
                                 </header>
 
                                 <div className="space-y-8">
                                     {searchResults && searchResults.length > 0 ? (
                                         searchResults.map((result: { sectionKey: string, sectionTitle: string, items: DocsSectionItem[] }, idx: number) => (
-                                            <div key={idx} className="p-8 bg-slate-50/50 border border-slate-100 rounded-[32px] space-y-6 hover:bg-white hover:border-slate-200 transition-all group">
+                                            <div key={idx} className="p-8 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-[32px] space-y-6 hover:bg-white dark:bg-slate-950 hover:border-slate-200 dark:border-slate-700 transition-all group">
                                                 <div className="flex items-center justify-between">
-                                                    <h3 className="text-xl font-black text-slate-950 group-hover:text-blue-600 transition-colors">{result.sectionTitle}</h3>
+                                                    <h3 className="text-xl font-black text-slate-950 dark:text-white group-hover:text-blue-600 transition-colors">{result.sectionTitle}</h3>
                                                     <button
                                                         onClick={() => {
                                                             setActiveSection(result.sectionKey);
                                                             window.dispatchEvent(new CustomEvent('clear-search'));
                                                         }}
-                                                        className="text-[11px] font-black text-slate-400 uppercase tracking-widest hover:text-slate-950 flex items-center gap-2"
+                                                        className="text-[11px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest hover:text-slate-950 dark:text-white flex items-center gap-2"
                                                     >
                                                         Go to section <ChevronRight className="w-3.5 h-3.5" />
                                                     </button>
                                                 </div>
                                                 <div className="space-y-4">
                                                     {result.items?.map((item: DocsSectionItem, i: number) => (
-                                                        <div key={i} className="pl-4 border-l-2 border-slate-200">
-                                                            <h4 className="text-sm font-bold text-slate-900">{item.title}</h4>
-                                                            <p className="text-xs text-slate-500 mt-1 line-clamp-2">{item.desc}</p>
+                                                        <div key={i} className="pl-4 border-l-2 border-slate-200 dark:border-slate-700">
+                                                            <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">{item.title}</h4>
+                                                            <p className="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-500 mt-1 line-clamp-2">{item.desc}</p>
                                                         </div>
                                                     ))}
                                                 </div>
@@ -243,12 +243,12 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                         ))
                                     ) : (
                                         <div className="text-center py-20 space-y-6">
-                                            <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto">
-                                                <Search className="w-8 h-8 text-slate-300" />
+                                            <div className="w-20 h-20 bg-slate-50 dark:bg-slate-900 rounded-full flex items-center justify-center mx-auto">
+                                                <Search className="w-8 h-8 text-slate-300 dark:text-slate-600" />
                                             </div>
                                             <div className="space-y-2">
-                                                <h3 className="text-xl font-black text-slate-950">No documentation found</h3>
-                                                <p className="text-slate-500 font-medium">Try searching for broader terms like &quot;Gold&quot;, &quot;Vault&quot;, or &quot;Security&quot;</p>
+                                                <h3 className="text-xl font-black text-slate-950 dark:text-white">No documentation found</h3>
+                                                <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium">Try searching for broader terms like &quot;Gold&quot;, &quot;Vault&quot;, or &quot;Security&quot;</p>
                                             </div>
                                         </div>
                                     )}
@@ -272,24 +272,24 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                         </div>
                                     )}
                                     <div className="space-y-3">
-                                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight leading-tight">{currentData.title}</h1>
-                                        <p className="text-slate-500 font-medium max-w-2xl text-sm leading-relaxed">
+                                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 dark:text-white tracking-tight leading-tight">{currentData.title}</h1>
+                                        <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium max-w-2xl text-sm leading-relaxed">
                                             {currentData.content}
                                         </p>
                                     </div>
                                 </header>
 
-                                <div className="h-px bg-slate-100" />
+                                <div className="h-px bg-slate-100 dark:bg-slate-800" />
 
                                 {/* Sections Content */}
                                 <div className="space-y-16">
                                     {currentData.sections && currentData.sections.map((section: DocsSection, idx: number) => (
                                         <section key={idx} className="space-y-8">
                                             {section.heading && (
-                                                <h2 className="text-xl font-black text-slate-950 tracking-tight">{section.heading}</h2>
+                                                <h2 className="text-xl font-black text-slate-950 dark:text-white tracking-tight">{section.heading}</h2>
                                             )}
                                             {section.content && (
-                                                <p className="text-sm text-slate-500 font-medium leading-relaxed">
+                                                <p className="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium leading-relaxed">
                                                     {section.content}
                                                 </p>
                                             )}
@@ -297,19 +297,19 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                             {/* Discovery Style Vertical Stack */}
                                             <div className="flex flex-col gap-6">
                                                 {section.items && section.items.map((item: DocsSectionItem, i: number) => (
-                                                    <div key={i} className="group relative bg-white border border-slate-100 rounded-[32px] p-10 flex flex-col gap-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] hover:border-slate-200 transition-all duration-500 overflow-hidden">
+                                                    <div key={i} className="group relative bg-white dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-[32px] p-10 flex flex-col gap-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] hover:border-slate-200 dark:border-slate-700 transition-all duration-500 overflow-hidden">
                                                         <div className="flex flex-col h-full gap-8 relative z-10">
                                                             <div className="flex items-center gap-4 md:gap-6">
                                                                 <div className="flex items-center justify-center transition-all duration-500 group-hover:scale-110 shrink-0">
-                                                                    {item.icon || <div className="w-12 h-12 md:w-16 md:h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400 group-hover:bg-slate-950 group-hover:text-white transition-all"><Layers className="w-6 h-6 md:w-8 md:h-8" /></div>}
+                                                                    {item.icon || <div className="w-12 h-12 md:w-16 md:h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center text-slate-400 dark:text-slate-500 group-hover:bg-slate-950 group-hover:text-white transition-all"><Layers className="w-6 h-6 md:w-8 md:h-8" /></div>}
                                                                 </div>
                                                                 <div className="flex flex-col gap-1">
-                                                                    <h4 className="text-lg md:text-[20px] font-black text-slate-950 tracking-tight leading-tight">{item.title}</h4>
-                                                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Platform Specification</span>
+                                                                    <h4 className="text-lg md:text-[20px] font-black text-slate-950 dark:text-white tracking-tight leading-tight">{item.title}</h4>
+                                                                    <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Platform Specification</span>
                                                                 </div>
                                                             </div>
                                                             <div className="space-y-4 flex-1">
-                                                                <p className="text-sm md:text-[15px] text-slate-500 font-medium leading-relaxed max-w-3xl">{item.desc}</p>
+                                                                <p className="text-sm md:text-[15px] text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium leading-relaxed max-w-3xl">{item.desc}</p>
                                                             </div>
                                                             {item.contract && (
                                                                 <div
@@ -317,17 +317,17 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                                                         e.stopPropagation();
                                                                         handleCopy(item.contract!);
                                                                     }}
-                                                                    className="flex items-center justify-between px-5 py-4 bg-[#fafbfc] border border-slate-100 rounded-2xl cursor-pointer hover:bg-white hover:border-slate-300 transition-all group/copy w-full md:w-fit md:min-w-[320px]"
+                                                                    className="flex items-center justify-between px-5 py-4 bg-[#fafbfc] dark:bg-slate-950 border border-slate-100 dark:border-slate-800 rounded-2xl cursor-pointer hover:bg-white dark:bg-slate-950 hover:border-slate-300 dark:border-slate-600 transition-all group/copy w-full md:w-fit md:min-w-[320px]"
                                                                 >
                                                                     <div className="flex flex-col gap-1 min-w-0">
-                                                                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Contract Address</span>
-                                                                        <code className="text-[13px] text-slate-950 font-mono truncate font-bold">{item.contract}</code>
+                                                                        <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Contract Address</span>
+                                                                        <code className="text-[13px] text-slate-950 dark:text-white font-mono truncate font-bold">{item.contract}</code>
                                                                     </div>
                                                                     <div className="ml-6">
                                                                         {copiedAddress === item.contract ? (
                                                                             <Check className="w-5 h-5 text-emerald-500" />
                                                                         ) : (
-                                                                            <Copy className="w-5 h-5 text-slate-300 group-hover/copy:text-slate-950 transition-colors" />
+                                                                            <Copy className="w-5 h-5 text-slate-300 dark:text-slate-600 group-hover/copy:text-slate-950 dark:text-white transition-colors" />
                                                                         )}
                                                                     </div>
                                                                 </div>
@@ -354,14 +354,14 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                                     <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Live Markets</span>
                                                 </div>
                                                 <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">Explore Real-Time Asset Data</h3>
-                                                <p className="text-slate-400 font-medium text-sm md:text-[15px] leading-relaxed">
+                                                <p className="text-slate-400 dark:text-slate-500 font-medium text-sm md:text-[15px] leading-relaxed">
                                                     Dive into the live market board to view real-time prices, 24h volume, and performance metrics for all Comdex tokenized assets.
                                                 </p>
                                             </div>
 
                                             <Link
                                                 href="/discover"
-                                                className="shrink-0 w-full md:w-auto px-8 py-5 bg-white text-slate-950 rounded-[24px] font-black text-[11px] uppercase tracking-widest hover:bg-blue-50 transition-all flex items-center justify-center gap-3 group/btn hover:scale-[1.02] active:scale-[0.98] shadow-xl"
+                                                className="shrink-0 w-full md:w-auto px-8 py-5 bg-white dark:bg-slate-950 text-slate-950 dark:text-white rounded-[24px] font-black text-[11px] uppercase tracking-widest hover:bg-blue-50 transition-all flex items-center justify-center gap-3 group/btn hover:scale-[1.02] active:scale-[0.98] shadow-xl"
                                             >
                                                 Go to Discover
                                                 <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -383,14 +383,14 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                                     <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Stablecoin & Settlement</span>
                                                 </div>
                                                 <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">View CUSD Market Data</h3>
-                                                <p className="text-slate-400 font-medium text-sm md:text-[15px] leading-relaxed">
+                                                <p className="text-slate-400 dark:text-slate-500 font-medium text-sm md:text-[15px] leading-relaxed">
                                                     Analyze the stability, treasury backing, and 24h volume of the Comdex USD (CUSD) settlement token.
                                                 </p>
                                             </div>
 
                                             <Link
                                                 href="/discover/CUSD"
-                                                className="shrink-0 w-full md:w-auto px-8 py-5 bg-white text-slate-950 rounded-[24px] font-black text-[11px] uppercase tracking-widest hover:bg-blue-50 transition-all flex items-center justify-center gap-3 group/btn hover:scale-[1.02] active:scale-[0.98] shadow-xl"
+                                                className="shrink-0 w-full md:w-auto px-8 py-5 bg-white dark:bg-slate-950 text-slate-950 dark:text-white rounded-[24px] font-black text-[11px] uppercase tracking-widest hover:bg-blue-50 transition-all flex items-center justify-center gap-3 group/btn hover:scale-[1.02] active:scale-[0.98] shadow-xl"
                                             >
                                                 View CUSD Details
                                                 <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -412,14 +412,14 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                                     <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Yield Opportunities</span>
                                                 </div>
                                                 <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">Start Earning Real Yield</h3>
-                                                <p className="text-slate-400 font-medium text-sm md:text-[15px] leading-relaxed">
+                                                <p className="text-slate-400 dark:text-slate-500 font-medium text-sm md:text-[15px] leading-relaxed">
                                                     Deposit your tokenized assets into Participation Pools and earn a share of platform revenue distributed in CUSD.
                                                 </p>
                                             </div>
 
                                             <Link
                                                 href="/earn"
-                                                className="shrink-0 w-full md:w-auto px-8 py-5 bg-white text-slate-950 rounded-[24px] font-black text-[11px] uppercase tracking-widest hover:bg-emerald-50 transition-all flex items-center justify-center gap-3 group/btn hover:scale-[1.02] active:scale-[0.98] shadow-xl"
+                                                className="shrink-0 w-full md:w-auto px-8 py-5 bg-white dark:bg-slate-950 text-slate-950 dark:text-white rounded-[24px] font-black text-[11px] uppercase tracking-widest hover:bg-emerald-50 transition-all flex items-center justify-center gap-3 group/btn hover:scale-[1.02] active:scale-[0.98] shadow-xl"
                                             >
                                                 Browse Pools
                                                 <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -441,14 +441,14 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                                     <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest">Live Trading</span>
                                                 </div>
                                                 <h3 className="text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">Professional Trading Terminal</h3>
-                                                <p className="text-slate-400 font-medium text-sm md:text-[15px] leading-relaxed">
+                                                <p className="text-slate-400 dark:text-slate-500 font-medium text-sm md:text-[15px] leading-relaxed">
                                                     Access institutional-grade tools, real-time charts, and deep liquidity. Experience seamless execution on our advanced decentralized exchange interface.
                                                 </p>
                                             </div>
 
                                             <Link
                                                 href="/discover/XAUc"
-                                                className="shrink-0 w-full md:w-auto px-8 py-5 bg-white text-slate-950 rounded-[24px] font-black text-[11px] uppercase tracking-widest hover:bg-blue-50 transition-all flex items-center justify-center gap-3 group/btn hover:scale-[1.02] active:scale-[0.98] shadow-xl"
+                                                className="shrink-0 w-full md:w-auto px-8 py-5 bg-white dark:bg-slate-950 text-slate-950 dark:text-white rounded-[24px] font-black text-[11px] uppercase tracking-widest hover:bg-blue-50 transition-all flex items-center justify-center gap-3 group/btn hover:scale-[1.02] active:scale-[0.98] shadow-xl"
                                             >
                                                 Launch App
                                                 <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -458,7 +458,7 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                 )}
 
                                 {/* Navigation Footer */}
-                                <div className="flex items-center justify-between mt-20 pt-10 border-t border-slate-100">
+                                <div className="flex items-center justify-between mt-20 pt-10 border-t border-slate-100 dark:border-slate-800">
                                     {prevSection ? (
                                         <button
                                             onClick={() => {
@@ -471,10 +471,10 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                             }}
                                             className="group flex flex-col items-start gap-2 text-left"
                                         >
-                                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-1 group-hover:text-slate-600 transition-colors">
+                                            <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest flex items-center gap-1 group-hover:text-slate-600 dark:text-slate-300 dark:text-slate-600 transition-colors">
                                                 <ArrowLeft className="w-3 h-3 transition-transform group-hover:-translate-x-1" /> Previous
                                             </span>
-                                            <span className="text-sm md:text-base font-black text-slate-950 group-hover:text-blue-600 transition-colors max-w-[150px] md:max-w-xs truncate">
+                                            <span className="text-sm md:text-base font-black text-slate-950 dark:text-white group-hover:text-blue-600 transition-colors max-w-[150px] md:max-w-xs truncate">
                                                 {prevSection}
                                             </span>
                                         </button>
@@ -492,10 +492,10 @@ function DocsContent({ activeSection, setActiveSection, searchQuery = "" }: { ac
                                             }}
                                             className="group flex flex-col items-end gap-2 text-right"
                                         >
-                                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-1 group-hover:text-slate-600 transition-colors">
+                                            <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest flex items-center gap-1 group-hover:text-slate-600 dark:text-slate-300 dark:text-slate-600 transition-colors">
                                                 Next <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
                                             </span>
-                                            <span className="text-sm md:text-base font-black text-slate-950 group-hover:text-blue-600 transition-colors max-w-[150px] md:max-w-xs truncate">
+                                            <span className="text-sm md:text-base font-black text-slate-950 dark:text-white group-hover:text-blue-600 transition-colors max-w-[150px] md:max-w-xs truncate">
                                                 {nextSection}
                                             </span>
                                         </button>
@@ -539,37 +539,37 @@ function GettingStartedSteps() {
     ];
 
     return (
-        <div className="bg-white rounded-[32px] md:rounded-[40px] p-6 md:p-10 lg:p-16 relative overflow-hidden group mb-12 border border-slate-100 shadow-[0_2px_15px_rgba(0,0,0,0.02)]">
-            <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-blue-50/50 blur-[100px] md:blur-[150px] rounded-full group-hover:bg-blue-100/50 transition-all duration-1000" />
+        <div className="bg-white dark:bg-slate-900/40 rounded-[32px] md:rounded-[40px] p-6 md:p-10 lg:p-16 relative overflow-hidden group mb-12 border border-slate-100 dark:border-slate-800 shadow-[0_2px_15px_rgba(0,0,0,0.02)]">
+            <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-blue-50/50 dark:hidden blur-[100px] md:blur-[150px] rounded-full group-hover:bg-blue-100/50 transition-all duration-1000" />
 
             <div className="relative z-10 space-y-12">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div className="space-y-4">
                         <div className="flex items-center gap-3">
-                            <span className="px-3 py-1 bg-blue-50 border border-blue-100 rounded-full text-[10px] font-black text-blue-600 uppercase tracking-widest">Execution Guide</span>
-                            <div className="h-px w-8 bg-slate-200" />
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Onboarding flow</span>
+                            <span className="px-3 py-1 bg-blue-50 dark:bg-slate-900 border border-blue-100 dark:border-blue-900/50 rounded-full text-[10px] font-black text-blue-600 dark:text-blue-500 uppercase tracking-widest">Execution Guide</span>
+                            <div className="h-px w-8 bg-slate-200 dark:bg-slate-800" />
+                            <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Onboarding flow</span>
                         </div>
-                        <h2 className="text-3xl md:text-5xl font-black text-slate-950 tracking-tight leading-none">Fast-Track Your Journey</h2>
+                        <h2 className="text-3xl md:text-5xl font-black text-slate-950 dark:text-white tracking-tight leading-none">Fast-Track Your Journey</h2>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {steps.map((step: { number: string, title: string, desc: string, icon: React.ElementType, color: string, link?: { text: string, href: string } }, i) => (
                         <div key={i} className="relative group/step">
-                            <div className="flex flex-col gap-8 p-8 bg-slate-50/50 border border-slate-100 rounded-[32px] hover:bg-white hover:shadow-[0_30px_60px_rgba(0,0,0,0.05)] hover:border-slate-200 transition-all duration-500 h-full">
+                            <div className="flex flex-col gap-8 p-8 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700/50 rounded-[32px] hover:bg-white dark:hover:bg-slate-800 hover:shadow-[0_30px_60px_rgba(0,0,0,0.05)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-500 h-full">
                                 <div className="flex items-center justify-between">
                                     <div className={cn(
-                                        "w-16 h-16 rounded-2xl flex items-center justify-center text-white transition-transform duration-500 group-hover/step:scale-110 shadow-lg",
-                                        step.color === 'blue' ? "bg-blue-600 shadow-blue-200" : step.color === 'emerald' ? "bg-emerald-600 shadow-emerald-200" : "bg-amber-500 shadow-amber-200"
+                                        "w-16 h-16 rounded-2xl flex items-center justify-center text-white transition-transform duration-500 group-hover/step:scale-110 shadow-lg dark:shadow-none",
+                                        step.color === 'blue' ? "bg-blue-600 shadow-blue-200/50 dark:shadow-none" : step.color === 'emerald' ? "bg-emerald-600 shadow-emerald-200/50 dark:shadow-none" : "bg-amber-500 shadow-amber-200/50 dark:shadow-none"
                                     )}>
                                         <step.icon className="w-8 h-8" />
                                     </div>
                                     <span className="text-5xl font-black text-slate-200/50 tracking-tighter group-hover/step:text-slate-200 transition-colors uppercase italic">{step.number}</span>
                                 </div>
                                 <div className="space-y-3">
-                                    <h3 className="text-[20px] font-black text-slate-950 tracking-tight leading-none">{step.title}</h3>
-                                    <p className="text-slate-500 text-[14px] font-medium leading-relaxed">{step.desc}</p>
+                                    <h3 className="text-[20px] font-black text-slate-950 dark:text-white tracking-tight leading-none">{step.title}</h3>
+                                    <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 text-[14px] font-medium leading-relaxed">{step.desc}</p>
                                 </div>
                                 {step.link && (
                                     <div className="pt-2 mt-auto">
@@ -624,39 +624,39 @@ function EarnMechanismSteps() {
     ];
 
     return (
-        <div className="bg-white rounded-[32px] md:rounded-[40px] p-6 md:p-10 lg:p-16 relative overflow-hidden group border border-slate-100 shadow-[0_2px_15px_rgba(0,0,0,0.02)]">
-            <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-violet-50/50 blur-[100px] md:blur-[150px] rounded-full group-hover:bg-violet-100/50 transition-all duration-1000" />
-            <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-blue-50/50 blur-[120px] rounded-full group-hover:bg-blue-100/50 transition-all duration-1000" />
+        <div className="bg-white dark:bg-slate-900/40 rounded-[32px] md:rounded-[40px] p-6 md:p-10 lg:p-16 relative overflow-hidden group border border-slate-100 dark:border-slate-800 shadow-[0_2px_15px_rgba(0,0,0,0.02)]">
+            <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-violet-50/50 dark:hidden blur-[100px] md:blur-[150px] rounded-full group-hover:bg-violet-100/50 transition-all duration-1000" />
+            <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-blue-50/50 dark:hidden blur-[120px] rounded-full group-hover:bg-blue-100/50 transition-all duration-1000" />
 
             <div className="relative z-10 space-y-12">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div className="space-y-4">
                         <div className="flex items-center gap-3">
-                            <span className="px-3 py-1 bg-blue-50 border border-blue-100 rounded-full text-[10px] font-black text-blue-600 uppercase tracking-widest">Protocol Revenue</span>
-                            <div className="h-px w-8 bg-slate-200" />
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Participation Model</span>
+                            <span className="px-3 py-1 bg-blue-50 dark:bg-slate-900 border border-blue-100 dark:border-blue-900/50 rounded-full text-[10px] font-black text-blue-600 dark:text-blue-500 uppercase tracking-widest">Protocol Revenue</span>
+                            <div className="h-px w-8 bg-slate-200 dark:bg-slate-800" />
+                            <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Participation Model</span>
                         </div>
-                        <h2 className="text-3xl md:text-5xl font-black text-slate-950 tracking-tight leading-none">Earn Real Yield</h2>
-                        <p className="text-slate-500 font-medium text-sm max-w-xl leading-relaxed text-balance">Turn your idle physical assets into active revenue streams through Comdex&apos;s institutional-grade Participation Pools.</p>
+                        <h2 className="text-3xl md:text-5xl font-black text-slate-950 dark:text-white tracking-tight leading-none">Earn Real Yield</h2>
+                        <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium text-sm max-w-xl leading-relaxed text-balance">Turn your idle physical assets into active revenue streams through Comdex&apos;s institutional-grade Participation Pools.</p>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {steps.map((step, i) => (
                         <div key={i} className="relative group/step">
-                            <div className="flex flex-col gap-8 p-8 bg-slate-50/50 border border-slate-100 rounded-[32px] hover:bg-white hover:shadow-[0_30px_60px_rgba(0,0,0,0.05)] hover:border-slate-200 transition-all duration-500 h-full">
+                            <div className="flex flex-col gap-8 p-8 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700/50 rounded-[32px] hover:bg-white dark:hover:bg-slate-800 hover:shadow-[0_30px_60px_rgba(0,0,0,0.05)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-500 h-full">
                                 <div className="flex items-center justify-between">
                                     <div className={cn(
-                                        "w-16 h-16 rounded-2xl flex items-center justify-center text-white transition-transform duration-500 group-hover/step:scale-110 shadow-lg",
-                                        step.color === 'blue' ? "bg-blue-600 shadow-blue-200" : step.color === 'emerald' ? "bg-emerald-600 shadow-emerald-200" : "bg-violet-600 shadow-violet-200"
+                                        "w-16 h-16 rounded-2xl flex items-center justify-center text-white transition-transform duration-500 group-hover/step:scale-110 shadow-lg dark:shadow-none",
+                                        step.color === 'blue' ? "bg-blue-600 shadow-blue-200/50 dark:shadow-none" : step.color === 'emerald' ? "bg-emerald-600 shadow-emerald-200/50 dark:shadow-none" : "bg-violet-600 shadow-violet-200/50 dark:shadow-none"
                                     )}>
                                         <step.icon className="w-8 h-8" />
                                     </div>
                                     <span className="text-5xl font-black text-slate-200/50 tracking-tighter group-hover/step:text-slate-200 transition-colors uppercase italic">{step.number}</span>
                                 </div>
                                 <div className="space-y-3">
-                                    <h3 className="text-[20px] font-black text-slate-950 tracking-tight leading-none">{step.title}</h3>
-                                    <p className="text-slate-500 text-[14px] font-medium leading-relaxed">{step.desc}</p>
+                                    <h3 className="text-[20px] font-black text-slate-950 dark:text-white tracking-tight leading-none">{step.title}</h3>
+                                    <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 text-[14px] font-medium leading-relaxed">{step.desc}</p>
                                 </div>
                                 {step.link && (
                                     <div className="pt-2 mt-auto">
@@ -708,9 +708,9 @@ function FAQAccordion({ searchQuery = "" }: { searchQuery?: string }) {
                         <div className="flex items-center gap-3">
                             <span className="px-3 py-1 bg-blue-50 border border-blue-100 rounded-full text-[10px] font-black text-blue-600 uppercase tracking-widest">Support FAQ</span>
                             <div className="h-px w-8 bg-slate-200" />
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Common Inquiries</span>
+                            <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Common Inquiries</span>
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-black text-slate-950 tracking-tight leading-none">Frequently Asked Questions</h2>
+                        <h2 className="text-3xl md:text-4xl font-black text-slate-950 dark:text-white tracking-tight leading-none">Frequently Asked Questions</h2>
                     </div>
                 </div>
 
@@ -727,8 +727,8 @@ function FAQAccordion({ searchQuery = "" }: { searchQuery?: string }) {
                                 className={cn(
                                     "px-6 py-3 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all whitespace-nowrap border",
                                     activeCategory === cat
-                                        ? "bg-slate-950 text-white border-slate-950 shadow-lg shadow-slate-900/10"
-                                        : "bg-white text-slate-400 border-slate-100 hover:border-slate-300 hover:text-slate-600"
+                                        ? "bg-slate-950 dark:bg-white text-white dark:text-slate-900 border-slate-950 dark:border-white shadow-lg shadow-slate-900/10"
+                                        : "bg-white dark:bg-slate-800 text-slate-400 dark:text-slate-400 border-slate-100 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 hover:text-slate-600 dark:hover:text-slate-200"
                                 )}
                             >
                                 {cat}
@@ -749,10 +749,10 @@ function FAQAccordion({ searchQuery = "" }: { searchQuery?: string }) {
                             exit={{ opacity: 0, scale: 0.95 }}
                             key={faq.q}
                             className={cn(
-                                "group rounded-[32px] border transition-all duration-300 overflow-hidden cursor-pointer bg-white",
+                                "group rounded-[32px] border transition-all duration-300 overflow-hidden cursor-pointer bg-white dark:bg-slate-900/40",
                                 activeIndex === i
-                                    ? "border-blue-100 shadow-[0_20px_40px_rgba(0,0,0,0.03)]"
-                                    : "border-slate-100 hover:border-slate-200"
+                                    ? "border-blue-100 dark:border-slate-700 shadow-[0_20px_40px_rgba(0,0,0,0.03)] dark:bg-slate-800"
+                                    : "border-slate-100 dark:border-slate-800 hover:border-slate-200 dark:hover:border-slate-700"
                             )}
                             onClick={() => setActiveIndex(activeIndex === i ? null : i)}
                         >
@@ -763,20 +763,20 @@ function FAQAccordion({ searchQuery = "" }: { searchQuery?: string }) {
                                             "w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center text-[14px] md:text-[16px] font-black transition-all duration-300 shrink-0",
                                             activeIndex === i
                                                 ? "bg-blue-600 text-white"
-                                                : "bg-slate-50 text-slate-400 group-hover:bg-slate-100"
+                                                : "bg-slate-50 dark:bg-slate-900 text-slate-400 group-hover:bg-slate-100 dark:group-hover:bg-slate-800"
                                         )}>
                                             {String(i + 1).padStart(2, '0')}
                                         </div>
                                         <h4 className={cn(
                                             "text-[16px] md:text-[18px] font-black tracking-tight leading-tight transition-colors duration-300",
-                                            activeIndex === i ? "text-slate-950" : "text-slate-500 group-hover:text-slate-950"
+                                            activeIndex === i ? "text-slate-950 dark:text-white" : "text-slate-500 dark:text-slate-400 dark:text-slate-500 group-hover:text-slate-950 dark:text-white"
                                         )}>
                                             {faq.q}
                                         </h4>
                                     </div>
                                     <div className={cn(
-                                        "w-8 h-8 rounded-full border border-slate-100 flex items-center justify-center transition-all duration-300 shrink-0",
-                                        activeIndex === i ? "rotate-180 bg-blue-50 border-blue-100 text-blue-600" : "text-slate-300"
+                                        "w-8 h-8 rounded-full border border-slate-100 dark:border-slate-800 flex items-center justify-center transition-all duration-300 shrink-0",
+                                        activeIndex === i ? "rotate-180 bg-blue-50 border-blue-100 text-blue-600" : "text-slate-300 dark:text-slate-600"
                                     )}>
                                         <ChevronRight className="w-4 h-4 rotate-90" />
                                     </div>
@@ -791,11 +791,11 @@ function FAQAccordion({ searchQuery = "" }: { searchQuery?: string }) {
                                             transition={{ duration: 0.3, ease: "circOut" }}
                                         >
                                             <div className="pt-6 mt-6 border-t border-slate-50">
-                                                <p className="text-[14px] md:text-[15px] text-slate-500 font-medium leading-relaxed max-w-3xl">
+                                                <p className="text-[14px] md:text-[15px] text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium leading-relaxed max-w-3xl">
                                                     {faq.a}
                                                 </p>
                                                 <div className="mt-6 flex items-center gap-2">
-                                                    <span className="px-3 py-1 bg-slate-50 rounded-lg text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                                                    <span className="px-3 py-1 bg-slate-50 dark:bg-slate-900 rounded-lg text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
                                                         Category: {faq.category}
                                                     </span>
                                                 </div>
@@ -830,13 +830,13 @@ function SupportContent({ searchQuery = "" }: { searchQuery?: string }) {
             <FAQAccordion searchQuery={searchQuery} />
 
             {searchQuery && !hasFaqResults && (
-                <div className="text-center py-20 space-y-6 bg-white rounded-[48px] border border-dashed border-slate-200">
-                    <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto">
-                        <Search className="w-8 h-8 text-slate-300" />
+                <div className="text-center py-20 space-y-6 bg-white dark:bg-slate-950 rounded-[48px] border border-dashed border-slate-200 dark:border-slate-700">
+                    <div className="w-20 h-20 bg-slate-50 dark:bg-slate-900 rounded-full flex items-center justify-center mx-auto">
+                        <Search className="w-8 h-8 text-slate-300 dark:text-slate-600" />
                     </div>
                     <div className="space-y-2">
-                        <h3 className="text-xl font-black text-slate-950">No results found</h3>
-                        <p className="text-slate-500 font-medium">We couldn&apos;t find any help topics matching &quot;{searchQuery}&quot;</p>
+                        <h3 className="text-xl font-black text-slate-950 dark:text-white">No results found</h3>
+                        <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium">We couldn&apos;t find any help topics matching &quot;{searchQuery}&quot;</p>
                     </div>
                     <button
                         onClick={() => window.dispatchEvent(new CustomEvent('clear-search'))}
@@ -849,8 +849,8 @@ function SupportContent({ searchQuery = "" }: { searchQuery?: string }) {
 
             {/* Contact Section */}
             <div className="bg-slate-950 rounded-[32px] md:rounded-[48px] p-8 md:p-20 text-center space-y-8 md:space-y-12 relative overflow-hidden group border border-white/5">
-                <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/10 blur-[150px] rounded-full group-hover:bg-blue-600/20 transition-all duration-1000" />
-                <div className="absolute -bottom-40 -left-40 w-[600px] h-[600px] bg-emerald-600/10 blur-[150px] rounded-full group-hover:bg-emerald-600/20 transition-all duration-1000" />
+                <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-600/10 dark:hidden blur-[150px] rounded-full group-hover:bg-blue-600/20 transition-all duration-1000" />
+                <div className="absolute -bottom-40 -left-40 w-[600px] h-[600px] bg-emerald-600/10 dark:hidden blur-[150px] rounded-full group-hover:bg-emerald-600/20 transition-all duration-1000" />
 
                 <div className="space-y-4 md:space-y-6 relative z-10">
                     <div className="flex items-center justify-center gap-3">
@@ -858,7 +858,7 @@ function SupportContent({ searchQuery = "" }: { searchQuery?: string }) {
                         <span className="text-[10px] md:text-[11px] font-black text-white/40 uppercase tracking-[0.3em]">Support Connectivity active</span>
                     </div>
                     <h2 className="text-3xl md:text-6xl font-black text-white tracking-tighter leading-none">Global Support Line</h2>
-                    <p className="text-slate-400 font-medium text-base md:text-lg max-w-2xl mx-auto leading-relaxed text-balance">Our specialized support team and global community are here to help you scaling institutional commodity trading.</p>
+                    <p className="text-slate-400 dark:text-slate-500 font-medium text-base md:text-lg max-w-2xl mx-auto leading-relaxed text-balance">Our specialized support team and global community are here to help you scaling institutional commodity trading.</p>
                 </div>
 
                 <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-6 relative z-10 pt-4 px-4 sm:px-0">
@@ -866,7 +866,7 @@ function SupportContent({ searchQuery = "" }: { searchQuery?: string }) {
                         href="https://t.me/comdexexchange"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full sm:w-auto px-10 py-5 bg-white text-slate-950 rounded-[24px] font-black text-[12px] uppercase tracking-widest flex items-center justify-center gap-4 hover:bg-slate-200 transition-all active:scale-[0.98] shadow-2xl shadow-indigo-500/10"
+                        className="w-full sm:w-auto px-10 py-5 bg-white dark:bg-slate-950 text-slate-950 dark:text-white rounded-[24px] font-black text-[12px] uppercase tracking-widest flex items-center justify-center gap-4 hover:bg-slate-200 transition-all active:scale-[0.98] shadow-2xl shadow-indigo-500/10"
                     >
                         <MessageCircle className="w-5 h-5" />
                         Community
@@ -915,7 +915,7 @@ function PageMain() {
     }, [searchParams]);
 
     return (
-        <div className="flex-1 flex flex-col overflow-hidden bg-[#fafbfc]">
+        <div className="flex-1 flex flex-col overflow-hidden bg-[#fafbfc] dark:bg-[#020617]">
             <main className="flex-1 overflow-y-auto no-scrollbar relative z-0">
                 <div className="max-w-[1500px] mx-auto flex flex-col gap-10 md:gap-16 px-4 md:px-10 py-8 md:py-12">
 
@@ -925,15 +925,15 @@ function PageMain() {
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="w-fit flex items-center gap-2 text-[10px] font-black text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full uppercase tracking-[0.2em]"
+                                className="w-fit flex items-center gap-2 text-[10px] font-black text-blue-600 dark:text-blue-500 bg-blue-50 dark:bg-slate-900 border border-transparent dark:border-blue-900/50 px-3 py-1.5 rounded-full uppercase tracking-[0.2em]"
                             >
-                                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-pulse" />
+                                <div className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-500 rounded-full animate-pulse" />
                                 Knowledge Intelligence
                             </motion.div>
-                            <h1 className="text-4xl md:text-5xl font-black text-slate-950 tracking-tight leading-none">
+                            <h1 className="text-4xl md:text-5xl font-black text-slate-950 dark:text-white tracking-tight leading-none">
                                 {activeTab === 'support' ? "Help & Support" : "Project Whitepaper"}
                             </h1>
-                            <p className="text-slate-500 font-medium max-w-lg text-sm leading-relaxed">
+                            <p className="text-slate-500 dark:text-slate-400 dark:text-slate-500 font-medium max-w-lg text-sm leading-relaxed">
                                 {activeTab === 'support'
                                     ? "Access our comprehensive support network and community-driven guides for the Comdex ecosystem."
                                     : "Detailed technical specifications, economic models, and architectural blueprints of Comdex Pro."
@@ -942,12 +942,12 @@ function PageMain() {
                         </div>
 
                         {/* Premium Tab Control - Matching Discover Categories style */}
-                        <div className="flex items-center gap-2 bg-white px-2 py-1.5 rounded-[24px] border border-slate-100 shadow-sm w-full md:w-auto overflow-x-auto no-scrollbar">
+                        <div className="flex items-center gap-2 bg-white dark:bg-slate-950 px-2 py-1.5 rounded-[24px] border border-slate-100 dark:border-slate-800 shadow-sm w-full md:w-auto overflow-x-auto no-scrollbar">
                             <button
                                 onClick={() => setActiveTab('support')}
                                 className={cn(
                                     "flex-1 md:flex-none px-5 md:px-7 py-3 rounded-[18px] text-[11px] font-black transition-all whitespace-nowrap uppercase tracking-widest",
-                                    activeTab === 'support' ? "text-slate-950 bg-slate-50 shadow-sm border border-slate-100" : "text-slate-400 hover:text-slate-900"
+                                    activeTab === 'support' ? "text-slate-950 dark:text-white bg-slate-50 dark:bg-slate-900 shadow-sm border border-slate-100 dark:border-slate-800" : "text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:text-slate-100"
                                 )}
                             >
                                 Support Center
@@ -956,7 +956,7 @@ function PageMain() {
                                 onClick={() => setActiveTab('docs')}
                                 className={cn(
                                     "flex-1 md:flex-none px-5 md:px-7 py-3 rounded-[18px] text-[11px] font-black transition-all whitespace-nowrap uppercase tracking-widest",
-                                    activeTab === 'docs' ? "text-slate-950 bg-slate-50 shadow-sm border border-slate-100" : "text-slate-400 hover:text-slate-900"
+                                    activeTab === 'docs' ? "text-slate-950 dark:text-white bg-slate-50 dark:bg-slate-900 shadow-sm border border-slate-100 dark:border-slate-800" : "text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:text-slate-100"
                                 )}
                             >
                                 Whitepaper
@@ -967,17 +967,17 @@ function PageMain() {
                     {/* Search & Tool Bar - Matching Discover style */}
                     <div className="flex flex-col xl:flex-row items-center justify-between gap-6 -mt-4">
                         <div className="relative flex-1 w-full md:max-w-xl group">
-                            <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 group-focus-within:text-blue-600 transition-colors" />
+                            <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 w-4 h-4 group-focus-within:text-blue-600 transition-colors" />
                             <input
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search documentation, guides, or help topics..."
-                                className="w-full pl-14 pr-6 py-4 bg-white border border-slate-100 rounded-[24px] text-sm font-bold text-slate-800 focus:outline-none focus:ring-4 focus:ring-blue-50 focus:border-blue-200 placeholder:text-slate-300 transition-all shadow-sm"
+                                className="w-full pl-14 pr-6 py-4 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[24px] text-sm font-bold text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-4 focus:ring-blue-50 focus:border-blue-200 focus:bg-white dark:focus:border-slate-700 dark:focus:bg-slate-800 transition-all shadow-sm"
                             />
                         </div>
                         <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest hidden lg:flex">
-                            <span className="flex items-center gap-1.5 text-slate-400">
+                            <span className="flex items-center gap-1.5 text-slate-400 dark:text-slate-500">
                                 <Clock className="w-3.5 h-3.5 text-emerald-500" />
                                 24/7 Global Support Active
                             </span>

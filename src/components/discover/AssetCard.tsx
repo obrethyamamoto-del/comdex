@@ -55,7 +55,7 @@ export default function AssetCard({ symbol, name, price, changePercent, isPositi
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onClick={() => router.push(`/discover/${symbol.toLowerCase()}`)}
-            className="group relative bg-white border border-slate-100 rounded-[28px] p-6 flex flex-col gap-5 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] hover:border-slate-200 transition-all duration-500 cursor-pointer overflow-hidden min-h-[320px]"
+            className="group relative bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[28px] p-6 flex flex-col gap-5 shadow-[0_2px_8px_rgba(0,0,0,0.02)] dark:shadow-none hover:shadow-[0_30px_60px_rgba(0,0,0,0.08)] dark:hover:shadow-black/40 hover:border-slate-200 dark:hover:border-slate-700 transition-all duration-500 cursor-pointer overflow-hidden min-h-[320px]"
         >
             {/* Immersive Background Graph */}
             <div className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-700">
@@ -84,7 +84,7 @@ export default function AssetCard({ symbol, name, price, changePercent, isPositi
                         strokeLinecap="round"
                     />
                 </svg>
-                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-white to-transparent opacity-60 z-[1]" />
+                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-white dark:from-slate-900 to-transparent opacity-60 z-[1]" />
             </div>
 
             {/* Header */}
@@ -96,14 +96,14 @@ export default function AssetCard({ symbol, name, price, changePercent, isPositi
                     </div>
                     <div className="flex flex-col">
                         <div className="flex items-center gap-1.5">
-                            <span className="text-[15px] font-black text-slate-950 tracking-tight leading-none">{symbol}</span>
-                            <ArrowUpRight className={`w-3 h-3 text-slate-300 transition-colors ${isHovered ? "text-slate-950" : ""}`} />
+                            <span className="text-[15px] font-black text-slate-950 dark:text-white tracking-tight leading-none">{symbol}</span>
+                            <ArrowUpRight className={`w-3 h-3 text-slate-300 dark:text-slate-600 transition-colors ${isHovered ? "text-slate-950 dark:text-white" : ""}`} />
                         </div>
-                        <span className="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-widest leading-none">{name}</span>
+                        <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-1 uppercase tracking-widest leading-none">{name}</span>
                     </div>
                 </div>
 
-                <div className="inline-flex items-center gap-1.5 px-2 py-1 bg-slate-50 text-slate-500 border border-slate-100/50 rounded-md text-[9px] font-black uppercase tracking-widest leading-none">
+                <div className="inline-flex items-center gap-1.5 px-2 py-1 bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border border-slate-100/50 dark:border-slate-700/50 rounded-md text-[9px] font-black uppercase tracking-widest leading-none">
                     {category}
                 </div>
             </div>
@@ -111,19 +111,19 @@ export default function AssetCard({ symbol, name, price, changePercent, isPositi
             {/* Price Section */}
             <div className="flex flex-col gap-1 relative z-10 mt-2">
                 <div className="flex items-baseline gap-1">
-                    <span className="text-[32px] font-black text-slate-950 tracking-tighter tabular-nums leading-none">${price}</span>
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">USD</span>
+                    <span className="text-[32px] font-black text-slate-950 dark:text-white tracking-tighter tabular-nums leading-none">${price}</span>
+                    <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">USD</span>
                 </div>
 
                 <div className="flex items-center gap-4 mt-1">
-                    <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-black text-[11px] shadow-sm ${isPositive ? "bg-emerald-50 text-emerald-600 border border-emerald-100/50" : "bg-rose-50 text-rose-600 border border-rose-100/50"
+                    <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-black text-[11px] shadow-sm ${isPositive ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-100/50 dark:border-emerald-800/50" : "bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-100/50 dark:border-rose-800/50"
                         }`}>
                         {isPositive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
                         {changePercent}
                     </div>
                     <div className="flex flex-col">
-                        <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Volume</span>
-                        <span className="text-[11px] font-black text-slate-600 tabular-nums leading-none tracking-tight">${volume}</span>
+                        <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Volume</span>
+                        <span className="text-[11px] font-black text-slate-600 dark:text-slate-300 tabular-nums leading-none tracking-tight">${volume}</span>
                     </div>
                 </div>
             </div>
@@ -139,7 +139,7 @@ export default function AssetCard({ symbol, name, price, changePercent, isPositi
             </div>
 
             {/* Dynamic Hover Accent */}
-            <div className={`absolute bottom-0 left-0 h-[3px] w-full bg-slate-950 transition-transform duration-500 origin-left z-20 ${isHovered ? "scale-x-100" : "scale-x-0"}`} />
+            <div className={`absolute bottom-0 left-0 h-[3px] w-full bg-slate-950 dark:bg-blue-500 transition-transform duration-500 origin-left z-20 ${isHovered ? "scale-x-100" : "scale-x-0"}`} />
         </motion.div>
     );
 }

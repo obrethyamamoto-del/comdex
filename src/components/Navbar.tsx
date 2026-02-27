@@ -8,6 +8,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
+import { ThemeToggle } from "./ThemeToggle";
 
 export default function Navbar() {
     const pathname = usePathname();
@@ -43,7 +44,7 @@ export default function Navbar() {
     ];
 
     return (
-        <header className="h-[72px] bg-white border-b border-slate-100 flex items-center px-4 md:px-6 sticky top-0 z-50">
+        <header className="h-[72px] bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800 flex items-center px-4 md:px-6 sticky top-0 z-50 transition-colors duration-300">
             {/* Logo */}
             <div className="flex items-center gap-2 mr-4 md:mr-12">
                 <Link href="/" className="flex items-center gap-3">
@@ -55,7 +56,7 @@ export default function Navbar() {
                             className="w-6 h-6 md:w-7 md:h-7 object-contain"
                         />
                     </div>
-                    <span className="text-lg md:text-xl font-black text-slate-900 tracking-[-0.03em] whitespace-nowrap uppercase">Comdex Pro</span>
+                    <span className="text-lg md:text-xl font-black text-slate-900 dark:text-white tracking-[-0.03em] whitespace-nowrap uppercase">Comdex Pro</span>
                 </Link>
             </div>
 
@@ -67,7 +68,7 @@ export default function Navbar() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search support, assets or guide..."
-                    className="w-full bg-[#f1f5f9] border-none rounded-2xl py-2.5 pl-11 pr-4 text-sm font-medium focus:ring-2 focus:ring-blue-100 outline-none placeholder:text-slate-400 text-slate-600 shadow-inner shadow-slate-200/50"
+                    className="w-full bg-[#f1f5f9] dark:bg-slate-900 border-none rounded-2xl py-2.5 pl-11 pr-4 text-sm font-medium focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 outline-none placeholder:text-slate-400 text-slate-600 dark:text-slate-300 shadow-inner shadow-slate-200/50 dark:shadow-black/20"
                 />
             </form>
 
@@ -79,7 +80,7 @@ export default function Navbar() {
                         <Link key={link.name} href={link.href}>
                             <button className={cn(
                                 "px-4 py-2 rounded-xl text-sm font-bold transition-all",
-                                isActive ? "text-blue-600 bg-[#eff6ff]" : "text-slate-500 hover:bg-slate-50"
+                                isActive ? "text-blue-600 bg-[#eff6ff] dark:bg-blue-900/30 dark:text-blue-400" : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900"
                             )}>
                                 {link.name}
                             </button>
@@ -90,21 +91,22 @@ export default function Navbar() {
 
             {/* Actions */}
             <div className="flex items-center gap-2 md:gap-4 ml-auto lg:ml-8">
+                <ThemeToggle />
                 <button
                     onClick={() => setIsMenuOpen(true)}
-                    className="hidden md:flex items-center justify-center w-10 h-10 lg:hidden text-slate-500 hover:bg-slate-50 rounded-xl transition-all"
+                    className="hidden md:flex items-center justify-center w-10 h-10 lg:hidden text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 rounded-xl transition-all"
                 >
                     <Search className="w-5 h-5" />
                 </button>
 
-                <div className="hidden sm:block h-6 w-[1px] bg-slate-100 mx-1"></div>
+                <div className="hidden sm:block h-6 w-[1px] bg-slate-100 dark:bg-slate-800 mx-1"></div>
 
                 <button
                     onClick={() => {
                         console.log("DEBUG: Navbar (Desktop) Connect Wallet clicked");
                         open();
                     }}
-                    className="hidden sm:block px-5 md:px-6 py-2.5 bg-slate-950 text-white text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-slate-800 transition-all shadow-lg shadow-black/5 active:scale-95 whitespace-nowrap"
+                    className="hidden sm:block px-5 md:px-6 py-2.5 bg-slate-950 dark:bg-blue-600 text-white text-[11px] font-black uppercase tracking-widest rounded-xl hover:bg-slate-800 dark:hover:bg-blue-500 transition-all shadow-lg shadow-black/5 active:scale-95 whitespace-nowrap"
                 >
                     {isConnected ? formatAddress(address!) : "Connect Wallet"}
                 </button>
@@ -112,7 +114,7 @@ export default function Navbar() {
                 {/* Mobile Menu Toggle */}
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="lg:hidden w-10 h-10 flex items-center justify-center text-slate-900 hover:bg-slate-50 rounded-xl transition-all active:scale-90"
+                    className="lg:hidden w-10 h-10 flex items-center justify-center text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-900 rounded-xl transition-all active:scale-90"
                 >
                     {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
@@ -125,7 +127,7 @@ export default function Navbar() {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="absolute top-[72px] inset-x-0 bg-white border-b border-slate-100 shadow-2xl p-4 flex flex-col gap-2 lg:hidden z-40"
+                        className="absolute top-[72px] inset-x-0 bg-white dark:bg-slate-950 border-b border-slate-100 dark:border-slate-800 shadow-2xl p-4 flex flex-col gap-2 lg:hidden z-40 transition-colors"
                     >
                         <form onSubmit={handleSearch} className="relative mb-4">
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
@@ -134,7 +136,7 @@ export default function Navbar() {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search..."
-                                className="w-full bg-[#f1f5f9] border-none rounded-xl py-3 pl-11 pr-4 text-sm font-medium outline-none text-slate-600"
+                                className="w-full bg-[#f1f5f9] dark:bg-slate-900 border-none rounded-xl py-3 pl-11 pr-4 text-sm font-medium outline-none text-slate-600 dark:text-slate-300"
                             />
                         </form>
                         {navLinks.map((link) => {
@@ -146,21 +148,21 @@ export default function Navbar() {
                                     onClick={() => setIsMenuOpen(false)}
                                     className={cn(
                                         "flex items-center px-4 py-3 rounded-xl text-sm font-black transition-all",
-                                        isActive ? "text-blue-600 bg-blue-50" : "text-slate-600 hover:bg-slate-50"
+                                        isActive ? "text-blue-600 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900"
                                     )}
                                 >
                                     {link.name}
                                 </Link>
                             );
                         })}
-                        <div className="pt-4 mt-2 border-t border-slate-50 flex flex-col gap-4">
+                        <div className="pt-4 mt-2 border-t border-slate-50 dark:border-slate-800 flex flex-col gap-4">
                             <button
                                 onClick={() => {
                                     console.log("DEBUG: Navbar (Mobile) Connect Wallet clicked");
                                     open();
                                     setIsMenuOpen(false);
                                 }}
-                                className="w-full py-4 bg-slate-950 text-white text-xs font-black uppercase tracking-widest rounded-xl shadow-lg active:scale-[0.98] transition-all"
+                                className="w-full py-4 bg-slate-950 dark:bg-blue-600 text-white text-xs font-black uppercase tracking-widest rounded-xl shadow-lg active:scale-[0.98] transition-all"
                             >
                                 {isConnected ? formatAddress(address!) : "Connect Wallet"}
                             </button>
@@ -189,7 +191,7 @@ export default function Navbar() {
                                         href={social.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-950 hover:bg-white hover:shadow-md transition-all duration-300"
+                                        className="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 flex items-center justify-center text-slate-400 hover:text-slate-950 dark:hover:text-slate-100 hover:bg-white dark:hover:bg-slate-800 hover:shadow-md transition-all duration-300"
                                     >
                                         <social.icon className="w-4 h-4" />
                                     </a>

@@ -74,39 +74,39 @@ function PoolCard({ pool }: { pool: typeof POOLS[0] }) {
     };
 
     return (
-        <div className="bg-white border border-slate-100 p-8 rounded-[32px] shadow-sm flex flex-col group hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] hover:border-slate-200 transition-all duration-500 overflow-hidden relative">
+        <div className="bg-white dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 p-8 rounded-[32px] shadow-sm flex flex-col group hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_40px_80px_rgba(0,0,0,0.4)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-500 overflow-hidden relative">
             <div className="flex items-center justify-between mb-8 relative z-10">
                 <AssetIcon symbol={pool.ticker} avatar={pool.avatar} color={pool.color} size="md" className="shadow-lg transition-transform group-hover:scale-110" />
                 <div className="text-right">
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Ticker</p>
-                    <p className="text-sm font-black text-slate-950">{pool.ticker}</p>
+                    <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest leading-none mb-1">Ticker</p>
+                    <p className="text-sm font-black text-slate-950 dark:text-white">{pool.ticker}</p>
                 </div>
             </div>
 
             <div className="relative z-10 mb-8">
-                <h3 className="text-lg font-black text-slate-950 mb-1">{pool.name}</h3>
+                <h3 className="text-lg font-black text-slate-950 dark:text-white mb-1">{pool.name}</h3>
                 <div className="flex items-baseline gap-1">
-                    <span className="text-2xl font-black text-blue-600 transition-colors group-hover:text-blue-700">{pool.apy}</span>
-                    <span className="text-[10px] text-slate-400 uppercase tracking-widest font-black">APY</span>
+                    <span className="text-2xl font-black text-blue-600 dark:text-blue-400 transition-colors group-hover:text-blue-700 dark:group-hover:text-blue-500">{pool.apy}</span>
+                    <span className="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-widest font-black">APY</span>
                 </div>
             </div>
 
-            <div className="space-y-4 mb-8 bg-slate-50/50 p-6 rounded-2xl border border-slate-100/50 relative z-10 transition-colors group-hover:bg-slate-50">
+            <div className="space-y-4 mb-8 bg-slate-50/50 dark:bg-slate-800/30 p-6 rounded-2xl border border-slate-100/50 dark:border-slate-800/50 relative z-10 transition-colors group-hover:bg-slate-50 dark:group-hover:bg-slate-800/50">
                 <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
-                    <span className="text-slate-400">TVL</span>
-                    <span className="text-slate-950">{pool.tvl}</span>
+                    <span className="text-slate-400 dark:text-slate-500">TVL</span>
+                    <span className="text-slate-950 dark:text-white">{pool.tvl}</span>
                 </div>
                 <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
-                    <span className="text-slate-400">Total Reward</span>
-                    <span className="text-slate-950">{pool.rewards}</span>
+                    <span className="text-slate-400 dark:text-slate-500">Total Reward</span>
+                    <span className="text-slate-950 dark:text-white">{pool.rewards}</span>
                 </div>
                 <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
-                    <span className="text-slate-400">Your Position</span>
-                    <span className="text-slate-950">{pool.stake}</span>
+                    <span className="text-slate-400 dark:text-slate-500">Your Position</span>
+                    <span className="text-slate-950 dark:text-white">{pool.stake}</span>
                 </div>
                 <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
-                    <span className="text-slate-400">Your Reward</span>
-                    <span className="text-blue-600 font-bold">{pool.yourReward}</span>
+                    <span className="text-slate-400 dark:text-slate-500">Your Reward</span>
+                    <span className="text-blue-600 dark:text-blue-400 font-bold">{pool.yourReward}</span>
                 </div>
             </div>
 
@@ -117,11 +117,11 @@ function PoolCard({ pool }: { pool: typeof POOLS[0] }) {
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     placeholder={`0.00 ${pool.ticker}`}
-                    className="w-full h-14 bg-slate-50 border border-slate-100 rounded-2xl px-5 pr-16 text-sm font-black text-slate-950 outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-200 focus:bg-white transition-all placeholder:text-slate-200"
+                    className="w-full h-14 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl px-5 pr-16 text-sm font-black text-slate-950 dark:text-white outline-none focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900/30 focus:border-blue-200 dark:focus:border-blue-800 focus:bg-white dark:focus:bg-slate-950 transition-all placeholder:text-slate-200 dark:placeholder:text-slate-600"
                 />
                 <button
                     onClick={() => setAmount(pool.stake.split(' ')[0].replace(/,/g, ''))}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-[10px] font-black text-blue-600 hover:text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-sm"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-[10px] font-black text-blue-600 dark:text-blue-400 hover:text-white dark:hover:text-white hover:bg-blue-600 dark:hover:bg-blue-600 hover:border-blue-600 transition-all shadow-sm"
                 >
                     MAX
                 </button>
@@ -134,7 +134,7 @@ function PoolCard({ pool }: { pool: typeof POOLS[0] }) {
                             console.log("DEBUG: Earn Page Connect Wallet clicked");
                             open();
                         }}
-                        className="w-full py-5 bg-slate-950 text-white text-[12px] font-black uppercase tracking-[0.2em] rounded-[24px] shadow-2xl hover:bg-slate-800 transition-all active:scale-[0.98]"
+                        className="w-full py-5 bg-slate-950 dark:bg-blue-600 text-white text-[12px] font-black uppercase tracking-[0.2em] rounded-[24px] shadow-2xl dark:shadow-blue-900/40 hover:bg-slate-800 dark:hover:bg-blue-500 transition-all active:scale-[0.98]"
                     >
                         Connect Wallet
                     </button>
@@ -145,8 +145,8 @@ function PoolCard({ pool }: { pool: typeof POOLS[0] }) {
                         onClick={handleClaim}
                         disabled={claimStatus !== "idle" || status !== "idle" || redeemStatus !== "idle"}
                         className={`w-full h-11 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-[0.98] flex items-center justify-center gap-2 border shadow-sm ${claimStatus === "success"
-                            ? `${SUCCESS_BUTTON_CLASS} border-emerald-100`
-                            : "bg-white border-blue-100 text-blue-600 hover:bg-blue-50"
+                            ? `${SUCCESS_BUTTON_CLASS} border-emerald-100 dark:border-emerald-800`
+                            : "bg-white dark:bg-slate-800 border-blue-100 dark:border-blue-900 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/40"
                             }`}
                     >
                         {claimStatus === "idle" && "Claim Rewards"}
@@ -191,8 +191,8 @@ function PoolCard({ pool }: { pool: typeof POOLS[0] }) {
                             onClick={handleRedeem}
                             disabled={redeemStatus !== "idle" || status !== "idle" || claimStatus !== "idle"}
                             className={`h-12 border rounded-xl text-[10px] font-black uppercase tracking-widest transition-all active:scale-[0.98] whitespace-nowrap flex items-center justify-center gap-2 ${redeemStatus === "success"
-                                ? "bg-emerald-50 text-emerald-600 border-emerald-200"
-                                : "bg-white border-slate-100 text-slate-400 hover:bg-slate-50 hover:text-slate-950"
+                                ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800"
+                                : "bg-white dark:bg-slate-800 border-slate-100 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-950 dark:hover:text-white"
                                 }`}
                         >
                             {redeemStatus === "idle" && "Redeem"}
@@ -237,35 +237,35 @@ function StakeRow({ stake }: { stake: typeof STAKES[0] }) {
     };
 
     return (
-        <tr key={stake.id} className="group hover:bg-slate-50/50 transition-all">
-            <td className="px-6 py-4 md:py-6 min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-0 z-10 bg-white group-hover:bg-slate-50 transition-colors border-r border-slate-50 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.02)]">
+        <tr key={stake.id} className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-all">
+            <td className="px-6 py-4 md:py-6 min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-0 z-10 bg-white dark:bg-slate-900 group-hover:bg-slate-50 dark:group-hover:bg-slate-800/50 transition-colors border-r border-slate-50 dark:border-slate-800/50 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.02)] dark:shadow-none">
                 <div className="flex items-center gap-2 md:gap-4">
                     <AssetIcon symbol={stake.symbol} avatar="" color={stake.color} size="sm" className="transition-transform group-hover:scale-110 flex-shrink-0" />
                     <div className="flex flex-col min-w-0">
-                        <p className="text-sm font-black text-slate-950 leading-none truncate">{stake.symbol}</p>
-                        <p className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest truncate">{stake.fullName}</p>
+                        <p className="text-sm font-black text-slate-950 dark:text-white leading-none truncate">{stake.symbol}</p>
+                        <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-2 uppercase tracking-widest truncate">{stake.fullName}</p>
                     </div>
                 </div>
             </td>
-            <td className="px-6 py-6">
-                <p className="text-sm font-black text-slate-950 leading-none tabular-nums whitespace-nowrap">{stake.amount}</p>
-                <p className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest tabular-nums whitespace-nowrap">{stake.value}</p>
+            <td className="px-6 py-6 border-b border-slate-100 dark:border-slate-800/50">
+                <p className="text-sm font-black text-slate-950 dark:text-white leading-none tabular-nums whitespace-nowrap">{stake.amount}</p>
+                <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-2 uppercase tracking-widest tabular-nums whitespace-nowrap">{stake.value}</p>
             </td>
-            <td className="px-6 py-6">
+            <td className="px-6 py-6 border-b border-slate-100 dark:border-slate-800/50">
                 <div className="w-32">
-                    <p className="text-sm font-black text-slate-950 mb-2 leading-none tabular-nums">{stake.duration}</p>
-                    <div className="h-1 bg-slate-100 rounded-full overflow-hidden">
-                        <div className="h-full bg-blue-600 rounded-full" style={{ width: `${stake.progress}%` }} />
+                    <p className="text-sm font-black text-slate-950 dark:text-white mb-2 leading-none tabular-nums">{stake.duration}</p>
+                    <div className="h-1 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                        <div className="h-full bg-blue-600 dark:bg-blue-500 rounded-full" style={{ width: `${stake.progress}%` }} />
                     </div>
                 </div>
             </td>
-            <td className="px-6 py-6">
-                <p className="text-sm font-black text-blue-600 tabular-nums">{stake.apy}</p>
+            <td className="px-6 py-6 border-b border-slate-100 dark:border-slate-800/50">
+                <p className="text-sm font-black text-blue-600 dark:text-blue-400 tabular-nums">{stake.apy}</p>
             </td>
-            <td className="px-6 py-6">
-                <p className="text-sm font-black text-slate-950 tabular-nums">{stake.rewarded} CUSD</p>
+            <td className="px-6 py-6 border-b border-slate-100 dark:border-slate-800/50">
+                <p className="text-sm font-black text-slate-950 dark:text-white tabular-nums">{stake.rewarded} CUSD</p>
             </td>
-            <td className="px-6 py-6 text-right">
+            <td className="px-6 py-6 text-right border-b border-slate-100 dark:border-slate-800/50">
                 <button
                     onClick={handleClaim}
                     disabled={claimStatus !== "idle"}
@@ -303,7 +303,7 @@ export default function EarnPage() {
         : POOLS.filter(p => p.name === selectedFilter);
 
     return (
-        <div className="flex-1 overflow-y-auto bg-[#fafbfc] px-4 md:px-10 py-8 md:py-12 no-scrollbar">
+        <div className="flex-1 overflow-y-auto bg-[#fafbfc] dark:bg-[#020617] transition-colors duration-300 px-4 md:px-10 py-8 md:py-12 no-scrollbar">
             <div className="max-w-[1500px] mx-auto space-y-12 md:space-y-16 pb-20">
 
                 {/* Hero Section */}
@@ -312,13 +312,13 @@ export default function EarnPage() {
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="w-fit flex items-center gap-2 text-[10px] font-black text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full uppercase tracking-[0.2em]"
+                            className="w-fit flex items-center gap-2 text-[10px] font-black text-blue-600 dark:text-blue-500 bg-blue-50 dark:bg-slate-900 border border-transparent dark:border-blue-900/50 px-3 py-1.5 rounded-full uppercase tracking-[0.2em]"
                         >
-                            <div className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-pulse" />
+                            <div className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-500 rounded-full animate-pulse" />
                             Revenue Share Mechanism
                         </motion.div>
-                        <h1 className="text-3xl md:text-4xl font-black text-slate-950 tracking-tight leading-none">Put Your Assets to Work</h1>
-                        <p className="text-slate-500 font-medium max-w-lg text-sm leading-relaxed">
+                        <h1 className="text-3xl md:text-4xl font-black text-slate-950 dark:text-white tracking-tight leading-none">Put Your Assets to Work</h1>
+                        <p className="text-slate-500 dark:text-slate-400 font-medium max-w-lg text-sm leading-relaxed">
                             Participate with your assets and earn high-yield rewards in CUSD stablecoins.
                             Institutional-grade security, fully audited and always liquid.
                         </p>
@@ -328,17 +328,17 @@ export default function EarnPage() {
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {[
-                        { icon: Lock, title: "Total Value Locked", val: "$142,850,920.00", color: "text-blue-600", bg: "bg-blue-50" },
-                        { icon: DollarSign, title: "Total Rewards", val: "$1,842,450.65", color: "text-emerald-600", bg: "bg-emerald-50" },
-                        { icon: Users, title: "Total Users", val: "12,842", color: "text-slate-950", bg: "bg-slate-50" }
+                        { icon: Lock, title: "Total Value Locked", val: "$142,850,920.00", color: "text-blue-600 dark:text-blue-400", bg: "bg-blue-50 dark:bg-blue-900/30" },
+                        { icon: DollarSign, title: "Total Rewards", val: "$1,842,450.65", color: "text-emerald-600 dark:text-emerald-400", bg: "bg-emerald-50 dark:bg-emerald-500/10" },
+                        { icon: Users, title: "Total Users", val: "12,842", color: "text-slate-950 dark:text-white", bg: "bg-slate-50 dark:bg-slate-800" }
                     ].map((stat, i) => (
-                        <div key={i} className={`bg-white border border-slate-100 p-6 md:p-8 rounded-[32px] shadow-sm flex items-center gap-6 group hover:border-slate-200 hover:bg-slate-50/50 transition-all cursor-default ${i === 2 ? "md:col-span-2 lg:col-span-1" : ""}`}>
+                        <div key={i} className={`bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-6 md:p-8 rounded-[32px] shadow-sm flex items-center gap-6 group hover:border-slate-200 dark:hover:border-slate-700 hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-all cursor-default ${i === 2 ? "md:col-span-2 lg:col-span-1" : ""}`}>
                             <div className={`w-12 h-12 md:w-14 md:h-14 ${stat.bg} rounded-2xl flex items-center justify-center ${stat.color} transition-transform group-hover:scale-110 flex-shrink-0`}>
                                 <stat.icon className="w-5 h-5 md:w-6 md:h-6" />
                             </div>
                             <div>
-                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{stat.title}</p>
-                                <p className="text-xl md:text-2xl font-black text-slate-950 tracking-tight tabular-nums">{stat.val}</p>
+                                <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">{stat.title}</p>
+                                <p className="text-xl md:text-2xl font-black text-slate-950 dark:text-white tracking-tight tabular-nums">{stat.val}</p>
                             </div>
                         </div>
                     ))}
@@ -347,12 +347,12 @@ export default function EarnPage() {
                 {/* Staking Pools Section */}
                 <div className="space-y-8">
                     <div className="flex items-center justify-between px-1 relative z-30">
-                        <h2 className="text-2xl md:text-3xl font-black text-slate-950 tracking-tight">Available Vaults</h2>
+                        <h2 className="text-2xl md:text-3xl font-black text-slate-950 dark:text-white tracking-tight">Available Vaults</h2>
 
                         <div className="relative">
                             <button
                                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                                className="flex items-center gap-3 px-5 py-2.5 bg-white border border-slate-100 rounded-xl text-[11px] font-black text-slate-950 shadow-sm transition-all uppercase tracking-widest hover:border-slate-200"
+                                className="flex items-center gap-3 px-5 py-2.5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl text-[11px] font-black text-slate-950 dark:text-white shadow-sm transition-all uppercase tracking-widest hover:border-slate-200 dark:hover:border-slate-700"
                             >
                                 {selectedFilter}
                                 <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${isFilterOpen ? "rotate-180" : ""}`} />
@@ -366,7 +366,7 @@ export default function EarnPage() {
                                             initial={{ opacity: 0, scale: 0.95, y: 10 }}
                                             animate={{ opacity: 1, scale: 1, y: 0 }}
                                             exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                                            className="absolute right-0 top-full mt-2 w-48 bg-white border border-slate-100 rounded-2xl shadow-xl py-2 z-20"
+                                            className="absolute right-0 top-full mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-xl dark:shadow-black/50 py-2 z-20"
                                         >
                                             {["All Vaults", ...POOLS.map(p => p.name)].map((option) => (
                                                 <button
@@ -376,8 +376,8 @@ export default function EarnPage() {
                                                         setIsFilterOpen(false);
                                                     }}
                                                     className={`w-full text-left px-5 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all ${selectedFilter === option
-                                                        ? "text-slate-950 bg-slate-50"
-                                                        : "text-slate-400 hover:text-slate-950 hover:bg-slate-50"
+                                                        ? "text-slate-950 dark:text-white bg-slate-50 dark:bg-slate-800"
+                                                        : "text-slate-400 dark:text-slate-500 hover:text-slate-950 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800"
                                                         }`}
                                                 >
                                                     {option}
@@ -401,15 +401,15 @@ export default function EarnPage() {
                 {isConnected && (
                     <div className="space-y-8">
                         <div className="flex items-center justify-between px-1">
-                            <h2 className="text-2xl md:text-3xl font-black text-slate-950 tracking-tight">Active Participations</h2>
+                            <h2 className="text-2xl md:text-3xl font-black text-slate-950 dark:text-white tracking-tight">Active Participations</h2>
                         </div>
 
-                        <div className="bg-white border border-slate-100 rounded-[32px] shadow-sm overflow-hidden mb-32">
+                        <div className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[32px] shadow-sm overflow-hidden mb-32">
                             <div className="overflow-x-auto no-scrollbar">
-                                <table className="w-full text-left min-w-[1000px]">
-                                    <thead className="bg-[#fafbfc] border-b border-slate-100">
+                                <table className="w-full text-left border-collapse min-w-[1000px]">
+                                    <thead className="bg-[#fafbfc] dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800">
                                         <tr>
-                                            <th className={`${TABLE_HEADER_CLASS} min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-0 z-20 bg-[#fafbfc] border-r border-slate-100 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.05)]`}>Asset Pool</th>
+                                            <th className={`${TABLE_HEADER_CLASS} min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-0 z-20 bg-[#fafbfc] dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.05)] dark:shadow-none`}>Asset Pool</th>
                                             <th className={TABLE_HEADER_CLASS}>Participated Amount</th>
                                             <th className={TABLE_HEADER_CLASS}>Lifecycle</th>
                                             <th className={TABLE_HEADER_CLASS}>APY %</th>
@@ -417,7 +417,7 @@ export default function EarnPage() {
                                             <th className={`${TABLE_HEADER_CLASS} text-right`}>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-slate-100">
+                                    <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                                         {STAKES.map((stake) => (
                                             <StakeRow key={stake.id} stake={stake} />
                                         ))}

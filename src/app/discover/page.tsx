@@ -76,7 +76,7 @@ function DiscoverContent() {
     });
 
     return (
-        <div className="flex-1 flex flex-col overflow-hidden bg-[#fafbfc]">
+        <div className="flex-1 flex flex-col overflow-hidden bg-[#fafbfc] dark:bg-[#020617] transition-colors duration-300">
             <DiscoverTicker />
 
             <main className="flex-1 overflow-y-auto no-scrollbar relative z-0">
@@ -88,13 +88,13 @@ function DiscoverContent() {
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                className="w-fit flex items-center gap-2 text-[10px] font-black text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full uppercase tracking-[0.2em]"
+                                className="w-fit flex items-center gap-2 text-[10px] font-black text-blue-600 dark:text-blue-500 bg-blue-50 dark:bg-slate-900 border border-transparent dark:border-blue-900/50 px-3 py-1.5 rounded-full uppercase tracking-[0.2em]"
                             >
-                                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-pulse" />
+                                <div className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-500 rounded-full animate-pulse" />
                                 Market Intelligence
                             </motion.div>
-                            <h1 className="text-4xl font-black text-slate-950 tracking-tight leading-none">Discover Opportunities</h1>
-                            <p className="text-slate-500 font-medium max-w-lg text-sm leading-relaxed">
+                            <h1 className="text-4xl font-black text-slate-950 dark:text-white tracking-tight leading-none">Discover Opportunities</h1>
+                            <p className="text-slate-500 dark:text-slate-400 font-medium max-w-lg text-sm leading-relaxed">
                                 Stay ahead of the curve with real-time analytics, trending assets, and premium market insights.
                             </p>
                         </div>
@@ -111,17 +111,17 @@ function DiscoverContent() {
 
                     {/* Explorer Bar */}
                     <div className="flex flex-col gap-10">
-                        <div className="relative z-40 bg-[#fafbfc] py-6 -mx-1 px-1 border-b border-slate-100 flex flex-col gap-6">
+                        <div className="relative z-40 bg-[#fafbfc] dark:bg-[#020617] py-6 -mx-1 px-1 border-b border-slate-100 dark:border-slate-800 flex flex-col gap-6 transition-colors duration-300">
                             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                                 <div className="flex items-center gap-4">
-                                    <h2 className="text-xl font-black text-slate-950 tracking-tight">Market Explorer</h2>
-                                    <div className="h-4 w-[1px] bg-slate-200 hidden xs:block" />
+                                    <h2 className="text-xl font-black text-slate-950 dark:text-white tracking-tight">Market Explorer</h2>
+                                    <div className="h-4 w-[1px] bg-slate-200 dark:bg-slate-700 hidden xs:block" />
                                     <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest">
-                                        <span className="flex items-center gap-1.5 text-slate-400">
-                                            <Clock className="w-3.5 h-3.5 text-orange-400" />
+                                        <span className="flex items-center gap-1.5 text-slate-400 dark:text-slate-500">
+                                            <Clock className="w-3.5 h-3.5 text-orange-400 dark:text-orange-500" />
                                             Market Closed
                                         </span>
-                                        <span className="text-slate-300 font-bold ml-1 hidden sm:inline-block">(08:05 PM ET)</span>
+                                        <span className="text-slate-300 dark:text-slate-600 font-bold ml-1 hidden sm:inline-block">(08:05 PM ET)</span>
                                     </div>
                                 </div>
                             </div>
@@ -129,24 +129,24 @@ function DiscoverContent() {
                             <div className="flex flex-col xl:flex-row items-center justify-between gap-6">
                                 <div className="flex flex-col md:flex-row items-center gap-4 flex-1 w-full">
                                     <div className="relative flex-1 w-full md:max-w-xl group">
-                                        <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 group-focus-within:text-primary transition-colors" />
+                                        <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 w-4 h-4 group-focus-within:text-primary transition-colors" />
                                         <input
                                             type="text"
                                             value={searchQuery}
                                             onChange={(e) => setSearchQuery(e.target.value)}
                                             placeholder="Fast search for assets, sectors or people..."
-                                            className="w-full pl-14 pr-6 py-4 bg-white border border-slate-100 rounded-[24px] text-sm font-bold text-slate-800 focus:outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary/20 placeholder:text-slate-300 transition-all shadow-sm"
+                                            className="w-full pl-14 pr-6 py-4 bg-white dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 rounded-[24px] text-sm font-bold text-slate-800 dark:text-white focus:outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary/20 placeholder:text-slate-300 dark:placeholder:text-slate-600 transition-all shadow-sm"
                                         />
                                     </div>
 
-                                    <div className="flex items-center gap-2 bg-white px-2 py-1.5 rounded-[24px] border border-slate-100 shadow-sm overflow-x-auto no-scrollbar w-full md:w-auto">
+                                    <div className="flex items-center gap-2 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 px-2 py-1.5 rounded-[24px] shadow-sm overflow-x-auto no-scrollbar w-full md:w-auto">
                                         {CATEGORIES.map((cat) => (
                                             <button
                                                 key={cat}
                                                 onClick={() => setActiveCategory(cat)}
                                                 className={`px-5 py-2.5 rounded-[18px] text-[11px] font-black transition-all whitespace-nowrap uppercase tracking-widest ${activeCategory === cat
-                                                    ? "text-slate-950 bg-slate-50 shadow-sm border border-slate-100"
-                                                    : "text-slate-400 hover:text-slate-900"
+                                                    ? "text-slate-950 dark:text-white bg-slate-50 dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700"
+                                                    : "text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-slate-300"
                                                     }`}
                                             >
                                                 {cat}
@@ -156,16 +156,16 @@ function DiscoverContent() {
                                 </div>
 
                                 <div className="flex flex-wrap items-center gap-3 w-full xl:w-auto justify-between md:justify-end relative">
-                                    <div className="flex items-center gap-1 bg-white p-1 rounded-2xl border border-slate-100 shadow-sm">
+                                    <div className="flex items-center gap-1 bg-white dark:bg-slate-900 p-1 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm">
                                         <button
                                             onClick={() => setViewMode("grid")}
-                                            className={`p-2.5 rounded-xl transition-all ${viewMode === "grid" ? "bg-slate-900 text-white shadow-lg" : "text-slate-400 hover:text-slate-600"}`}
+                                            className={`p-2.5 rounded-xl transition-all ${viewMode === "grid" ? "bg-slate-900 dark:bg-blue-600 text-white shadow-lg" : "text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"}`}
                                         >
                                             <LayoutGrid className="w-4 h-4" />
                                         </button>
                                         <button
                                             onClick={() => setViewMode("list")}
-                                            className={`p-2.5 rounded-xl transition-all ${viewMode === "list" ? "bg-slate-900 text-white shadow-lg" : "text-slate-400 hover:text-slate-600"}`}
+                                            className={`p-2.5 rounded-xl transition-all ${viewMode === "list" ? "bg-slate-900 dark:bg-blue-600 text-white shadow-lg" : "text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300"}`}
                                         >
                                             <List className="w-4 h-4" />
                                         </button>
@@ -174,10 +174,10 @@ function DiscoverContent() {
                                     <div className="relative flex-1 md:flex-none">
                                         <button
                                             onClick={() => setIsSortOpen(!isSortOpen)}
-                                            className="flex items-center gap-6 px-6 py-4 bg-white border border-slate-100 rounded-[22px] text-[11px] font-black text-slate-950 shadow-sm hover:hover:shadow-md transition-all uppercase tracking-widest w-full md:min-w-[220px] justify-between group/btn"
+                                            className="flex items-center gap-6 px-6 py-4 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[22px] text-[11px] font-black text-slate-950 dark:text-white shadow-sm hover:hover:shadow-md transition-all uppercase tracking-widest w-full md:min-w-[220px] justify-between group/btn"
                                         >
                                             <span>{activeSort}</span>
-                                            <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${isSortOpen ? "rotate-180" : ""}`} />
+                                            <ChevronDown className={`w-4 h-4 text-slate-400 dark:text-slate-500 transition-transform ${isSortOpen ? "rotate-180" : ""}`} />
                                         </button>
 
                                         {/* Dropdown Menu */}
@@ -193,7 +193,7 @@ function DiscoverContent() {
                                                         initial={{ opacity: 0, scale: 0.95, y: 10 }}
                                                         animate={{ opacity: 1, scale: 1, y: 0 }}
                                                         exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                                                        className="absolute right-0 top-full mt-2 w-full bg-white border border-slate-100 rounded-[24px] shadow-2xl py-3 z-50 text-left"
+                                                        className="absolute right-0 top-full mt-2 w-full bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[24px] shadow-2xl py-3 z-50 text-left"
                                                     >
                                                         {[
                                                             "Most Popular",
@@ -212,8 +212,8 @@ function DiscoverContent() {
                                                                     setIsSortOpen(false);
                                                                 }}
                                                                 className={`w-full text-left px-6 py-2.5 text-[11px] font-black uppercase tracking-widest transition-all ${activeSort === option
-                                                                    ? "text-slate-950"
-                                                                    : "text-slate-400 hover:text-slate-950"
+                                                                    ? "text-slate-950 dark:text-white"
+                                                                    : "text-slate-400 dark:text-slate-500 hover:text-slate-950 dark:hover:text-white"
                                                                     }`}
                                                             >
                                                                 {option}
@@ -248,21 +248,21 @@ function DiscoverContent() {
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
-                                    className="bg-white rounded-[32px] border border-slate-100 shadow-sm mb-32 overflow-hidden"
+                                    className="bg-white dark:bg-slate-900 rounded-[32px] border border-slate-100 dark:border-slate-800 shadow-sm mb-32 overflow-hidden"
                                 >
                                     <div className="overflow-x-auto no-scrollbar">
                                         <table className="w-full text-left border-collapse min-w-[1000px]">
-                                            <thead className="bg-[#fafbfc] border-b border-slate-100">
+                                            <thead className="bg-[#fafbfc] dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800">
                                                 <tr>
-                                                    <th className={`${TABLE_HEADER_CLASS} w-10 md:w-16 text-center sticky left-0 z-20 bg-[#fafbfc] border-r border-slate-100`}>#</th>
-                                                    <th className={`${TABLE_HEADER_CLASS} min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-10 md:left-16 z-20 bg-[#fafbfc] border-r border-slate-100 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.05)]`}>Asset Name</th>
+                                                    <th className={`${TABLE_HEADER_CLASS} w-10 md:w-16 text-center sticky left-0 z-20 bg-[#fafbfc] dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800`}>#</th>
+                                                    <th className={`${TABLE_HEADER_CLASS} min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-10 md:left-16 z-20 bg-[#fafbfc] dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.05)] dark:shadow-none`}>Asset Name</th>
                                                     <th className={TABLE_HEADER_CLASS}>Price</th>
                                                     <th className={TABLE_HEADER_CLASS}>Categories</th>
                                                     <th className={TABLE_HEADER_CLASS}>Performance</th>
                                                     <th className={`${TABLE_HEADER_CLASS} text-right`}>Volume</th>
                                                 </tr>
                                             </thead>
-                                            <tbody className="divide-y divide-slate-50">
+                                            <tbody className="divide-y divide-slate-50 dark:divide-slate-800/50">
                                                 {sortedAssets.map((asset, idx) => (
                                                     <AssetRow key={asset.symbol} index={idx} {...asset} />
                                                 ))}
