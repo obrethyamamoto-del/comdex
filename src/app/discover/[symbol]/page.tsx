@@ -101,7 +101,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                             <div className="bg-white dark:bg-slate-900 rounded-[32px] p-6 md:p-8 border border-slate-100 dark:border-slate-800 shadow-sm">
                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-8">
                                     <div className="flex items-center gap-4">
-                                        <AssetIcon symbol={selectedAsset.symbol} avatar={selectedAsset.avatar} color={selectedAsset.color} size="lg" className="shadow-lg" />
+                                        <AssetIcon symbol={selectedAsset.symbol} color={selectedAsset.color} size="lg" className="shadow-lg" />
                                         <div className="flex flex-col min-w-0">
                                             <div className="flex items-center gap-2 flex-wrap">
                                                 <h1 className="text-xl md:text-2xl font-black text-slate-950 dark:text-white tracking-tight truncate">{selectedAsset.name}</h1>
@@ -196,7 +196,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                             {tradeType === "buy" ? (
                                                 <div className="flex items-center gap-2.5 px-3 py-2 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 rounded-2xl shadow-sm">
                                                     <div className="flex items-center gap-2">
-                                                        <AssetIcon symbol="CUSD" avatar="C" color="#8B5CF6" size="sm" />
+                                                        <AssetIcon symbol="CUSD" color="#8B5CF6" size="sm" />
                                                         <span className="text-[14px] font-black text-slate-900 dark:text-white tracking-tight">CUSD</span>
                                                     </div>
                                                 </div>
@@ -207,7 +207,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                                         className="flex items-center gap-2.5 px-3 py-2 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 rounded-2xl shadow-sm hover:border-blue-200 dark:hover:border-slate-600 transition-all active:scale-[0.98]"
                                                     >
                                                         <div className="flex items-center gap-2">
-                                                            <AssetIcon symbol={selectedAsset.symbol} avatar={selectedAsset.avatar} color={selectedAsset.color} size="sm" />
+                                                            <AssetIcon symbol={selectedAsset.symbol} color={selectedAsset.color} size="sm" />
                                                             <span className="text-[14px] font-black text-slate-900 dark:text-white tracking-tight">{selectedAsset.symbol}</span>
                                                         </div>
                                                         <ChevronDown className={`w-3.5 h-3.5 text-slate-300 dark:text-slate-500 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`} />
@@ -225,7 +225,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                                                         onClick={() => handleAssetSelect(a)}
                                                                         className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
                                                                     >
-                                                                        <AssetIcon symbol={a.symbol} avatar={a.avatar} color={a.color} size="sm" />
+                                                                        <AssetIcon symbol={a.symbol} color={a.color} size="sm" />
                                                                         <div className="flex flex-col items-start leading-none">
                                                                             <span className="text-[13px] font-black text-slate-950 dark:text-white">{a.symbol}</span>
                                                                             <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500 mt-1 uppercase tracking-wider">{a.name}</span>
@@ -269,7 +269,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                                         className="flex items-center gap-2.5 px-3 py-2 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700/50 rounded-2xl shadow-sm hover:border-blue-200 dark:hover:border-slate-600 transition-all active:scale-[0.98]"
                                                     >
                                                         <div className="flex items-center gap-2">
-                                                            <AssetIcon symbol={selectedAsset.symbol} avatar={selectedAsset.avatar} color={selectedAsset.color} size="sm" />
+                                                            <AssetIcon symbol={selectedAsset.symbol} color={selectedAsset.color} size="sm" />
                                                             <span className="text-[14px] font-black text-slate-900 dark:text-white tracking-tight">{selectedAsset.symbol}</span>
                                                         </div>
                                                         <ChevronDown className={`w-3.5 h-3.5 text-slate-300 dark:text-slate-500 transition-transform ${isDropdownOpen ? "rotate-180" : ""}`} />
@@ -287,7 +287,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                                                         onClick={() => handleAssetSelect(a)}
                                                                         className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
                                                                     >
-                                                                        <AssetIcon symbol={a.symbol} avatar={a.avatar} color={a.color} size="sm" />
+                                                                        <AssetIcon symbol={a.symbol} color={a.color} size="sm" />
                                                                         <div className="flex flex-col items-start leading-none">
                                                                             <span className="text-[13px] font-black text-slate-950 dark:text-white">{a.symbol}</span>
                                                                             <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500 mt-1 uppercase tracking-wider">{a.name}</span>
@@ -301,7 +301,7 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                             ) : (
                                                 <div className="flex items-center gap-2.5 px-3 py-2 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl shadow-sm">
                                                     <div className="flex items-center gap-2">
-                                                        <AssetIcon symbol="CUSD" avatar="C" color="#8B5CF6" size="sm" />
+                                                        <AssetIcon symbol="CUSD" color="#8B5CF6" size="sm" />
                                                         <span className="text-[14px] font-black text-slate-900 dark:text-white tracking-tight">CUSD</span>
                                                     </div>
                                                 </div>

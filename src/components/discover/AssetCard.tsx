@@ -91,7 +91,7 @@ export default function AssetCard({ symbol, name, price, changePercent, isPositi
             <div className="flex items-start justify-between relative z-10">
                 <div className="flex items-center gap-3">
                     <div className="relative">
-                        <AssetIcon symbol={symbol} avatar={avatar} color={color} size="md" className="transition-all duration-500" />
+                        <AssetIcon symbol={symbol} color={color} size="md" className="transition-all duration-500" />
 
                     </div>
                     <div className="flex flex-col">

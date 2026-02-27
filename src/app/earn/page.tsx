@@ -76,7 +76,7 @@ function PoolCard({ pool }: { pool: typeof POOLS[0] }) {
     return (
         <div className="bg-white dark:bg-slate-800/40 border border-slate-100 dark:border-slate-700/50 p-8 rounded-[32px] shadow-sm flex flex-col group hover:shadow-[0_40px_80px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_40px_80px_rgba(0,0,0,0.4)] hover:border-slate-200 dark:hover:border-slate-600 transition-all duration-500 overflow-hidden relative">
             <div className="flex items-center justify-between mb-8 relative z-10">
-                <AssetIcon symbol={pool.ticker} avatar={pool.avatar} color={pool.color} size="md" className="shadow-lg transition-transform group-hover:scale-110" />
+                <AssetIcon symbol={pool.ticker} color={pool.color} size="md" className="shadow-lg transition-transform group-hover:scale-110" />
                 <div className="text-right">
                     <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest leading-none mb-1">Ticker</p>
                     <p className="text-sm font-black text-slate-950 dark:text-white">{pool.ticker}</p>
@@ -240,7 +240,7 @@ function StakeRow({ stake }: { stake: typeof STAKES[0] }) {
         <tr key={stake.id} className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-all">
             <td className="px-6 py-4 md:py-6 min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-0 z-10 bg-white dark:bg-slate-900 group-hover:bg-slate-50 dark:group-hover:bg-slate-800/50 transition-colors border-r border-slate-50 dark:border-slate-800/50 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.02)] dark:shadow-none">
                 <div className="flex items-center gap-2 md:gap-4">
-                    <AssetIcon symbol={stake.symbol} avatar="" color={stake.color} size="sm" className="transition-transform group-hover:scale-110 flex-shrink-0" />
+                    <AssetIcon symbol={stake.symbol} color={stake.color} size="sm" className="transition-transform group-hover:scale-110 flex-shrink-0" />
                     <div className="flex flex-col min-w-0">
                         <p className="text-sm font-black text-slate-950 dark:text-white leading-none truncate">{stake.symbol}</p>
                         <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-2 uppercase tracking-widest truncate">{stake.fullName}</p>

@@ -31,7 +31,6 @@ function StatItem({ icon, name, symbol, value, subValue, isPositive, idx = 0, co
             <div className="flex items-center gap-4">
                 <AssetIcon
                     symbol={symbol}
-                    avatar={typeof icon === "string" ? icon : ""}
                     color={color}
                     size="sm"
                     className="transition-all duration-300"

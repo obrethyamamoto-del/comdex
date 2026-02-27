@@ -106,7 +106,7 @@ function BalanceRow({ item, index }: { item: typeof WALLET_BALANCES[0], index: n
         >
             <td className={`${TABLE_CELL_CLASS} min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-0 z-10 bg-white dark:bg-slate-900 group-hover:bg-slate-50 dark:group-hover:bg-slate-800/50 transition-colors border-r border-slate-50 dark:border-slate-800/50 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.02)] dark:shadow-none`}>
                 <div className="flex items-center gap-2 md:gap-4">
-                    <AssetIcon symbol={item.asset.symbol} avatar={item.asset.avatar} color={item.asset.color} size="sm" className="transition-transform group-hover:scale-110 flex-shrink-0" />
+                    <AssetIcon symbol={item.asset.symbol} color={item.asset.color} size="sm" className="transition-transform group-hover:scale-110 flex-shrink-0" />
                     <div className="flex flex-col min-w-0">
                         <p className="text-[13px] font-black text-slate-950 dark:text-white leading-none truncate">{item.asset.symbol}</p>
                         <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-1.5 uppercase tracking-widest truncate">{item.asset.name}</p>
@@ -149,7 +149,7 @@ function StakedRow({ item, index }: { item: typeof STAKED_POSITIONS[0], index: n
         >
             <td className={`${TABLE_CELL_CLASS} min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-0 z-10 bg-white dark:bg-slate-900 group-hover:bg-slate-50 dark:group-hover:bg-slate-800/50 transition-colors border-r border-slate-50 dark:border-slate-800/50 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.02)] dark:shadow-none`}>
                 <div className="flex items-center gap-2 md:gap-4">
-                    <AssetIcon symbol={item.asset.symbol} avatar={item.asset.avatar} color={item.asset.color} size="sm" className="transition-transform group-hover:scale-110 flex-shrink-0" />
+                    <AssetIcon symbol={item.asset.symbol} color={item.asset.color} size="sm" className="transition-transform group-hover:scale-110 flex-shrink-0" />
                     <div className="flex flex-col min-w-0">
                         <p className="text-[13px] font-black text-slate-950 dark:text-white leading-none truncate">{item.asset.symbol}</p>
                         <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-1.5 uppercase tracking-widest truncate">{item.asset.name}</p>

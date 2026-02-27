@@ -36,7 +36,7 @@ export default function AssetRow({ index, symbol, name, price, changePercent, is
             </td>
             <td className={`${TABLE_CELL_CLASS} min-w-[140px] md:min-w-[200px] max-w-[160px] md:max-w-none sticky left-10 md:left-16 z-10 bg-white dark:bg-slate-900 group-hover:bg-slate-50 dark:group-hover:bg-slate-800/50 transition-colors border-r border-slate-50 dark:border-slate-800/50 shadow-[10px_0_15px_-10px_rgba(0,0,0,0.02)] dark:shadow-none`}>
                 <div className="flex items-center gap-2 md:gap-3">
-                    <AssetIcon symbol={symbol} avatar={avatar} color={color} size="sm" className="transition-all duration-300 group-hover:scale-110 flex-shrink-0" />
+                    <AssetIcon symbol={symbol} color={color} size="sm" className="transition-all duration-300 group-hover:scale-110 flex-shrink-0" />
                     <div className="flex flex-col min-w-0">
                         <span className="text-[13px] font-black text-slate-950 dark:text-white leading-none tracking-tight truncate">{symbol}</span>
                         <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-1.5 uppercase tracking-wider truncate">{name}</span>
