@@ -377,15 +377,22 @@ function ProTradePageInner() {
 
                 {/* Asset identity block */}
                 <div className={`flex items-center gap-3 px-6 py-3 shrink-0 border-r ${BORDER}`}>
-                    <AssetIcon symbol={selectedAsset.symbol} color={selectedAsset.color} size="sm" />
-                    <div>
-                        <div className="flex items-center gap-1.5 leading-none">
-                            <span className="text-[15px] font-black text-slate-900 dark:text-white tracking-tight">
+                    <AssetIcon symbol={selectedAsset.symbol} color={selectedAsset.color} size="md" />
+                    <div className="flex flex-col justify-center">
+                        <div className="flex items-center gap-2 mb-0.5">
+                            <span className="text-[16px] font-black text-slate-900 dark:text-white tracking-tight leading-none">
                                 {selectedAsset.symbol}
-                                <span className="text-slate-400 dark:text-slate-500 font-semibold text-[13px]">/CUSD</span>
+                                <span className="text-slate-400 dark:text-slate-500 font-bold text-[13px]">/CUSD</span>
+                            </span>
+                            <span className={`inline-flex items-center gap-1 text-[9px] font-black px-1.5 py-0.5 rounded-md ${isMarketOpen
+                                ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                                : "bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500"
+                                }`}>
+                                <span className={`w-1 h-1 rounded-full shrink-0 ${isMarketOpen ? "bg-emerald-500 animate-pulse" : "bg-slate-400"}`} />
+                                {isMarketOpen ? "OPEN" : "CLOSED"}
                             </span>
                         </div>
-                        <p className={`${LABEL} mt-0.5`}>{selectedAsset.name}</p>
+                        <p className={`${LABEL}`}>{selectedAsset.name}</p>
                     </div>
                 </div>
 
@@ -422,13 +429,7 @@ function ProTradePageInner() {
                                     {selectedAsset.isPositive ? "+" : ""}{selectedAsset.changePercent}
                                 </span>
                             </div>
-                            <div className={`flex flex-col justify-center px-6 py-3 shrink-0 border-r ${BORDER}`}>
-                                <span className={`${LABEL} mb-0.5`}>Market</span>
-                                <span className={`inline-flex items-center gap-1.5 text-[12px] font-black ${isMarketOpen ? "text-emerald-600 dark:text-emerald-400" : "text-slate-400 dark:text-slate-500"}`}>
-                                    <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${isMarketOpen ? "bg-emerald-500 animate-pulse" : "bg-slate-400"}`} />
-                                    {isMarketOpen ? "Open" : "Closed"}
-                                </span>
-                            </div>
+
                             <div className={`flex flex-col justify-center px-6 py-3 shrink-0`}>
                                 <span className={`${LABEL} mb-0.5`}>Last Updated</span>
                                 <span className="text-[13px] font-black text-slate-900 dark:text-white">{updated}</span>
