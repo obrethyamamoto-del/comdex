@@ -222,15 +222,15 @@ export default function HomePage() {
                 transition={{ duration: 0.7, delay: 0.3 }}
                 className="flex flex-col sm:flex-row items-center gap-4 pt-4 w-full sm:w-auto mx-auto lg:mx-0"
               >
-                <Link href="/discover" className="w-full sm:w-auto">
+                <Link href="/pro" className="w-full sm:w-auto">
                   <button className="h-[56px] px-8 w-full sm:w-auto bg-slate-900 dark:bg-blue-600 text-white hover:bg-slate-800 dark:hover:bg-blue-500 rounded-2xl text-sm font-black uppercase tracking-widest flex items-center justify-center gap-3 shadow-xl shadow-slate-900/10 dark:shadow-blue-900/20 hover:shadow-2xl hover:shadow-slate-900/20 active:scale-95 transition-all duration-300">
                     Start Trading
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </Link>
-                <Link href="/support" className="w-full sm:w-auto">
+                <Link href="/discover" className="w-full sm:w-auto">
                   <button className="h-[56px] px-8 w-full sm:w-auto bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 rounded-2xl text-sm font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-95 transition-all duration-300">
-                    Documentation
+                    Discover
                   </button>
                 </Link>
               </motion.div>
