@@ -89,11 +89,11 @@ function HeroAssetCard() {
   const priceParts = asset.price.split(".");
 
   return (
-    <div className="relative group w-full max-w-[360px] mx-auto sm:mr-0">
+    <div className="relative group w-full sm:max-w-[360px] mx-auto sm:mr-0">
       {/* Glow Effect */}
       <div className="absolute -inset-1 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/10 dark:to-purple-900/10 rounded-[35px] blur-xl opacity-70 group-hover:opacity-100 transition duration-1000" />
 
-      <div className="relative bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl border border-white/50 dark:border-slate-800/50 rounded-[32px] p-8 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] dark:shadow-none overflow-hidden">
+      <div className="relative bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl border border-white/50 dark:border-slate-800/50 rounded-[32px] p-6 sm:p-8 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] dark:shadow-none overflow-hidden">
         {/* Abstract pattern */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 dark:bg-slate-800 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 opacity-60" />
 
@@ -247,7 +247,7 @@ export default function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-50/50 to-purple-50/50 dark:from-blue-900/10 dark:to-purple-900/10 rounded-full blur-3xl opacity-60" />
 
               {/* Main Card */}
-              <div className="transform transition-transform hover:scale-[1.02] duration-500 relative z-10 w-full px-4 sm:px-0 flex justify-center">
+              <div className="transform transition-transform hover:scale-[1.02] duration-500 relative z-10 w-full flex justify-center">
                 <HeroAssetCard />
               </div>
 

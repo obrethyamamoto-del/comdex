@@ -295,7 +295,7 @@ function ProTradePageInner() {
     const isMarketOpen = utcDay >= 1 && utcDay <= 5 && utcMins >= 540 && utcMins < 1290;
 
     return (
-        <div className={`flex-1 flex flex-col overflow-hidden bg-[#f8fafc] dark:bg-[#020617] w-full h-[calc(100vh-72px)] transition-colors duration-300`}>
+        <div className={`flex-1 flex flex-col overflow-hidden bg-[#f8fafc] dark:bg-[#020617] w-full h-[calc(100dvh-72px)] transition-colors duration-300`}>
 
             {/* ── TICKER BAR — Mobile ── */}
             <div className={`md:hidden flex flex-col ${PANEL_BG} border-b ${BORDER} shrink-0`}>
@@ -590,6 +590,22 @@ function ProTradePageInner() {
 
             {/* ── MOBILE LAYOUT (<md) ── */}
             <div className="flex md:hidden flex-1 flex-col overflow-hidden min-h-0">
+                {/* Mobile Top Segmented Tabs */}
+                <div className={`shrink-0 ${PANEL_BG} border-b ${BORDER} flex items-center z-10 relative`}>
+                    {([
+                        { id: "pairs" as MobileTab, label: "Pairs" },
+                        { id: "trade" as MobileTab, label: "Trade" },
+                        { id: "chart" as MobileTab, label: "Chart" },
+                    ]).map(({ id, label }) => (
+                        <button key={id} onClick={() => setMobileTab(id)}
+                            className={`flex-1 relative flex justify-center items-center py-3.5 transition-colors ${mobileTab === id ? "text-slate-900 dark:text-white" : "text-slate-400 dark:text-slate-500"
+                                }`}>
+                            <span className="text-[11px] font-black uppercase tracking-widest">{label}</span>
+                            {mobileTab === id && <span className="absolute bottom-0 inset-x-0 h-0.5 bg-blue-600 dark:bg-blue-500 rounded-t" />}
+                        </button>
+                    ))}
+                </div>
+
                 {/* tab content */}
                 <div className="flex-1 overflow-hidden relative">
                     <AnimatePresence mode="wait">
@@ -677,25 +693,9 @@ function ProTradePageInner() {
                         )}
                     </AnimatePresence>
                 </div>
-
-                {/* Mobile Bottom Tab Bar */}
-                <div className={`shrink-0 ${PANEL_BG} border-t ${BORDER} flex items-center safe-area-bottom`}>
-                    {([
-                        { id: "pairs" as MobileTab, label: "Pairs", icon: List },
-                        { id: "trade" as MobileTab, label: "Trade", icon: ArrowUpDown },
-                        { id: "chart" as MobileTab, label: "Chart", icon: BarChart2 },
-                    ]).map(({ id, label, icon: Icon }) => (
-                        <button key={id} onClick={() => setMobileTab(id)}
-                            className={`flex-1 flex flex-col items-center gap-1 py-3 transition-colors ${mobileTab === id ? "text-blue-600 dark:text-blue-400" : "text-slate-400 dark:text-slate-500"
-                                }`}>
-                            <Icon className="w-5 h-5" strokeWidth={mobileTab === id ? 2.5 : 1.5} />
-                            <span className={`text-[9px] font-black uppercase tracking-widest`}>{label}</span>
-                        </button>
-                    ))}
-                </div>
             </div>
 
-        </div >
+        </div>
     );
 }
 
