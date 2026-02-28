@@ -448,12 +448,7 @@ export default function HomePage() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/comdex-logo.svg" alt="Comdex" className="w-6 h-6" />
               </div>
-              <span className="text-xl font-black text-slate-900 dark:text-white tracking-[-0.03em] whitespace-nowrap uppercase flex items-center">
-                Comdex
-                <span className="ml-1.5 px-1.5 py-0.5 rounded-md bg-gradient-to-tr from-blue-600 to-indigo-500 text-white text-[11px] font-black leading-none tracking-wider shadow-sm relative -top-2">
-                  PRO
-                </span>
-              </span>
+              <span className="text-xl font-black text-slate-900 dark:text-white tracking-tighter">COMDEX</span>
             </div>
             <p className="text-sm text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
               Tokenized real-world assets for the decentralized economy.
