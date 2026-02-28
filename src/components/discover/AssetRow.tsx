@@ -14,13 +14,12 @@ interface AssetRowProps {
     changeValue: string;
     changePercent: string;
     isPositive: boolean;
-    avatar: string;
     volume: string;
     category: string;
     color?: string;
 }
 
-export default function AssetRow({ index, symbol, name, price, changePercent, isPositive, avatar, volume, category, color }: AssetRowProps) {
+export default function AssetRow({ index, symbol, name, price, changePercent, isPositive, volume, category, color }: AssetRowProps) {
     const router = useRouter();
 
     return (

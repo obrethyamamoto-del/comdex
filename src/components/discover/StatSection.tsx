@@ -2,12 +2,11 @@
 
 import { motion } from "framer-motion";
 import { TrendingUp, TrendingDown, ArrowRight } from "lucide-react";
-import { ReactNode } from "react";
+
 import { useRouter } from "next/navigation";
 import AssetIcon from "@/components/AssetIcon";
 
 interface StatItemProps {
-    icon: string | ReactNode;
     name: string;
     symbol: string;
     value: string;
@@ -17,7 +16,7 @@ interface StatItemProps {
     color?: string;
 }
 
-function StatItem({ icon, name, symbol, value, subValue, isPositive, idx = 0, color }: StatItemProps) {
+function StatItem({ name, symbol, value, subValue, isPositive, idx = 0, color }: StatItemProps) {
     const router = useRouter();
 
     return (

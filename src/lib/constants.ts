@@ -11,6 +11,8 @@ export const TABLE_CELL_CLASS = "px-6 py-5";
 
 /** Standard icon sizes used across components (in Tailwind) */
 export const ICON_SIZES = {
+    /** Pair list rows */
+    xs: { container: "w-7 h-7", img: "w-4 h-4", radius: "rounded-lg" },
     /** Cards, stat items */
     sm: { container: "w-10 h-10", img: "w-6 h-6", radius: "rounded-xl" },
     /** Default / rows, pool cards */

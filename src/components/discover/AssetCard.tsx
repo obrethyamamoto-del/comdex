@@ -13,13 +13,12 @@ interface AssetCardProps {
     price: string;
     changePercent: string;
     isPositive: boolean;
-    avatar: string;
     color?: string;
     volume: string;
     category: string;
 }
 
-export default function AssetCard({ symbol, name, price, changePercent, isPositive, avatar, color, volume, category }: AssetCardProps) {
+export default function AssetCard({ symbol, name, price, changePercent, isPositive, color, volume, category }: AssetCardProps) {
     const [isHovered, setIsHovered] = useState(false);
     const [sparklineData, setSparklineData] = useState({ path: "", fillPath: "" });
     const router = useRouter();

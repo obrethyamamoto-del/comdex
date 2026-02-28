@@ -13,7 +13,9 @@ import {
     ArrowLeft,
     Copy,
     Loader2,
-    CheckCircle2
+    CheckCircle2,
+    BarChart2,
+    ArrowUpRight
 } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
@@ -360,6 +362,16 @@ export default function AssetDetailPage({ params }: { params: Promise<{ symbol: 
                                         </>
                                     )}
                                 </button>
+
+                                {/* Trade on Pro link */}
+                                <Link
+                                    href={`/pro?asset=${selectedAsset.symbol}`}
+                                    className="mt-3 w-full flex items-center justify-center gap-2 py-3.5 rounded-[20px] border border-slate-100 dark:border-slate-700 text-[11px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all group"
+                                >
+                                    <BarChart2 className="w-3.5 h-3.5 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+                                    Trade on Comdex Pro
+                                    <ArrowUpRight className="w-3.5 h-3.5 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+                                </Link>
                             </div>
                         </div>
 

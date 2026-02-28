@@ -38,6 +38,7 @@ export default function Navbar() {
     const navLinks = [
         { name: "Home", href: "/" },
         { name: "Discover", href: "/discover" },
+        { name: "Comdex Pro", href: "/pro" },
         { name: "Earn", href: "/earn" },
         { name: "Portfolio", href: "/portfolio" },
         { name: "Support", href: "/support" },
@@ -56,7 +57,9 @@ export default function Navbar() {
                             className="w-6 h-6 md:w-7 md:h-7 object-contain"
                         />
                     </div>
-                    <span className="text-lg md:text-xl font-black text-slate-900 dark:text-white tracking-[-0.03em] whitespace-nowrap uppercase">Comdex Pro</span>
+                    <span className="text-lg md:text-xl font-black text-slate-900 dark:text-white tracking-[-0.03em] whitespace-nowrap uppercase">
+                        COMDEX
+                    </span>
                 </Link>
             </div>
 
@@ -82,7 +85,19 @@ export default function Navbar() {
                                 "px-4 py-2 rounded-xl text-sm font-bold transition-all",
                                 isActive ? "text-blue-600 bg-[#eff6ff] dark:bg-blue-900/30 dark:text-blue-400" : "text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900"
                             )}>
-                                {link.name}
+                                {link.name === "Comdex Pro" ? (
+                                    <span className="flex items-center">
+                                        Comdex
+                                        <span className={cn(
+                                            "ml-1.5 px-1.5 py-0.5 rounded-md text-[9px] uppercase tracking-wider relative -top-1 font-black transition-colors duration-300",
+                                            isActive
+                                                ? "bg-blue-500 text-white shadow-sm"
+                                                : "bg-[#e2e8f0] dark:bg-blue-500/10 text-blue-600 dark:text-blue-400"
+                                        )}>PRO</span>
+                                    </span>
+                                ) : (
+                                    link.name
+                                )}
                             </button>
                         </Link>
                     );
@@ -151,7 +166,19 @@ export default function Navbar() {
                                         isActive ? "text-blue-600 bg-blue-50 dark:bg-blue-900/30 dark:text-blue-400" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900"
                                     )}
                                 >
-                                    {link.name}
+                                    {link.name === "Comdex Pro" ? (
+                                        <span className="flex items-center">
+                                            Comdex
+                                            <span className={cn(
+                                                "ml-1.5 px-1.5 py-0.5 rounded-md text-[9px] uppercase tracking-wider relative -top-1 font-black transition-colors duration-300",
+                                                isActive
+                                                    ? "bg-blue-500 text-white shadow-sm"
+                                                    : "bg-blue-100 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400"
+                                            )}>PRO</span>
+                                        </span>
+                                    ) : (
+                                        link.name
+                                    )}
                                 </Link>
                             );
                         })}
