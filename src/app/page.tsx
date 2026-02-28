@@ -461,7 +461,7 @@ export default function HomePage() {
                 { label: "Discover", href: "/discover" },
                 { label: "Earn", href: "/earn" },
                 { label: "Portfolio", href: "/portfolio" },
-                { label: "Exchange", href: "/discover" }
+                { label: "Comdex Pro", href: "/pro" }
               ]
             },
             {
