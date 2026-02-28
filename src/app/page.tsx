@@ -229,7 +229,7 @@ export default function HomePage() {
                   </button>
                 </Link>
                 <Link href="/discover" className="w-full sm:w-auto">
-                  <button className="h-[56px] px-8 w-full sm:w-auto bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 rounded-2xl text-sm font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-95 transition-all duration-300">
+                  <button className="h-[56px] px-8 w-full sm:w-auto sm:min-w-[200px] bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 rounded-2xl text-sm font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-95 transition-all duration-300">
                     Discover
                   </button>
                 </Link>
