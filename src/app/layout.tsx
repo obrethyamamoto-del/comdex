@@ -10,6 +10,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Comdex Pro | Tokenized Commodities Exchange",
   description: "Trade real-world commodity-backed tokens on BNB Chain. Gold, silver, platinum, palladium, copper, and crude oil — each backed 1:1 by physical reserves.",
+  formatDetection: {
+    telephone: false,
+    date: false,
+    email: false,
+    address: false,
+  },
 };
 
 import Navbar from "@/components/Navbar";
@@ -24,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="bg-[#f8fafc] dark:bg-slate-950 overscroll-none">
-      <body className={`${inter.variable} font-display antialiased bg-[#f8fafc] dark:bg-slate-950 overscroll-none`}>
+      <body suppressHydrationWarning className={`${inter.variable} font-display antialiased bg-[#f8fafc] dark:bg-slate-950 overscroll-none`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

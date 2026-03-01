@@ -67,6 +67,7 @@ export default function Navbar() {
             <form onSubmit={handleSearch} className="hidden lg:block flex-1 max-w-[480px] relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
                 <input
+                    suppressHydrationWarning
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -147,6 +148,7 @@ export default function Navbar() {
                         <form onSubmit={handleSearch} className="relative mb-4">
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
                             <input
+                                suppressHydrationWarning
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
